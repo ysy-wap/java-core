@@ -1,0 +1,1015 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>第10讲 | 如何保证集合是线程安全的? ConcurrentHashMap如何实现高效地线程安全？ · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="11.html" />
+    
+    
+    <link rel="prev" href="9.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1" data-path="0.html">
+            
+                <a href="0.html">
+            
+                    
+                    开篇词 | 以面试题为切入点，有效提升你的Java内功
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2" data-path="1.html">
+            
+                <a href="1.html">
+            
+                    
+                    第1讲 | 谈谈你对Java平台的理解？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3" data-path="2.html">
+            
+                <a href="2.html">
+            
+                    
+                    第2讲 | Exception和Error有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4" data-path="3.html">
+            
+                <a href="3.html">
+            
+                    
+                    第3讲 | 谈谈final、finally、 finalize有什么不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5" data-path="4.html">
+            
+                <a href="4.html">
+            
+                    
+                    第4讲 | 强引用、软引用、弱引用、幻象引用有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.6" data-path="5.html">
+            
+                <a href="5.html">
+            
+                    
+                    第5讲 | String、StringBuffer、StringBuilder有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.7" data-path="6.html">
+            
+                <a href="6.html">
+            
+                    
+                    第6讲 | 动态代理是基于什么原理？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.8" data-path="7.html">
+            
+                <a href="7.html">
+            
+                    
+                    第7讲 | int和Integer有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.9" data-path="8.html">
+            
+                <a href="8.html">
+            
+                    
+                    第8讲 | 对比Vector、ArrayList、LinkedList有何区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.10" data-path="9.html">
+            
+                <a href="9.html">
+            
+                    
+                    第9讲 | 对比Hashtable、HashMap、TreeMap有什么不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.1.11" data-path="10.html">
+            
+                <a href="10.html">
+            
+                    
+                    第10讲 | 如何保证集合是线程安全的? ConcurrentHashMap如何实现高效地线程安全？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.12" data-path="11.html">
+            
+                <a href="11.html">
+            
+                    
+                    第11讲 | Java提供了哪些IO方式？ NIO如何实现多路复用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.13" data-path="12.html">
+            
+                <a href="12.html">
+            
+                    
+                    第12讲 | Java有几种文件拷贝方式？哪一种最高效？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.14" data-path="13.html">
+            
+                <a href="13.html">
+            
+                    
+                    第13讲 | 谈谈接口和抽象类有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.15" data-path="14.html">
+            
+                <a href="14.html">
+            
+                    
+                    第14讲 | 谈谈你知道的设计模式？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.16" data-path="15.html">
+            
+                <a href="15.html">
+            
+                    
+                    第15讲 | synchronized和ReentrantLock有什么区别呢？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.17" data-path="15-1.html">
+            
+                <a href="15-1.html">
+            
+                    
+                    周末福利 | 谈谈我对Java学习和面试的看法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.18" data-path="16.html">
+            
+                <a href="16.html">
+            
+                    
+                    第16讲 | synchronized底层如何实现？什么是锁的升级、降级？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.19" data-path="17.html">
+            
+                <a href="17.html">
+            
+                    
+                    第17讲 | 一个线程两次调用start()方法会出现什么情况？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.20" data-path="18.html">
+            
+                <a href="18.html">
+            
+                    
+                    第18讲 | 什么情况下Java程序会产生死锁？如何定位、修复？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.21" data-path="19.html">
+            
+                <a href="19.html">
+            
+                    
+                    第19讲 | Java并发包提供了哪些并发工具类？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.22" data-path="20.html">
+            
+                <a href="20.html">
+            
+                    
+                    第20讲 | 并发包中的ConcurrentLinkedQueue和LinkedBlockingQueue有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.23" data-path="21.html">
+            
+                <a href="21.html">
+            
+                    
+                    第21讲 | Java并发类库提供的线程池有哪几种？ 分别有什么特点？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.24" data-path="22.html">
+            
+                <a href="22.html">
+            
+                    
+                    第22讲 | AtomicInteger底层实现原理是什么？如何在自己的产品代码中应用CAS操作？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.25" data-path="23.html">
+            
+                <a href="23.html">
+            
+                    
+                    第23讲 | 请介绍类加载过程，什么是双亲委派模型？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.26" data-path="24.html">
+            
+                <a href="24.html">
+            
+                    
+                    第24讲 | 有哪些方法可以在运行时动态生成一个Java类？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.27" data-path="25.html">
+            
+                <a href="25.html">
+            
+                    
+                    第25讲 | 谈谈JVM内存区域的划分，哪些区域可能发生OutOfMemoryError？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.28" data-path="26.html">
+            
+                <a href="26.html">
+            
+                    
+                    第26讲 | 如何监控和诊断JVM堆内和堆外内存使用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.29" data-path="27.html">
+            
+                <a href="27.html">
+            
+                    
+                    第27讲 | Java常见的垃圾收集器有哪些？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.30" data-path="28.html">
+            
+                <a href="28.html">
+            
+                    
+                    第28讲 | 谈谈你的GC调优思路?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.31" data-path="29.html">
+            
+                <a href="29.html">
+            
+                    
+                    第29讲 | Java内存模型中的happen-before是什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.32" data-path="30.html">
+            
+                <a href="30.html">
+            
+                    
+                    第30讲 | Java程序运行在Docker等容器环境有哪些新问题？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.33" data-path="31.html">
+            
+                <a href="31.html">
+            
+                    
+                    第31讲 | 你了解Java应用开发中的注入攻击吗？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.34" data-path="32.html">
+            
+                <a href="32.html">
+            
+                    
+                    第32讲 | 如何写出安全的Java代码？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.35" data-path="33.html">
+            
+                <a href="33.html">
+            
+                    
+                    第33讲 | 后台服务出现明显“变慢”，谈谈你的诊断思路？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.36" data-path="34.html">
+            
+                <a href="34.html">
+            
+                    
+                    第34讲 | 有人说“Lambda能让Java程序慢30倍”，你怎么看？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.37" data-path="35.html">
+            
+                <a href="35.html">
+            
+                    
+                    第35讲 | JVM优化Java代码时都做了什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.38" data-path="35-1.html">
+            
+                <a href="35-1.html">
+            
+                    
+                    周末福利 | 一份Java工程师必读书单
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.39" data-path="36.html">
+            
+                <a href="36.html">
+            
+                    
+                    第36讲 | 谈谈MySQL支持的事务隔离级别，以及悲观锁和乐观锁的原理和应用场景？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.40" data-path="37.html">
+            
+                <a href="37.html">
+            
+                    
+                    第37讲 | 谈谈Spring Bean的生命周期和作用域？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.41" data-path="38.html">
+            
+                <a href="38.html">
+            
+                    
+                    第38讲 | 对比Java标准NIO类库，你知道Netty是如何实现更高性能的吗？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.42" data-path="39.html">
+            
+                <a href="39.html">
+            
+                    
+                    第39讲 | 谈谈常用的分布式ID的设计方案？Snowflake是否受冬令时切换影响？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.43" data-path="end.html">
+            
+                <a href="end.html">
+            
+                    
+                    结束语 | 技术没有终点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >第10讲 | 如何保证集合是线程安全的? ConcurrentHashMap如何实现高效地线程安全？</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x7B2C;10&#x8BB2;--&#x5982;&#x4F55;&#x4FDD;&#x8BC1;&#x96C6;&#x5408;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;-concurrenthashmap&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x9AD8;&#x6548;&#x5730;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF1F;">&#x7B2C;10&#x8BB2; | &#x5982;&#x4F55;&#x4FDD;&#x8BC1;&#x96C6;&#x5408;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;? ConcurrentHashMap&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x9AD8;&#x6548;&#x5730;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF1F;</h1>
+<p>&#x6211;&#x5728;&#x4E4B;&#x524D;&#x4E24;&#x8BB2;&#x4ECB;&#x7ECD;&#x4E86; Java &#x96C6;&#x5408;&#x6846;&#x67B6;&#x7684;&#x5178;&#x578B;&#x5BB9;&#x5668;&#x7C7B;&#xFF0C;&#x5B83;&#x4EEC;&#x7EDD;&#x5927;&#x90E8;&#x5206;&#x90FD;&#x4E0D;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x4EC5;&#x6709;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x5B9E;&#x73B0;&#xFF0C;&#x6BD4;&#x5982; Vector&#x3001;Stack&#xFF0C;&#x5728;&#x6027;&#x80FD;&#x65B9;&#x9762;&#x4E5F;&#x8FDC;&#x4E0D;&#x5C3D;&#x5982;&#x4EBA;&#x610F;&#x3002;&#x5E78;&#x597D; Java &#x8BED;&#x8A00;&#x63D0;&#x4F9B;&#x4E86;&#x5E76;&#x53D1;&#x5305;&#xFF08;java.util.concurrent&#xFF09;&#xFF0C;&#x4E3A;&#x9AD8;&#x5EA6;&#x5E76;&#x53D1;&#x9700;&#x6C42;&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x52A0;&#x5168;&#x9762;&#x7684;&#x5DE5;&#x5177;&#x652F;&#x6301;&#x3002;</p>
+<p>&#x4ECA;&#x5929;&#x6211;&#x8981;&#x95EE;&#x4F60;&#x7684;&#x95EE;&#x9898;&#x662F;&#xFF0C;&#x5982;&#x4F55;&#x4FDD;&#x8BC1;&#x5BB9;&#x5668;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF1F;ConcurrentHashMap &#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x9AD8;&#x6548;&#x5730;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#xFF1F;</p>
+<h2 id="&#x5178;&#x578B;&#x56DE;&#x7B54;">&#x5178;&#x578B;&#x56DE;&#x7B54;</h2>
+<p>Java &#x63D0;&#x4F9B;&#x4E86;&#x4E0D;&#x540C;&#x5C42;&#x9762;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x652F;&#x6301;&#x3002;&#x5728;&#x4F20;&#x7EDF;&#x96C6;&#x5408;&#x6846;&#x67B6;&#x5185;&#x90E8;&#xFF0C;&#x9664;&#x4E86; Hashtable &#x7B49;&#x540C;&#x6B65;&#x5BB9;&#x5668;&#xFF0C;&#x8FD8;&#x63D0;&#x4F9B;&#x4E86;&#x6240;&#x8C13;&#x7684;&#x540C;&#x6B65;&#x5305;&#x88C5;&#x5668;&#xFF08;Synchronized Wrapper&#xFF09;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8C03;&#x7528; Collections &#x5DE5;&#x5177;&#x7C7B;&#x63D0;&#x4F9B;&#x7684;&#x5305;&#x88C5;&#x65B9;&#x6CD5;&#xFF0C;&#x6765;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x540C;&#x6B65;&#x7684;&#x5305;&#x88C5;&#x5BB9;&#x5668;&#xFF08;&#x5982; Collections.synchronizedMap&#xFF09;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x4EEC;&#x90FD;&#x662F;&#x5229;&#x7528;&#x975E;&#x5E38;&#x7C97;&#x7C92;&#x5EA6;&#x7684;&#x540C;&#x6B65;&#x65B9;&#x5F0F;&#xFF0C;&#x5728;&#x9AD8;&#x5E76;&#x53D1;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6027;&#x80FD;&#x6BD4;&#x8F83;&#x4F4E;&#x4E0B;&#x3002;</p>
+<p>&#x53E6;&#x5916;&#xFF0C;&#x66F4;&#x52A0;&#x666E;&#x904D;&#x7684;&#x9009;&#x62E9;&#x662F;&#x5229;&#x7528;&#x5E76;&#x53D1;&#x5305;&#x63D0;&#x4F9B;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x5BB9;&#x5668;&#x7C7B;&#xFF0C;&#x5B83;&#x63D0;&#x4F9B;&#x4E86;&#xFF1A;</p>
+<ul>
+<li>&#x5404;&#x79CD;&#x5E76;&#x53D1;&#x5BB9;&#x5668;&#xFF0C;&#x6BD4;&#x5982; ConcurrentHashMap&#x3001;CopyOnWriteArrayList&#x3002;</li>
+<li>&#x5404;&#x79CD;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x961F;&#x5217;&#xFF08;Queue/Deque&#xFF09;&#xFF0C;&#x5982; ArrayBlockingQueue&#x3001;SynchronousQueue&#x3002;</li>
+<li>&#x5404;&#x79CD;&#x6709;&#x5E8F;&#x5BB9;&#x5668;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7248;&#x672C;&#x7B49;&#x3002;</li>
+</ul>
+<p>&#x5177;&#x4F53;&#x4FDD;&#x8BC1;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x5305;&#x62EC;&#x6709;&#x4ECE;&#x7B80;&#x5355;&#x7684; synchronize &#x65B9;&#x5F0F;&#xFF0C;&#x5230;&#x57FA;&#x4E8E;&#x66F4;&#x52A0;&#x7CBE;&#x7EC6;&#x5316;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x57FA;&#x4E8E;&#x5206;&#x79BB;&#x9501;&#x5B9E;&#x73B0;&#x7684; ConcurrentHashMap &#x7B49;&#x5E76;&#x53D1;&#x5B9E;&#x73B0;&#x7B49;&#x3002;&#x5177;&#x4F53;&#x9009;&#x62E9;&#x8981;&#x770B;&#x5F00;&#x53D1;&#x7684;&#x573A;&#x666F;&#x9700;&#x6C42;&#xFF0C;&#x603B;&#x4F53;&#x6765;&#x8BF4;&#xFF0C;&#x5E76;&#x53D1;&#x5305;&#x5185;&#x63D0;&#x4F9B;&#x7684;&#x5BB9;&#x5668;&#x901A;&#x7528;&#x573A;&#x666F;&#xFF0C;&#x8FDC;&#x4F18;&#x4E8E;&#x65E9;&#x671F;&#x7684;&#x7B80;&#x5355;&#x540C;&#x6B65;&#x5B9E;&#x73B0;&#x3002;</p>
+<h2 id="&#x8003;&#x70B9;&#x5206;&#x6790;">&#x8003;&#x70B9;&#x5206;&#x6790;</h2>
+<p>&#x8C08;&#x5230;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x548C;&#x5E76;&#x53D1;&#xFF0C;&#x53EF;&#x4EE5;&#x8BF4;&#x662F; Java &#x9762;&#x8BD5;&#x4E2D;&#x5FC5;&#x8003;&#x7684;&#x8003;&#x70B9;&#xFF0C;&#x6211;&#x4E0A;&#x9762;&#x7ED9;&#x51FA;&#x7684;&#x56DE;&#x7B54;&#x662F;&#x4E00;&#x4E2A;&#x76F8;&#x5BF9;&#x5BBD;&#x6CDB;&#x7684;&#x603B;&#x7ED3;&#xFF0C;&#x800C;&#x4E14; ConcurrentHashMap &#x7B49;&#x5E76;&#x53D1;&#x5BB9;&#x5668;&#x5B9E;&#x73B0;&#x4E5F;&#x5728;&#x4E0D;&#x65AD;&#x6F14;&#x8FDB;&#xFF0C;&#x4E0D;&#x80FD;&#x4E00;&#x6982;&#x800C;&#x8BBA;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x8981;&#x6DF1;&#x5165;&#x601D;&#x8003;&#x5E76;&#x56DE;&#x7B54;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x53CA;&#x5176;&#x6269;&#x5C55;&#x65B9;&#x9762;&#xFF0C;&#x81F3;&#x5C11;&#x9700;&#x8981;&#xFF1A;</p>
+<ul>
+<li>&#x7406;&#x89E3;&#x57FA;&#x672C;&#x7684;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x5DE5;&#x5177;&#x3002;</li>
+<li>&#x7406;&#x89E3;&#x4F20;&#x7EDF;&#x96C6;&#x5408;&#x6846;&#x67B6;&#x5E76;&#x53D1;&#x7F16;&#x7A0B;&#x4E2D; Map &#x5B58;&#x5728;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x6E05;&#x695A;&#x7B80;&#x5355;&#x540C;&#x6B65;&#x65B9;&#x5F0F;&#x7684;&#x4E0D;&#x8DB3;&#x3002;</li>
+<li>&#x68B3;&#x7406;&#x5E76;&#x53D1;&#x5305;&#x5185;&#xFF0C;&#x5C24;&#x5176;&#x662F; ConcurrentHashMap &#x91C7;&#x53D6;&#x4E86;&#x54EA;&#x4E9B;&#x65B9;&#x6CD5;&#x6765;&#x63D0;&#x9AD8;&#x5E76;&#x53D1;&#x8868;&#x73B0;&#x3002;</li>
+<li>&#x6700;&#x597D;&#x80FD;&#x591F;&#x638C;&#x63E1; ConcurrentHashMap &#x81EA;&#x8EAB;&#x7684;&#x6F14;&#x8FDB;&#xFF0C;&#x76EE;&#x524D;&#x7684;&#x5F88;&#x591A;&#x5206;&#x6790;&#x8D44;&#x6599;&#x8FD8;&#x662F;&#x57FA;&#x4E8E;&#x5176;&#x65E9;&#x671F;&#x7248;&#x672C;&#x3002;</li>
+</ul>
+<p>&#x4ECA;&#x5929;&#x6211;&#x4E3B;&#x8981;&#x662F;&#x5EF6;&#x7EED;&#x4E13;&#x680F;&#x4E4B;&#x524D;&#x4E24;&#x8BB2;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x91CD;&#x70B9;&#x89E3;&#x8BFB;&#x7ECF;&#x5E38;&#x88AB;&#x540C;&#x65F6;&#x8003;&#x5BDF;&#x7684; HashMap &#x548C; ConcurrentHashMap&#x3002;&#x4ECA;&#x5929;&#x8FD9;&#x4E00;&#x8BB2;&#x5E76;&#x4E0D;&#x662F;&#x5BF9;&#x5E76;&#x53D1;&#x65B9;&#x9762;&#x7684;&#x5168;&#x9762;&#x68B3;&#x7406;&#xFF0C;&#x6BD5;&#x7ADF;&#x8FD9;&#x4E5F;&#x4E0D;&#x662F;&#x4E13;&#x680F;&#x4E00;&#x8BB2;&#x53EF;&#x4EE5;&#x4ECB;&#x7ECD;&#x5B8C;&#x6574;&#x7684;&#xFF0C;&#x7B97;&#x662F;&#x4E2A;&#x5F00;&#x80C3;&#x83DC;&#x5427;&#xFF0C;&#x7C7B;&#x4F3C; CAS &#x7B49;&#x66F4;&#x52A0;&#x5E95;&#x5C42;&#x7684;&#x673A;&#x5236;&#xFF0C;&#x540E;&#x9762;&#x4F1A;&#x5728; Java &#x8FDB;&#x9636;&#x6A21;&#x5757;&#x4E2D;&#x7684;&#x5E76;&#x53D1;&#x4E3B;&#x9898;&#x6709;&#x66F4;&#x52A0;&#x7CFB;&#x7EDF;&#x7684;&#x4ECB;&#x7ECD;&#x3002;</p>
+<h2 id="&#x77E5;&#x8BC6;&#x6269;&#x5C55;">&#x77E5;&#x8BC6;&#x6269;&#x5C55;</h2>
+<p>\1. &#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981; ConcurrentHashMap&#xFF1F;</p>
+<p>Hashtable &#x672C;&#x8EAB;&#x6BD4;&#x8F83;&#x4F4E;&#x6548;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x57FA;&#x672C;&#x5C31;&#x662F;&#x5C06; put&#x3001;get&#x3001;size &#x7B49;&#x5404;&#x79CD;&#x65B9;&#x6CD5;&#x52A0;&#x4E0A;&#x201C;synchronized&#x201D;&#x3002;&#x7B80;&#x5355;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x5C31;&#x5BFC;&#x81F4;&#x4E86;&#x6240;&#x6709;&#x5E76;&#x53D1;&#x64CD;&#x4F5C;&#x90FD;&#x8981;&#x7ADE;&#x4E89;&#x540C;&#x4E00;&#x628A;&#x9501;&#xFF0C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x5728;&#x8FDB;&#x884C;&#x540C;&#x6B65;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x53EA;&#x80FD;&#x7B49;&#x5F85;&#xFF0C;&#x5927;&#x5927;&#x964D;&#x4F4E;&#x4E86;&#x5E76;&#x53D1;&#x64CD;&#x4F5C;&#x7684;&#x6548;&#x7387;&#x3002;</p>
+<p>&#x524D;&#x9762;&#x5DF2;&#x7ECF;&#x63D0;&#x8FC7; HashMap &#x4E0D;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#xFF0C;&#x5E76;&#x53D1;&#x60C5;&#x51B5;&#x4F1A;&#x5BFC;&#x81F4;&#x7C7B;&#x4F3C; CPU &#x5360;&#x7528; 100% &#x7B49;&#x4E00;&#x4E9B;&#x95EE;&#x9898;&#xFF0C;&#x90A3;&#x4E48;&#x80FD;&#x4E0D;&#x80FD;&#x5229;&#x7528; Collections &#x63D0;&#x4F9B;&#x7684;&#x540C;&#x6B65;&#x5305;&#x88C5;&#x5668;&#x6765;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#x5462;&#xFF1F;</p>
+<p>&#x770B;&#x770B;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#xFF0C;&#x6211;&#x4EEC;&#x53D1;&#x73B0;&#x540C;&#x6B65;&#x5305;&#x88C5;&#x5668;&#x53EA;&#x662F;&#x5229;&#x7528;&#x8F93;&#x5165; Map &#x6784;&#x9020;&#x4E86;&#x53E6;&#x4E00;&#x4E2A;&#x540C;&#x6B65;&#x7248;&#x672C;&#xFF0C;&#x6240;&#x6709;&#x64CD;&#x4F5C;&#x867D;&#x7136;&#x4E0D;&#x518D;&#x58F0;&#x660E;&#x6210;&#x4E3A; synchronized &#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x662F;&#x8FD8;&#x662F;&#x5229;&#x7528;&#x4E86;&#x201C;this&#x201D;&#x4F5C;&#x4E3A;&#x4E92;&#x65A5;&#x7684; mutex&#xFF0C;&#x6CA1;&#x6709;&#x771F;&#x6B63;&#x610F;&#x4E49;&#x4E0A;&#x7684;&#x6539;&#x8FDB;&#xFF01;</p>
+<pre><code>private static class SynchronizedMap&lt;K,V&gt;
+    implements Map&lt;K,V&gt;, Serializable {
+    private final Map&lt;K,V&gt; m;     // Backing Map
+    final Object      mutex;        // Object on which to synchronize
+    // &#x2026;
+    public int size() {
+        synchronized (mutex) {return m.size();}
+    }
+ // &#x2026; 
+}
+</code></pre><p>&#x6240;&#x4EE5;&#xFF0C;Hashtable &#x6216;&#x8005;&#x540C;&#x6B65;&#x5305;&#x88C5;&#x7248;&#x672C;&#xFF0C;&#x90FD;&#x53EA;&#x662F;&#x9002;&#x5408;&#x5728;&#x975E;&#x9AD8;&#x5EA6;&#x5E76;&#x53D1;&#x7684;&#x573A;&#x666F;&#x4E0B;&#x3002;</p>
+<p>2.ConcurrentHashMap &#x5206;&#x6790;</p>
+<p>&#x6211;&#x4EEC;&#x518D;&#x6765;&#x770B;&#x770B; ConcurrentHashMap &#x662F;&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x5B83;&#x80FD;&#x5927;&#x5927;&#x63D0;&#x9AD8;&#x5E76;&#x53D1;&#x6548;&#x7387;&#x3002;</p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x6211;&#x8FD9;&#x91CC;&#x5F3A;&#x8C03;&#xFF0C;<strong>ConcurrentHashMap &#x7684;&#x8BBE;&#x8BA1;&#x5B9E;&#x73B0;&#x5176;&#x5B9E;&#x4E00;&#x76F4;&#x5728;&#x6F14;&#x5316;</strong>&#xFF0C;&#x6BD4;&#x5982;&#x5728; Java 8 &#x4E2D;&#x5C31;&#x53D1;&#x751F;&#x4E86;&#x975E;&#x5E38;&#x5927;&#x7684;&#x53D8;&#x5316;&#xFF08;Java 7 &#x5176;&#x5B9E;&#x4E5F;&#x6709;&#x4E0D;&#x5C11;&#x66F4;&#x65B0;&#xFF09;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x6211;&#x8FD9;&#x91CC;&#x5C06;&#x6BD4;&#x8F83;&#x5206;&#x6790;&#x7ED3;&#x6784;&#x3001;&#x5B9E;&#x73B0;&#x673A;&#x5236;&#x7B49;&#x65B9;&#x9762;&#xFF0C;&#x5BF9;&#x6BD4;&#x4E0D;&#x540C;&#x7248;&#x672C;&#x7684;&#x4E3B;&#x8981;&#x533A;&#x522B;&#x3002;</p>
+<p>&#x65E9;&#x671F; ConcurrentHashMap&#xFF0C;&#x5176;&#x5B9E;&#x73B0;&#x662F;&#x57FA;&#x4E8E;&#xFF1A;</p>
+<ul>
+<li>&#x5206;&#x79BB;&#x9501;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5C06;&#x5185;&#x90E8;&#x8FDB;&#x884C;&#x5206;&#x6BB5;&#xFF08;Segment&#xFF09;&#xFF0C;&#x91CC;&#x9762;&#x5219;&#x662F; HashEntry &#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x548C; HashMap &#x7C7B;&#x4F3C;&#xFF0C;&#x54C8;&#x5E0C;&#x76F8;&#x540C;&#x7684;&#x6761;&#x76EE;&#x4E5F;&#x662F;&#x4EE5;&#x94FE;&#x8868;&#x5F62;&#x5F0F;&#x5B58;&#x653E;&#x3002;</li>
+<li>HashEntry &#x5185;&#x90E8;&#x4F7F;&#x7528; volatile &#x7684; value &#x5B57;&#x6BB5;&#x6765;&#x4FDD;&#x8BC1;&#x53EF;&#x89C1;&#x6027;&#xFF0C;&#x4E5F;&#x5229;&#x7528;&#x4E86;&#x4E0D;&#x53EF;&#x53D8;&#x5BF9;&#x8C61;&#x7684;&#x673A;&#x5236;&#x4EE5;&#x6539;&#x8FDB;&#x5229;&#x7528; Unsafe &#x63D0;&#x4F9B;&#x7684;&#x5E95;&#x5C42;&#x80FD;&#x529B;&#xFF0C;&#x6BD4;&#x5982; volatile access&#xFF0C;&#x53BB;&#x76F4;&#x63A5;&#x5B8C;&#x6210;&#x90E8;&#x5206;&#x64CD;&#x4F5C;&#xFF0C;&#x4EE5;&#x6700;&#x4F18;&#x5316;&#x6027;&#x80FD;&#xFF0C;&#x6BD5;&#x7ADF; Unsafe &#x4E2D;&#x7684;&#x5F88;&#x591A;&#x64CD;&#x4F5C;&#x90FD;&#x662F; JVM intrinsic &#x4F18;&#x5316;&#x8FC7;&#x7684;&#x3002;</li>
+</ul>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x65E9;&#x671F; ConcurrentHashMap &#x5185;&#x90E8;&#x7ED3;&#x6784;&#x7684;&#x793A;&#x610F;&#x56FE;&#xFF0C;&#x5176;&#x6838;&#x5FC3;&#x662F;&#x5229;&#x7528;&#x5206;&#x6BB5;&#x8BBE;&#x8BA1;&#xFF0C;&#x5728;&#x8FDB;&#x884C;&#x5E76;&#x53D1;&#x64CD;&#x4F5C;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x9501;&#x5B9A;&#x76F8;&#x5E94;&#x6BB5;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x6709;&#x6548;&#x907F;&#x514D;&#x4E86;&#x7C7B;&#x4F3C; Hashtable &#x6574;&#x4F53;&#x540C;&#x6B65;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x5927;&#x5927;&#x63D0;&#x9AD8;&#x4E86;&#x6027;&#x80FD;&#x3002;</p>
+<p><img src="../image/d45bcf9a34da2ef1ef335532b0198bd9.png" alt="img"></p>
+<p>&#x5728;&#x6784;&#x9020;&#x7684;&#x65F6;&#x5019;&#xFF0C;Segment &#x7684;&#x6570;&#x91CF;&#x7531;&#x6240;&#x8C13;&#x7684; concurrentcyLevel &#x51B3;&#x5B9A;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F; 16&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x76F8;&#x5E94;&#x6784;&#x9020;&#x51FD;&#x6570;&#x76F4;&#x63A5;&#x6307;&#x5B9A;&#x3002;&#x6CE8;&#x610F;&#xFF0C;Java &#x9700;&#x8981;&#x5B83;&#x662F; 2 &#x7684;&#x5E42;&#x6570;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x8F93;&#x5165;&#x662F;&#x7C7B;&#x4F3C; 15 &#x8FD9;&#x79CD;&#x975E;&#x5E42;&#x503C;&#xFF0C;&#x4F1A;&#x88AB;&#x81EA;&#x52A8;&#x8C03;&#x6574;&#x5230; 16 &#x4E4B;&#x7C7B; 2 &#x7684;&#x5E42;&#x6570;&#x503C;&#x3002;</p>
+<p>&#x5177;&#x4F53;&#x60C5;&#x51B5;&#xFF0C;&#x6211;&#x4EEC;&#x4E00;&#x8D77;&#x770B;&#x770B;&#x4E00;&#x4E9B; Map &#x57FA;&#x672C;&#x64CD;&#x4F5C;&#x7684;<a href="http://hg.openjdk.java.net/jdk7/jdk7/jdk/file/9b8c96f96a0f/src/share/classes/java/util/concurrent/ConcurrentHashMap.java" target="_blank">&#x6E90;&#x7801;</a>&#xFF0C;&#x8FD9;&#x662F; JDK 7 &#x6BD4;&#x8F83;&#x65B0;&#x7684; get &#x4EE3;&#x7801;&#x3002;&#x9488;&#x5BF9;&#x5177;&#x4F53;&#x7684;&#x4F18;&#x5316;&#x90E8;&#x5206;&#xFF0C;&#x4E3A;&#x65B9;&#x4FBF;&#x7406;&#x89E3;&#xFF0C;&#x6211;&#x76F4;&#x63A5;&#x6CE8;&#x91CA;&#x5728;&#x4EE3;&#x7801;&#x6BB5;&#x91CC;&#xFF0C;get &#x64CD;&#x4F5C;&#x9700;&#x8981;&#x4FDD;&#x8BC1;&#x7684;&#x662F;&#x53EF;&#x89C1;&#x6027;&#xFF0C;&#x6240;&#x4EE5;&#x5E76;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x540C;&#x6B65;&#x903B;&#x8F91;&#x3002;</p>
+<pre><code>public V get(Object key) {
+        Segment&lt;K,V&gt; s; // manually integrate access methods to reduce overhead
+        HashEntry&lt;K,V&gt;[] tab;
+        int h = hash(key.hashCode());
+       // &#x5229;&#x7528;&#x4F4D;&#x64CD;&#x4F5C;&#x66FF;&#x6362;&#x666E;&#x901A;&#x6570;&#x5B66;&#x8FD0;&#x7B97;
+       long u = (((h &gt;&gt;&gt; segmentShift) &amp; segmentMask) &lt;&lt; SSHIFT) + SBASE;
+        // &#x4EE5; Segment &#x4E3A;&#x5355;&#x4F4D;&#xFF0C;&#x8FDB;&#x884C;&#x5B9A;&#x4F4D;
+        // &#x5229;&#x7528; Unsafe &#x76F4;&#x63A5;&#x8FDB;&#x884C; volatile access
+        if ((s = (Segment&lt;K,V&gt;)UNSAFE.getObjectVolatile(segments, u)) != null &amp;&amp;
+            (tab = s.table) != null) {
+           // &#x7701;&#x7565;
+          }
+        return null;
+    }
+</code></pre><p>&#x800C;&#x5BF9;&#x4E8E; put &#x64CD;&#x4F5C;&#xFF0C;&#x9996;&#x5148;&#x662F;&#x901A;&#x8FC7;&#x4E8C;&#x6B21;&#x54C8;&#x5E0C;&#x907F;&#x514D;&#x54C8;&#x5E0C;&#x51B2;&#x7A81;&#xFF0C;&#x7136;&#x540E;&#x4EE5; Unsafe &#x8C03;&#x7528;&#x65B9;&#x5F0F;&#xFF0C;&#x76F4;&#x63A5;&#x83B7;&#x53D6;&#x76F8;&#x5E94;&#x7684; Segment&#xFF0C;&#x7136;&#x540E;&#x8FDB;&#x884C;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684; put &#x64CD;&#x4F5C;&#xFF1A;</p>
+<pre><code> public V put(K key, V value) {
+        Segment&lt;K,V&gt; s;
+        if (value == null)
+            throw new NullPointerException();
+        // &#x4E8C;&#x6B21;&#x54C8;&#x5E0C;&#xFF0C;&#x4EE5;&#x4FDD;&#x8BC1;&#x6570;&#x636E;&#x7684;&#x5206;&#x6563;&#x6027;&#xFF0C;&#x907F;&#x514D;&#x54C8;&#x5E0C;&#x51B2;&#x7A81;
+        int hash = hash(key.hashCode());
+        int j = (hash &gt;&gt;&gt; segmentShift) &amp; segmentMask;
+        if ((s = (Segment&lt;K,V&gt;)UNSAFE.getObject          // nonvolatile; recheck
+             (segments, (j &lt;&lt; SSHIFT) + SBASE)) == null) //  in ensureSegment
+            s = ensureSegment(j);
+        return s.put(key, hash, value, false);
+    }
+</code></pre><p>&#x5176;&#x6838;&#x5FC3;&#x903B;&#x8F91;&#x5B9E;&#x73B0;&#x5728;&#x4E0B;&#x9762;&#x7684;&#x5185;&#x90E8;&#x65B9;&#x6CD5;&#x4E2D;&#xFF1A;</p>
+<pre><code>final V put(K key, int hash, V value, boolean onlyIfAbsent) {
+            // scanAndLockForPut &#x4F1A;&#x53BB;&#x67E5;&#x627E;&#x662F;&#x5426;&#x6709; key &#x76F8;&#x540C; Node
+            // &#x65E0;&#x8BBA;&#x5982;&#x4F55;&#xFF0C;&#x786E;&#x4FDD;&#x83B7;&#x53D6;&#x9501;
+            HashEntry&lt;K,V&gt; node = tryLock() ? null :
+                scanAndLockForPut(key, hash, value);
+            V oldValue;
+            try {
+                HashEntry&lt;K,V&gt;[] tab = table;
+                int index = (tab.length - 1) &amp; hash;
+                HashEntry&lt;K,V&gt; first = entryAt(tab, index);
+                for (HashEntry&lt;K,V&gt; e = first;;) {
+                    if (e != null) {
+                        K k;
+                        // &#x66F4;&#x65B0;&#x5DF2;&#x6709; value...
+                    }
+                    else {
+                        // &#x653E;&#x7F6E; HashEntry &#x5230;&#x7279;&#x5B9A;&#x4F4D;&#x7F6E;&#xFF0C;&#x5982;&#x679C;&#x8D85;&#x8FC7;&#x9608;&#x503C;&#xFF0C;&#x8FDB;&#x884C; rehash
+                        // ...
+                    }
+                }
+            } finally {
+                unlock();
+            }
+            return oldValue;
+        }
+</code></pre><p>&#x6240;&#x4EE5;&#xFF0C;&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x6E90;&#x7801;&#x6E05;&#x6670;&#x7684;&#x770B;&#x51FA;&#xFF0C;&#x5728;&#x8FDB;&#x884C;&#x5E76;&#x53D1;&#x5199;&#x64CD;&#x4F5C;&#x65F6;&#xFF1A;</p>
+<ul>
+<li>ConcurrentHashMap &#x4F1A;&#x83B7;&#x53D6;&#x518D;&#x5165;&#x9501;&#xFF0C;&#x4EE5;&#x4FDD;&#x8BC1;&#x6570;&#x636E;&#x4E00;&#x81F4;&#x6027;&#xFF0C;Segment &#x672C;&#x8EAB;&#x5C31;&#x662F;&#x57FA;&#x4E8E; ReentrantLock &#x7684;&#x6269;&#x5C55;&#x5B9E;&#x73B0;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x5728;&#x5E76;&#x53D1;&#x4FEE;&#x6539;&#x671F;&#x95F4;&#xFF0C;&#x76F8;&#x5E94; Segment &#x662F;&#x88AB;&#x9501;&#x5B9A;&#x7684;&#x3002;</li>
+<li>&#x5728;&#x6700;&#x521D;&#x9636;&#x6BB5;&#xFF0C;&#x8FDB;&#x884C;&#x91CD;&#x590D;&#x6027;&#x7684;&#x626B;&#x63CF;&#xFF0C;&#x4EE5;&#x786E;&#x5B9A;&#x76F8;&#x5E94; key &#x503C;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x5728;&#x6570;&#x7EC4;&#x91CC;&#x9762;&#xFF0C;&#x8FDB;&#x800C;&#x51B3;&#x5B9A;&#x662F;&#x66F4;&#x65B0;&#x8FD8;&#x662F;&#x653E;&#x7F6E;&#x64CD;&#x4F5C;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x4EE3;&#x7801;&#x91CC;&#x770B;&#x5230;&#x76F8;&#x5E94;&#x7684;&#x6CE8;&#x91CA;&#x3002;&#x91CD;&#x590D;&#x626B;&#x63CF;&#x3001;&#x68C0;&#x6D4B;&#x51B2;&#x7A81;&#x662F; ConcurrentHashMap &#x7684;&#x5E38;&#x89C1;&#x6280;&#x5DE7;&#x3002;</li>
+<li>&#x6211;&#x5728;&#x4E13;&#x680F;&#x4E0A;&#x4E00;&#x8BB2;&#x4ECB;&#x7ECD; HashMap &#x65F6;&#xFF0C;&#x63D0;&#x5230;&#x4E86;&#x53EF;&#x80FD;&#x53D1;&#x751F;&#x7684;&#x6269;&#x5BB9;&#x95EE;&#x9898;&#xFF0C;&#x5728; ConcurrentHashMap &#x4E2D;&#x540C;&#x6837;&#x5B58;&#x5728;&#x3002;&#x4E0D;&#x8FC7;&#x6709;&#x4E00;&#x4E2A;&#x660E;&#x663E;&#x533A;&#x522B;&#xFF0C;&#x5C31;&#x662F;&#x5B83;&#x8FDB;&#x884C;&#x7684;&#x4E0D;&#x662F;&#x6574;&#x4F53;&#x7684;&#x6269;&#x5BB9;&#xFF0C;&#x800C;&#x662F;&#x5355;&#x72EC;&#x5BF9; Segment &#x8FDB;&#x884C;&#x6269;&#x5BB9;&#xFF0C;&#x7EC6;&#x8282;&#x5C31;&#x4E0D;&#x4ECB;&#x7ECD;&#x4E86;&#x3002;</li>
+</ul>
+<p>&#x53E6;&#x5916;&#x4E00;&#x4E2A; Map &#x7684; size &#x65B9;&#x6CD5;&#x540C;&#x6837;&#x9700;&#x8981;&#x5173;&#x6CE8;&#xFF0C;&#x5B83;&#x7684;&#x5B9E;&#x73B0;&#x6D89;&#x53CA;&#x5206;&#x79BB;&#x9501;&#x7684;&#x4E00;&#x4E2A;&#x526F;&#x4F5C;&#x7528;&#x3002;</p>
+<p>&#x8BD5;&#x60F3;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x8FDB;&#x884C;&#x540C;&#x6B65;&#xFF0C;&#x7B80;&#x5355;&#x7684;&#x8BA1;&#x7B97;&#x6240;&#x6709; Segment &#x7684;&#x603B;&#x503C;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x56E0;&#x4E3A;&#x5E76;&#x53D1; put&#xFF0C;&#x5BFC;&#x81F4;&#x7ED3;&#x679C;&#x4E0D;&#x51C6;&#x786E;&#xFF0C;&#x4F46;&#x662F;&#x76F4;&#x63A5;&#x9501;&#x5B9A;&#x6240;&#x6709; Segment &#x8FDB;&#x884C;&#x8BA1;&#x7B97;&#xFF0C;&#x5C31;&#x4F1A;&#x53D8;&#x5F97;&#x975E;&#x5E38;&#x6602;&#x8D35;&#x3002;&#x5176;&#x5B9E;&#xFF0C;&#x5206;&#x79BB;&#x9501;&#x4E5F;&#x9650;&#x5236;&#x4E86; Map &#x7684;&#x521D;&#x59CB;&#x5316;&#x7B49;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;ConcurrentHashMap &#x7684;&#x5B9E;&#x73B0;&#x662F;&#x901A;&#x8FC7;&#x91CD;&#x8BD5;&#x673A;&#x5236;&#xFF08;RETRIES_BEFORE_LOCK&#xFF0C;&#x6307;&#x5B9A;&#x91CD;&#x8BD5;&#x6B21;&#x6570; 2&#xFF09;&#xFF0C;&#x6765;&#x8BD5;&#x56FE;&#x83B7;&#x5F97;&#x53EF;&#x9760;&#x503C;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x76D1;&#x63A7;&#x5230;&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF08;&#x901A;&#x8FC7;&#x5BF9;&#x6BD4; Segment.modCount&#xFF09;&#xFF0C;&#x5C31;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#xFF0C;&#x5426;&#x5219;&#x83B7;&#x53D6;&#x9501;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x6211;&#x6765;&#x5BF9;&#x6BD4;&#x4E00;&#x4E0B;&#xFF0C;<strong>&#x5728; Java 8 &#x548C;&#x4E4B;&#x540E;&#x7684;&#x7248;&#x672C;&#x4E2D;&#xFF0C;ConcurrentHashMap &#x53D1;&#x751F;&#x4E86;&#x54EA;&#x4E9B;&#x53D8;&#x5316;&#x5462;&#xFF1F;</strong></p>
+<ul>
+<li>&#x603B;&#x4F53;&#x7ED3;&#x6784;&#x4E0A;&#xFF0C;&#x5B83;&#x7684;&#x5185;&#x90E8;&#x5B58;&#x50A8;&#x53D8;&#x5F97;&#x548C;&#x6211;&#x5728;&#x4E13;&#x680F;&#x4E0A;&#x4E00;&#x8BB2;&#x4ECB;&#x7ECD;&#x7684; HashMap &#x7ED3;&#x6784;&#x975E;&#x5E38;&#x76F8;&#x4F3C;&#xFF0C;&#x540C;&#x6837;&#x662F;&#x5927;&#x7684;&#x6876;&#xFF08;bucket&#xFF09;&#x6570;&#x7EC4;&#xFF0C;&#x7136;&#x540E;&#x5185;&#x90E8;&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x4E2A;&#x6240;&#x8C13;&#x7684;&#x94FE;&#x8868;&#x7ED3;&#x6784;&#xFF08;bin&#xFF09;&#xFF0C;&#x540C;&#x6B65;&#x7684;&#x7C92;&#x5EA6;&#x8981;&#x66F4;&#x7EC6;&#x81F4;&#x4E00;&#x4E9B;&#x3002;</li>
+<li>&#x5176;&#x5185;&#x90E8;&#x4ECD;&#x7136;&#x6709; Segment &#x5B9A;&#x4E49;&#xFF0C;&#x4F46;&#x4EC5;&#x4EC5;&#x662F;&#x4E3A;&#x4E86;&#x4FDD;&#x8BC1;&#x5E8F;&#x5217;&#x5316;&#x65F6;&#x7684;&#x517C;&#x5BB9;&#x6027;&#x800C;&#x5DF2;&#xFF0C;&#x4E0D;&#x518D;&#x6709;&#x4EFB;&#x4F55;&#x7ED3;&#x6784;&#x4E0A;&#x7684;&#x7528;&#x5904;&#x3002;</li>
+<li>&#x56E0;&#x4E3A;&#x4E0D;&#x518D;&#x4F7F;&#x7528; Segment&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x64CD;&#x4F5C;&#x5927;&#x5927;&#x7B80;&#x5316;&#xFF0C;&#x4FEE;&#x6539;&#x4E3A; lazy-load &#x5F62;&#x5F0F;&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x6709;&#x6548;&#x907F;&#x514D;&#x521D;&#x59CB;&#x5F00;&#x9500;&#xFF0C;&#x89E3;&#x51B3;&#x4E86;&#x8001;&#x7248;&#x672C;&#x5F88;&#x591A;&#x4EBA;&#x62B1;&#x6028;&#x7684;&#x8FD9;&#x4E00;&#x70B9;&#x3002;</li>
+<li>&#x6570;&#x636E;&#x5B58;&#x50A8;&#x5229;&#x7528; volatile &#x6765;&#x4FDD;&#x8BC1;&#x53EF;&#x89C1;&#x6027;&#x3002;</li>
+<li>&#x4F7F;&#x7528; CAS &#x7B49;&#x64CD;&#x4F5C;&#xFF0C;&#x5728;&#x7279;&#x5B9A;&#x573A;&#x666F;&#x8FDB;&#x884C;&#x65E0;&#x9501;&#x5E76;&#x53D1;&#x64CD;&#x4F5C;&#x3002;</li>
+<li>&#x4F7F;&#x7528; Unsafe&#x3001;LongAdder &#x4E4B;&#x7C7B;&#x5E95;&#x5C42;&#x624B;&#x6BB5;&#xFF0C;&#x8FDB;&#x884C;&#x6781;&#x7AEF;&#x60C5;&#x51B5;&#x7684;&#x4F18;&#x5316;&#x3002;</li>
+</ul>
+<p>&#x5148;&#x770B;&#x770B;&#x73B0;&#x5728;&#x7684;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x5185;&#x90E8;&#x5B9E;&#x73B0;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x53D1;&#x73B0; Key &#x662F; final &#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x5728;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E2D;&#xFF0C;&#x4E00;&#x4E2A;&#x6761;&#x76EE;&#x7684; Key &#x53D1;&#x751F;&#x53D8;&#x5316;&#x662F;&#x4E0D;&#x53EF;&#x80FD;&#x7684;&#xFF1B;&#x4E0E;&#x6B64;&#x540C;&#x65F6; val&#xFF0C;&#x5219;&#x58F0;&#x660E;&#x4E3A; volatile&#xFF0C;&#x4EE5;&#x4FDD;&#x8BC1;&#x53EF;&#x89C1;&#x6027;&#x3002;</p>
+<pre><code> static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
+        final int hash;
+        final K key;
+        volatile V val;
+        volatile Node&lt;K,V&gt; next;
+        // &#x2026; 
+    }
+</code></pre><p>&#x6211;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x518D;&#x4ECB;&#x7ECD; get &#x65B9;&#x6CD5;&#x548C;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E86;&#xFF0C;&#x76F8;&#x5BF9;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#xFF0C;&#x76F4;&#x63A5;&#x770B;&#x5E76;&#x53D1;&#x7684; put &#x662F;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x7684;&#x3002;</p>
+<pre><code>final V putVal(K key, V value, boolean onlyIfAbsent) { if (key == null || value == null) throw new NullPointerException();
+    int hash = spread(key.hashCode());
+    int binCount = 0;
+    for (Node&lt;K,V&gt;[] tab = table;;) {
+        Node&lt;K,V&gt; f; int n, i, fh; K fk; V fv;
+        if (tab == null || (n = tab.length) == 0)
+            tab = initTable();
+        else if ((f = tabAt(tab, i = (n - 1) &amp; hash)) == null) {
+            // &#x5229;&#x7528; CAS &#x53BB;&#x8FDB;&#x884C;&#x65E0;&#x9501;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x64CD;&#x4F5C;&#xFF0C;&#x5982;&#x679C; bin &#x662F;&#x7A7A;&#x7684;
+            if (casTabAt(tab, i, null, new Node&lt;K,V&gt;(hash, key, value)))
+                break; 
+        }
+        else if ((fh = f.hash) == MOVED)
+            tab = helpTransfer(tab, f);
+        else if (onlyIfAbsent // &#x4E0D;&#x52A0;&#x9501;&#xFF0C;&#x8FDB;&#x884C;&#x68C0;&#x67E5;
+                 &amp;&amp; fh == hash
+                 &amp;&amp; ((fk = f.key) == key || (fk != null &amp;&amp; key.equals(fk)))
+                 &amp;&amp; (fv = f.val) != null)
+            return fv;
+        else {
+            V oldVal = null;
+            synchronized (f) {
+                   // &#x7EC6;&#x7C92;&#x5EA6;&#x7684;&#x540C;&#x6B65;&#x4FEE;&#x6539;&#x64CD;&#x4F5C;... 
+                }
+            }
+            // Bin &#x8D85;&#x8FC7;&#x9608;&#x503C;&#xFF0C;&#x8FDB;&#x884C;&#x6811;&#x5316;
+            if (binCount != 0) {
+                if (binCount &gt;= TREEIFY_THRESHOLD)
+                    treeifyBin(tab, i);
+                if (oldVal != null)
+                    return oldVal;
+                break;
+            }
+        }
+    }
+    addCount(1L, binCount);
+    return null;
+}
+</code></pre><p>&#x521D;&#x59CB;&#x5316;&#x64CD;&#x4F5C;&#x5B9E;&#x73B0;&#x5728; initTable &#x91CC;&#x9762;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x5178;&#x578B;&#x7684; CAS &#x4F7F;&#x7528;&#x573A;&#x666F;&#xFF0C;&#x5229;&#x7528; volatile &#x7684; sizeCtl &#x4F5C;&#x4E3A;&#x4E92;&#x65A5;&#x624B;&#x6BB5;&#xFF1A;&#x5982;&#x679C;&#x53D1;&#x73B0;&#x7ADE;&#x4E89;&#x6027;&#x7684;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x5C31; spin &#x5728;&#x90A3;&#x91CC;&#xFF0C;&#x7B49;&#x5F85;&#x6761;&#x4EF6;&#x6062;&#x590D;&#xFF1B;&#x5426;&#x5219;&#x5229;&#x7528; CAS &#x8BBE;&#x7F6E;&#x6392;&#x4ED6;&#x6807;&#x5FD7;&#x3002;&#x5982;&#x679C;&#x6210;&#x529F;&#x5219;&#x8FDB;&#x884C;&#x521D;&#x59CB;&#x5316;&#xFF1B;&#x5426;&#x5219;&#x91CD;&#x8BD5;&#x3002;</p>
+<p>&#x8BF7;&#x53C2;&#x8003;&#x4E0B;&#x9762;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code>private final Node&lt;K,V&gt;[] initTable() {
+    Node&lt;K,V&gt;[] tab; int sc;
+    while ((tab = table) == null || tab.length == 0) {
+        // &#x5982;&#x679C;&#x53D1;&#x73B0;&#x51B2;&#x7A81;&#xFF0C;&#x8FDB;&#x884C; spin &#x7B49;&#x5F85;
+        if ((sc = sizeCtl) &lt; 0)
+            Thread.yield(); 
+        // CAS &#x6210;&#x529F;&#x8FD4;&#x56DE; true&#xFF0C;&#x5219;&#x8FDB;&#x5165;&#x771F;&#x6B63;&#x7684;&#x521D;&#x59CB;&#x5316;&#x903B;&#x8F91;
+        else if (U.compareAndSetInt(this, SIZECTL, sc, -1)) {
+            try {
+                if ((tab = table) == null || tab.length == 0) {
+                    int n = (sc &gt; 0) ? sc : DEFAULT_CAPACITY;
+                    @SuppressWarnings(&quot;unchecked&quot;)
+                    Node&lt;K,V&gt;[] nt = (Node&lt;K,V&gt;[])new Node&lt;?,?&gt;[n];
+                    table = tab = nt;
+                    sc = n - (n &gt;&gt;&gt; 2);
+                }
+            } finally {
+                sizeCtl = sc;
+            }
+            break;
+        }
+    }
+    return tab;
+}
+</code></pre><p>&#x5F53; bin &#x4E3A;&#x7A7A;&#x65F6;&#xFF0C;&#x540C;&#x6837;&#x662F;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x9501;&#x5B9A;&#xFF0C;&#x4E5F;&#x662F;&#x4EE5; CAS &#x64CD;&#x4F5C;&#x53BB;&#x653E;&#x7F6E;&#x3002;</p>
+<p>&#x4F60;&#x6709;&#x6CA1;&#x6709;&#x6CE8;&#x610F;&#x5230;&#xFF0C;&#x5728;&#x540C;&#x6B65;&#x903B;&#x8F91;&#x4E0A;&#xFF0C;&#x5B83;&#x4F7F;&#x7528;&#x7684;&#x662F; synchronized&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x901A;&#x5E38;&#x5EFA;&#x8BAE;&#x7684; ReentrantLock &#x4E4B;&#x7C7B;&#xFF0C;&#x8FD9;&#x662F;&#x4E3A;&#x4EC0;&#x4E48;&#x5462;&#xFF1F;&#x73B0;&#x4EE3; JDK &#x4E2D;&#xFF0C;synchronized &#x5DF2;&#x7ECF;&#x88AB;&#x4E0D;&#x65AD;&#x4F18;&#x5316;&#xFF0C;&#x53EF;&#x4EE5;&#x4E0D;&#x518D;&#x8FC7;&#x5206;&#x62C5;&#x5FC3;&#x6027;&#x80FD;&#x5DEE;&#x5F02;&#xFF0C;&#x53E6;&#x5916;&#xFF0C;&#x76F8;&#x6BD4;&#x4E8E; ReentrantLock&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x51CF;&#x5C11;&#x5185;&#x5B58;&#x6D88;&#x8017;&#xFF0C;&#x8FD9;&#x662F;&#x4E2A;&#x975E;&#x5E38;&#x5927;&#x7684;&#x4F18;&#x52BF;&#x3002;</p>
+<p>&#x4E0E;&#x6B64;&#x540C;&#x65F6;&#xFF0C;&#x66F4;&#x591A;&#x7EC6;&#x8282;&#x5B9E;&#x73B0;&#x901A;&#x8FC7;&#x4F7F;&#x7528; Unsafe &#x8FDB;&#x884C;&#x4E86;&#x4F18;&#x5316;&#xFF0C;&#x4F8B;&#x5982; tabAt &#x5C31;&#x662F;&#x76F4;&#x63A5;&#x5229;&#x7528; getObjectAcquire&#xFF0C;&#x907F;&#x514D;&#x95F4;&#x63A5;&#x8C03;&#x7528;&#x7684;&#x5F00;&#x9500;&#x3002;</p>
+<pre><code>static final &lt;K,V&gt; Node&lt;K,V&gt; tabAt(Node&lt;K,V&gt;[] tab, int i) {
+    return (Node&lt;K,V&gt;)U.getObjectAcquire(tab, ((long)i &lt;&lt; ASHIFT) + ABASE);
+}
+</code></pre><p>&#x518D;&#x770B;&#x770B;&#xFF0C;&#x73B0;&#x5728;&#x662F;&#x5982;&#x4F55;&#x5B9E;&#x73B0; size &#x64CD;&#x4F5C;&#x7684;&#x3002;<a href="http://hg.openjdk.java.net/jdk/jdk/file/12fc7bf488ec/src/java.base/share/classes/java/util/concurrent/ConcurrentHashMap.java" target="_blank">&#x9605;&#x8BFB;&#x4EE3;&#x7801;</a>&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#xFF0C;&#x771F;&#x6B63;&#x7684;&#x903B;&#x8F91;&#x662F;&#x5728; sumCount &#x65B9;&#x6CD5;&#x4E2D;&#xFF0C; &#x90A3;&#x4E48; sumCount &#x505A;&#x4E86;&#x4EC0;&#x4E48;&#x5462;&#xFF1F;</p>
+<pre><code>final long sumCount() {
+    CounterCell[] as = counterCells; CounterCell a;
+    long sum = baseCount;
+    if (as != null) {
+        for (int i = 0; i &lt; as.length; ++i) {
+            if ((a = as[i]) != null)
+                sum += a.value;
+        }
+    }
+    return sum;
+}
+</code></pre><p>&#x6211;&#x4EEC;&#x53D1;&#x73B0;&#xFF0C;&#x867D;&#x7136;&#x601D;&#x8DEF;&#x4ECD;&#x7136;&#x548C;&#x4EE5;&#x524D;&#x7C7B;&#x4F3C;&#xFF0C;&#x90FD;&#x662F;&#x5206;&#x800C;&#x6CBB;&#x4E4B;&#x7684;&#x8FDB;&#x884C;&#x8BA1;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x6C42;&#x548C;&#x5904;&#x7406;&#xFF0C;&#x4F46;&#x5B9E;&#x73B0;&#x5374;&#x57FA;&#x4E8E;&#x4E00;&#x4E2A;&#x5947;&#x602A;&#x7684; CounterCell&#x3002; &#x96BE;&#x9053;&#x5B83;&#x7684;&#x6570;&#x503C;&#xFF0C;&#x5C31;&#x66F4;&#x52A0;&#x51C6;&#x786E;&#x5417;&#xFF1F;&#x6570;&#x636E;&#x4E00;&#x81F4;&#x6027;&#x662F;&#x600E;&#x4E48;&#x4FDD;&#x8BC1;&#x7684;&#xFF1F;</p>
+<pre><code>static final class CounterCell {
+    volatile long value;
+    CounterCell(long x) { value = x; }
+}
+</code></pre><p>&#x5176;&#x5B9E;&#xFF0C;&#x5BF9;&#x4E8E; CounterCell &#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x662F;&#x57FA;&#x4E8E; java.util.concurrent.atomic.LongAdder &#x8FDB;&#x884C;&#x7684;&#xFF0C;&#x662F;&#x4E00;&#x79CD; JVM &#x5229;&#x7528;&#x7A7A;&#x95F4;&#x6362;&#x53D6;&#x66F4;&#x9AD8;&#x6548;&#x7387;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x5229;&#x7528;&#x4E86;<a href="http://hg.openjdk.java.net/jdk/jdk/file/12fc7bf488ec/src/java.base/share/classes/java/util/concurrent/atomic/Striped64.java" target="_blank">Striped64</a>&#x5185;&#x90E8;&#x7684;&#x590D;&#x6742;&#x903B;&#x8F91;&#x3002;&#x8FD9;&#x4E2A;&#x4E1C;&#x897F;&#x975E;&#x5E38;&#x5C0F;&#x4F17;&#xFF0C;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5EFA;&#x8BAE;&#x8FD8;&#x662F;&#x4F7F;&#x7528; AtomicLong&#xFF0C;&#x8DB3;&#x4EE5;&#x6EE1;&#x8DB3;&#x7EDD;&#x5927;&#x90E8;&#x5206;&#x5E94;&#x7528;&#x7684;&#x6027;&#x80FD;&#x9700;&#x6C42;&#x3002;</p>
+<p>&#x4ECA;&#x5929;&#x6211;&#x4ECE;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;&#x5F00;&#x59CB;&#xFF0C;&#x6982;&#x5FF5;&#x6027;&#x7684;&#x603B;&#x7ED3;&#x4E86;&#x57FA;&#x672C;&#x5BB9;&#x5668;&#x5DE5;&#x5177;&#xFF0C;&#x5206;&#x6790;&#x4E86;&#x65E9;&#x671F;&#x540C;&#x6B65;&#x5BB9;&#x5668;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x8FDB;&#x800C;&#x5206;&#x6790;&#x4E86; Java 7 &#x548C; Java 8 &#x4E2D; ConcurrentHashMap &#x662F;&#x5982;&#x4F55;&#x8BBE;&#x8BA1;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x5E0C;&#x671B; ConcurrentHashMap &#x7684;&#x5E76;&#x53D1;&#x6280;&#x5DE7;&#x5BF9;&#x4F60;&#x5728;&#x65E5;&#x5E38;&#x5F00;&#x53D1;&#x53EF;&#x4EE5;&#x6709;&#x6240;&#x5E2E;&#x52A9;&#x3002;</p>
+<h2 id="&#x4E00;&#x8BFE;&#x4E00;&#x7EC3;">&#x4E00;&#x8BFE;&#x4E00;&#x7EC3;</h2>
+<p>&#x5173;&#x4E8E;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x8BA8;&#x8BBA;&#x7684;&#x9898;&#x76EE;&#x4F60;&#x505A;&#x5230;&#x5FC3;&#x4E2D;&#x6709;&#x6570;&#x4E86;&#x5417;&#xFF1F;&#x7559;&#x4E00;&#x4E2A;&#x9053;&#x601D;&#x8003;&#x9898;&#x7ED9;&#x4F60;&#xFF0C;&#x5728;&#x4EA7;&#x54C1;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x6709;&#x6CA1;&#x6709;&#x5178;&#x578B;&#x7684;&#x573A;&#x666F;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x7C7B;&#x4F3C; ConcurrentHashMap &#x8FD9;&#x6837;&#x7684;&#x5E76;&#x53D1;&#x5BB9;&#x5668;&#x5462;&#xFF1F;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="9.html" class="navigation navigation-prev " aria-label="Previous page: 第9讲 | 对比Hashtable、HashMap、TreeMap有什么不同？">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="11.html" class="navigation navigation-next " aria-label="Next page: 第11讲 | Java提供了哪些IO方式？ NIO如何实现多路复用？">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"第10讲 | 如何保证集合是线程安全的? ConcurrentHashMap如何实现高效地线程安全？","level":"1.1.11","depth":2,"next":{"title":"第11讲 | Java提供了哪些IO方式？ NIO如何实现多路复用？","level":"1.1.12","depth":2,"path":"document/11.md","ref":"document/11.md","articles":[]},"previous":{"title":"第9讲 | 对比Hashtable、HashMap、TreeMap有什么不同？","level":"1.1.10","depth":2,"path":"document/9.md","ref":"document/9.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"document/10.md","mtime":"2019-03-14T08:16:28.544Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-15T08:24:05.595Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

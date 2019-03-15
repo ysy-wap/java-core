@@ -1,0 +1,907 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>第13讲 | 谈谈接口和抽象类有什么区别？ · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="14.html" />
+    
+    
+    <link rel="prev" href="12.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1" data-path="0.html">
+            
+                <a href="0.html">
+            
+                    
+                    开篇词 | 以面试题为切入点，有效提升你的Java内功
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2" data-path="1.html">
+            
+                <a href="1.html">
+            
+                    
+                    第1讲 | 谈谈你对Java平台的理解？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3" data-path="2.html">
+            
+                <a href="2.html">
+            
+                    
+                    第2讲 | Exception和Error有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4" data-path="3.html">
+            
+                <a href="3.html">
+            
+                    
+                    第3讲 | 谈谈final、finally、 finalize有什么不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5" data-path="4.html">
+            
+                <a href="4.html">
+            
+                    
+                    第4讲 | 强引用、软引用、弱引用、幻象引用有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.6" data-path="5.html">
+            
+                <a href="5.html">
+            
+                    
+                    第5讲 | String、StringBuffer、StringBuilder有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.7" data-path="6.html">
+            
+                <a href="6.html">
+            
+                    
+                    第6讲 | 动态代理是基于什么原理？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.8" data-path="7.html">
+            
+                <a href="7.html">
+            
+                    
+                    第7讲 | int和Integer有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.9" data-path="8.html">
+            
+                <a href="8.html">
+            
+                    
+                    第8讲 | 对比Vector、ArrayList、LinkedList有何区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.10" data-path="9.html">
+            
+                <a href="9.html">
+            
+                    
+                    第9讲 | 对比Hashtable、HashMap、TreeMap有什么不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.11" data-path="10.html">
+            
+                <a href="10.html">
+            
+                    
+                    第10讲 | 如何保证集合是线程安全的? ConcurrentHashMap如何实现高效地线程安全？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.12" data-path="11.html">
+            
+                <a href="11.html">
+            
+                    
+                    第11讲 | Java提供了哪些IO方式？ NIO如何实现多路复用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.13" data-path="12.html">
+            
+                <a href="12.html">
+            
+                    
+                    第12讲 | Java有几种文件拷贝方式？哪一种最高效？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.1.14" data-path="13.html">
+            
+                <a href="13.html">
+            
+                    
+                    第13讲 | 谈谈接口和抽象类有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.15" data-path="14.html">
+            
+                <a href="14.html">
+            
+                    
+                    第14讲 | 谈谈你知道的设计模式？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.16" data-path="15.html">
+            
+                <a href="15.html">
+            
+                    
+                    第15讲 | synchronized和ReentrantLock有什么区别呢？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.17" data-path="15-1.html">
+            
+                <a href="15-1.html">
+            
+                    
+                    周末福利 | 谈谈我对Java学习和面试的看法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.18" data-path="16.html">
+            
+                <a href="16.html">
+            
+                    
+                    第16讲 | synchronized底层如何实现？什么是锁的升级、降级？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.19" data-path="17.html">
+            
+                <a href="17.html">
+            
+                    
+                    第17讲 | 一个线程两次调用start()方法会出现什么情况？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.20" data-path="18.html">
+            
+                <a href="18.html">
+            
+                    
+                    第18讲 | 什么情况下Java程序会产生死锁？如何定位、修复？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.21" data-path="19.html">
+            
+                <a href="19.html">
+            
+                    
+                    第19讲 | Java并发包提供了哪些并发工具类？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.22" data-path="20.html">
+            
+                <a href="20.html">
+            
+                    
+                    第20讲 | 并发包中的ConcurrentLinkedQueue和LinkedBlockingQueue有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.23" data-path="21.html">
+            
+                <a href="21.html">
+            
+                    
+                    第21讲 | Java并发类库提供的线程池有哪几种？ 分别有什么特点？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.24" data-path="22.html">
+            
+                <a href="22.html">
+            
+                    
+                    第22讲 | AtomicInteger底层实现原理是什么？如何在自己的产品代码中应用CAS操作？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.25" data-path="23.html">
+            
+                <a href="23.html">
+            
+                    
+                    第23讲 | 请介绍类加载过程，什么是双亲委派模型？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.26" data-path="24.html">
+            
+                <a href="24.html">
+            
+                    
+                    第24讲 | 有哪些方法可以在运行时动态生成一个Java类？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.27" data-path="25.html">
+            
+                <a href="25.html">
+            
+                    
+                    第25讲 | 谈谈JVM内存区域的划分，哪些区域可能发生OutOfMemoryError？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.28" data-path="26.html">
+            
+                <a href="26.html">
+            
+                    
+                    第26讲 | 如何监控和诊断JVM堆内和堆外内存使用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.29" data-path="27.html">
+            
+                <a href="27.html">
+            
+                    
+                    第27讲 | Java常见的垃圾收集器有哪些？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.30" data-path="28.html">
+            
+                <a href="28.html">
+            
+                    
+                    第28讲 | 谈谈你的GC调优思路?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.31" data-path="29.html">
+            
+                <a href="29.html">
+            
+                    
+                    第29讲 | Java内存模型中的happen-before是什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.32" data-path="30.html">
+            
+                <a href="30.html">
+            
+                    
+                    第30讲 | Java程序运行在Docker等容器环境有哪些新问题？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.33" data-path="31.html">
+            
+                <a href="31.html">
+            
+                    
+                    第31讲 | 你了解Java应用开发中的注入攻击吗？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.34" data-path="32.html">
+            
+                <a href="32.html">
+            
+                    
+                    第32讲 | 如何写出安全的Java代码？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.35" data-path="33.html">
+            
+                <a href="33.html">
+            
+                    
+                    第33讲 | 后台服务出现明显“变慢”，谈谈你的诊断思路？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.36" data-path="34.html">
+            
+                <a href="34.html">
+            
+                    
+                    第34讲 | 有人说“Lambda能让Java程序慢30倍”，你怎么看？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.37" data-path="35.html">
+            
+                <a href="35.html">
+            
+                    
+                    第35讲 | JVM优化Java代码时都做了什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.38" data-path="35-1.html">
+            
+                <a href="35-1.html">
+            
+                    
+                    周末福利 | 一份Java工程师必读书单
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.39" data-path="36.html">
+            
+                <a href="36.html">
+            
+                    
+                    第36讲 | 谈谈MySQL支持的事务隔离级别，以及悲观锁和乐观锁的原理和应用场景？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.40" data-path="37.html">
+            
+                <a href="37.html">
+            
+                    
+                    第37讲 | 谈谈Spring Bean的生命周期和作用域？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.41" data-path="38.html">
+            
+                <a href="38.html">
+            
+                    
+                    第38讲 | 对比Java标准NIO类库，你知道Netty是如何实现更高性能的吗？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.42" data-path="39.html">
+            
+                <a href="39.html">
+            
+                    
+                    第39讲 | 谈谈常用的分布式ID的设计方案？Snowflake是否受冬令时切换影响？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.43" data-path="end.html">
+            
+                <a href="end.html">
+            
+                    
+                    结束语 | 技术没有终点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >第13讲 | 谈谈接口和抽象类有什么区别？</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x7B2C;13&#x8BB2;--&#x8C08;&#x8C08;&#x63A5;&#x53E3;&#x548C;&#x62BD;&#x8C61;&#x7C7B;&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;&#xFF1F;">&#x7B2C;13&#x8BB2; | &#x8C08;&#x8C08;&#x63A5;&#x53E3;&#x548C;&#x62BD;&#x8C61;&#x7C7B;&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;&#xFF1F;</h1>
+<p>Java &#x662F;&#x975E;&#x5E38;&#x5178;&#x578B;&#x7684;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x8BED;&#x8A00;&#xFF0C;&#x66FE;&#x7ECF;&#x6709;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#xFF0C;&#x7A0B;&#x5E8F;&#x5458;&#x6574;&#x5929;&#x628A;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x3001;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x6302;&#x5728;&#x5634;&#x8FB9;&#x3002;&#x867D;&#x7136;&#x5982;&#x4ECA;&#x5927;&#x5BB6;&#x5BF9;&#x8FD9;&#x65B9;&#x9762;&#x5DF2;&#x7ECF;&#x4E0D;&#x518D;&#x90A3;&#x4E48;&#x72C2;&#x70ED;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x53EF;&#x5426;&#x8BA4;&#xFF0C;&#x638C;&#x63E1;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x8BBE;&#x8BA1;&#x539F;&#x5219;&#x548C;&#x6280;&#x5DE7;&#xFF0C;&#x662F;&#x4FDD;&#x8BC1;&#x9AD8;&#x8D28;&#x91CF;&#x4EE3;&#x7801;&#x7684;&#x57FA;&#x7840;&#x4E4B;&#x4E00;&#x3002;</p>
+<p>&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x63D0;&#x4F9B;&#x7684;&#x57FA;&#x672C;&#x673A;&#x5236;&#xFF0C;&#x5BF9;&#x4E8E;&#x63D0;&#x9AD8;&#x5F00;&#x53D1;&#x3001;&#x6C9F;&#x901A;&#x7B49;&#x5404;&#x65B9;&#x9762;&#x6548;&#x7387;&#x81F3;&#x5173;&#x91CD;&#x8981;&#x3002;&#x8003;&#x5BDF;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x4E5F;&#x662F;&#x9762;&#x8BD5;&#x4E2D;&#x7684;&#x5E38;&#x89C1;&#x4E00;&#x73AF;&#xFF0C;&#x4E0B;&#x9762;&#x6211;&#x6765;&#x804A;&#x804A;<strong>&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x8BBE;&#x8BA1;&#x57FA;&#x7840;</strong>&#x3002;</p>
+<p>&#x4ECA;&#x5929;&#x6211;&#x8981;&#x95EE;&#x4F60;&#x7684;&#x95EE;&#x9898;&#x662F;&#xFF0C;&#x8C08;&#x8C08;&#x63A5;&#x53E3;&#x548C;&#x62BD;&#x8C61;&#x7C7B;&#x6709;&#x4EC0;&#x4E48;&#x533A;&#x522B;&#xFF1F;</p>
+<h2 id="&#x5178;&#x578B;&#x56DE;&#x7B54;">&#x5178;&#x578B;&#x56DE;&#x7B54;</h2>
+<p>&#x63A5;&#x53E3;&#x548C;&#x62BD;&#x8C61;&#x7C7B;&#x662F; Java &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x8BBE;&#x8BA1;&#x7684;&#x4E24;&#x4E2A;&#x57FA;&#x7840;&#x673A;&#x5236;&#x3002;</p>
+<p>&#x63A5;&#x53E3;&#x662F;&#x5BF9;&#x884C;&#x4E3A;&#x7684;&#x62BD;&#x8C61;&#xFF0C;&#x5B83;&#x662F;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x5229;&#x7528;&#x63A5;&#x53E3;&#x53EF;&#x4EE5;&#x8FBE;&#x5230; API &#x5B9A;&#x4E49;&#x548C;&#x5B9E;&#x73B0;&#x5206;&#x79BB;&#x7684;&#x76EE;&#x7684;&#x3002;&#x63A5;&#x53E3;&#xFF0C;&#x4E0D;&#x80FD;&#x5B9E;&#x4F8B;&#x5316;&#xFF1B;&#x4E0D;&#x80FD;&#x5305;&#x542B;&#x4EFB;&#x4F55;&#x975E;&#x5E38;&#x91CF;&#x6210;&#x5458;&#xFF0C;&#x4EFB;&#x4F55; field &#x90FD;&#x662F;&#x9690;&#x542B;&#x7740; public static final &#x7684;&#x610F;&#x4E49;&#xFF1B;&#x540C;&#x65F6;&#xFF0C;&#x6CA1;&#x6709;&#x975E;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x8981;&#x4E48;&#x662F;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#xFF0C;&#x8981;&#x4E48;&#x662F;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x3002;Java &#x6807;&#x51C6;&#x7C7B;&#x5E93;&#x4E2D;&#xFF0C;&#x5B9A;&#x4E49;&#x4E86;&#x975E;&#x5E38;&#x591A;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x6BD4;&#x5982; java.util.List&#x3002;</p>
+<p>&#x62BD;&#x8C61;&#x7C7B;&#x662F;&#x4E0D;&#x80FD;&#x5B9E;&#x4F8B;&#x5316;&#x7684;&#x7C7B;&#xFF0C;&#x7528; abstract &#x5173;&#x952E;&#x5B57;&#x4FEE;&#x9970; class&#xFF0C;&#x5176;&#x76EE;&#x7684;&#x4E3B;&#x8981;&#x662F;&#x4EE3;&#x7801;&#x91CD;&#x7528;&#x3002;&#x9664;&#x4E86;&#x4E0D;&#x80FD;&#x5B9E;&#x4F8B;&#x5316;&#xFF0C;&#x5F62;&#x5F0F;&#x4E0A;&#x548C;&#x4E00;&#x822C;&#x7684; Java &#x7C7B;&#x5E76;&#x6CA1;&#x6709;&#x592A;&#x5927;&#x533A;&#x522B;&#xFF0C;&#x53EF;&#x4EE5;&#x6709;&#x4E00;&#x4E2A;&#x6216;&#x8005;&#x591A;&#x4E2A;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x6CA1;&#x6709;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x3002;&#x62BD;&#x8C61;&#x7C7B;&#x5927;&#x591A;&#x7528;&#x4E8E;&#x62BD;&#x53D6;&#x76F8;&#x5173; Java &#x7C7B;&#x7684;&#x5171;&#x7528;&#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#x6216;&#x8005;&#x662F;&#x5171;&#x540C;&#x6210;&#x5458;&#x53D8;&#x91CF;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;&#x7EE7;&#x627F;&#x7684;&#x65B9;&#x5F0F;&#x8FBE;&#x5230;&#x4EE3;&#x7801;&#x590D;&#x7528;&#x7684;&#x76EE;&#x7684;&#x3002;Java &#x6807;&#x51C6;&#x5E93;&#x4E2D;&#xFF0C;&#x6BD4;&#x5982; collection &#x6846;&#x67B6;&#xFF0C;&#x5F88;&#x591A;&#x901A;&#x7528;&#x90E8;&#x5206;&#x5C31;&#x88AB;&#x62BD;&#x53D6;&#x6210;&#x4E3A;&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x4F8B;&#x5982; java.util.AbstractList&#x3002;</p>
+<p>Java &#x7C7B;&#x5B9E;&#x73B0; interface &#x4F7F;&#x7528; implements &#x5173;&#x952E;&#x8BCD;&#xFF0C;&#x7EE7;&#x627F; abstract class &#x5219;&#x662F;&#x4F7F;&#x7528; extends &#x5173;&#x952E;&#x8BCD;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x53C2;&#x8003; Java &#x6807;&#x51C6;&#x5E93;&#x4E2D;&#x7684; ArrayList&#x3002;</p>
+<pre><code>public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
+        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
+{
+//...
+}
+</code></pre><h2 id="&#x8003;&#x70B9;&#x5206;&#x6790;">&#x8003;&#x70B9;&#x5206;&#x6790;</h2>
+<p>&#x8FD9;&#x662F;&#x4E2A;&#x975E;&#x5E38;&#x9AD8;&#x9891;&#x7684; Java &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x57FA;&#x7840;&#x95EE;&#x9898;&#xFF0C;&#x770B;&#x8D77;&#x6765;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x5982;&#x679C;&#x9762;&#x8BD5;&#x5B98;&#x7A0D;&#x5FAE;&#x6DF1;&#x5165;&#x4E00;&#x4E9B;&#xFF0C;&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#x5F88;&#x591A;&#x6709;&#x610F;&#x601D;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x53EF;&#x4EE5;&#x4ECE;&#x4E0D;&#x540C;&#x89D2;&#x5EA6;&#x5168;&#x9762;&#x5730;&#x8003;&#x5BDF;&#x4F60;&#x5BF9;&#x57FA;&#x672C;&#x673A;&#x5236;&#x7684;&#x7406;&#x89E3;&#x548C;&#x638C;&#x63E1;&#x3002;&#x6BD4;&#x5982;:</p>
+<ul>
+<li>&#x5BF9;&#x4E8E; Java &#x7684;&#x57FA;&#x672C;&#x5143;&#x7D20;&#x7684;&#x8BED;&#x6CD5;&#x662F;&#x5426;&#x7406;&#x89E3;&#x51C6;&#x786E;&#x3002;&#x80FD;&#x5426;&#x5B9A;&#x4E49;&#x51FA;&#x8BED;&#x6CD5;&#x57FA;&#x672C;&#x6B63;&#x786E;&#x7684;&#x63A5;&#x53E3;&#x3001;&#x62BD;&#x8C61;&#x7C7B;&#x6216;&#x8005;&#x76F8;&#x5173;&#x7EE7;&#x627F;&#x5B9E;&#x73B0;&#xFF0C;&#x6D89;&#x53CA;&#x91CD;&#x8F7D;&#xFF08;Overload&#xFF09;&#x3001;&#x91CD;&#x5199;&#xFF08;Override&#xFF09;&#x66F4;&#x662F;&#x6709;&#x5404;&#x79CD;&#x4E0D;&#x540C;&#x7684;&#x9898;&#x76EE;&#x3002;</li>
+<li>&#x5728;&#x8F6F;&#x4EF6;&#x8BBE;&#x8BA1;&#x5F00;&#x53D1;&#x4E2D;&#x59A5;&#x5584;&#x5730;&#x4F7F;&#x7528;&#x63A5;&#x53E3;&#x548C;&#x62BD;&#x8C61;&#x7C7B;&#x3002;&#x4F60;&#x81F3;&#x5C11;&#x77E5;&#x9053;&#x5178;&#x578B;&#x5E94;&#x7528;&#x573A;&#x666F;&#xFF0C;&#x638C;&#x63E1;&#x57FA;&#x7840;&#x7C7B;&#x5E93;&#x91CD;&#x8981;&#x63A5;&#x53E3;&#x7684;&#x4F7F;&#x7528;&#xFF1B;&#x638C;&#x63E1;&#x8BBE;&#x8BA1;&#x65B9;&#x6CD5;&#xFF0C;&#x80FD;&#x591F;&#x5728; review &#x4EE3;&#x7801;&#x7684;&#x65F6;&#x5019;&#x770B;&#x51FA;&#x660E;&#x663E;&#x7684;&#x4E0D;&#x5229;&#x4E8E;&#x672A;&#x6765;&#x7EF4;&#x62A4;&#x7684;&#x8BBE;&#x8BA1;&#x3002;</li>
+<li>&#x638C;&#x63E1; Java &#x8BED;&#x8A00;&#x7279;&#x6027;&#x6F14;&#x8FDB;&#x3002;&#x73B0;&#x5728;&#x975E;&#x5E38;&#x591A;&#x7684;&#x6846;&#x67B6;&#x5DF2;&#x7ECF;&#x662F;&#x57FA;&#x4E8E; Java 8&#xFF0C;&#x5E76;&#x9010;&#x6E10;&#x652F;&#x6301;&#x66F4;&#x65B0;&#x7248;&#x672C;&#xFF0C;&#x638C;&#x63E1;&#x76F8;&#x5173;&#x8BED;&#x6CD5;&#xFF0C;&#x7406;&#x89E3;&#x8BBE;&#x8BA1;&#x76EE;&#x7684;&#x662F;&#x5F88;&#x6709;&#x5FC5;&#x8981;&#x7684;&#x3002;</li>
+</ul>
+<h2 id="&#x77E5;&#x8BC6;&#x6269;&#x5C55;">&#x77E5;&#x8BC6;&#x6269;&#x5C55;</h2>
+<p>&#x6211;&#x4F1A;&#x4ECE;&#x63A5;&#x53E3;&#x3001;&#x62BD;&#x8C61;&#x7C7B;&#x7684;&#x4E00;&#x4E9B;&#x5B9E;&#x8DF5;&#xFF0C;&#x4EE5;&#x53CA;&#x8BED;&#x8A00;&#x53D8;&#x5316;&#x65B9;&#x9762;&#x53BB;&#x9610;&#x8FF0;&#x4E00;&#x4E9B;&#x6269;&#x5C55;&#x77E5;&#x8BC6;&#x70B9;&#x3002;</p>
+<p>Java &#x76F8;&#x6BD4;&#x4E8E;&#x5176;&#x4ED6;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x8BED;&#x8A00;&#xFF0C;&#x5982; C++&#xFF0C;&#x8BBE;&#x8BA1;&#x4E0A;&#x6709;&#x4E00;&#x4E9B;&#x57FA;&#x672C;&#x533A;&#x522B;&#xFF0C;&#x6BD4;&#x5982;<strong>Java &#x4E0D;&#x652F;&#x6301;&#x591A;&#x7EE7;&#x627F;</strong>&#x3002;&#x8FD9;&#x79CD;&#x9650;&#x5236;&#xFF0C;&#x5728;&#x89C4;&#x8303;&#x4E86;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#x7684;&#x540C;&#x65F6;&#xFF0C;&#x4E5F;&#x4EA7;&#x751F;&#x4E86;&#x4E00;&#x4E9B;&#x5C40;&#x9650;&#x6027;&#xFF0C;&#x5F71;&#x54CD;&#x7740;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;&#x7ED3;&#x6784;&#x3002;Java &#x7C7B;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x591A;&#x4E2A;&#x63A5;&#x53E3;&#xFF0C;&#x56E0;&#x4E3A;&#x63A5;&#x53E3;&#x662F;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x662F;&#x58F0;&#x660E;&#x6027;&#x7684;&#xFF0C;&#x4F46;&#x4E0D;&#x80FD;&#x901A;&#x8FC7;&#x6269;&#x5C55;&#x591A;&#x4E2A;&#x62BD;&#x8C61;&#x7C7B;&#x6765;&#x91CD;&#x7528;&#x903B;&#x8F91;&#x3002;</p>
+<p>&#x5728;&#x4E00;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#x5B58;&#x5728;&#x7279;&#x5B9A;&#x573A;&#x666F;&#xFF0C;&#x9700;&#x8981;&#x62BD;&#x8C61;&#x51FA;&#x4E0E;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x3001;&#x5B9E;&#x4F8B;&#x5316;&#x65E0;&#x5173;&#x7684;&#x901A;&#x7528;&#x903B;&#x8F91;&#xFF0C;&#x6216;&#x8005;&#x7EAF;&#x8C03;&#x7528;&#x5173;&#x7CFB;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x4F46;&#x662F;&#x4F7F;&#x7528;&#x4F20;&#x7EDF;&#x7684;&#x62BD;&#x8C61;&#x7C7B;&#x4F1A;&#x9677;&#x5165;&#x5230;&#x5355;&#x7EE7;&#x627F;&#x7684;&#x7A98;&#x5883;&#x3002;&#x4EE5;&#x5F80;&#x5E38;&#x89C1;&#x7684;&#x505A;&#x6CD5;&#x662F;&#xFF0C;&#x5B9E;&#x73B0;&#x7531;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x7EC4;&#x6210;&#x7684;&#x5DE5;&#x5177;&#x7C7B;&#xFF08;Utils&#xFF09;&#xFF0C;&#x6BD4;&#x5982; java.util.Collections&#x3002;</p>
+<p>&#x8BBE;&#x60F3;&#xFF0C;&#x4E3A;&#x63A5;&#x53E3;&#x6DFB;&#x52A0;&#x4EFB;&#x4F55;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#xFF0C;&#x76F8;&#x5E94;&#x7684;&#x6240;&#x6709;&#x5B9E;&#x73B0;&#x4E86;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x7684;&#x7C7B;&#xFF0C;&#x4E5F;&#x5FC5;&#x987B;&#x5B9E;&#x73B0;&#x65B0;&#x589E;&#x65B9;&#x6CD5;&#xFF0C;&#x5426;&#x5219;&#x4F1A;&#x51FA;&#x73B0;&#x7F16;&#x8BD1;&#x9519;&#x8BEF;&#x3002;&#x5BF9;&#x4E8E;&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x6DFB;&#x52A0;&#x975E;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#xFF0C;&#x5176;&#x5B50;&#x7C7B;&#x53EA;&#x4F1A;&#x4EAB;&#x53D7;&#x5230;&#x80FD;&#x529B;&#x6269;&#x5C55;&#xFF0C;&#x800C;&#x4E0D;&#x7528;&#x62C5;&#x5FC3;&#x7F16;&#x8BD1;&#x51FA;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x63A5;&#x53E3;&#x7684;&#x804C;&#x8D23;&#x4E5F;&#x4E0D;&#x4EC5;&#x4EC5;&#x9650;&#x4E8E;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x5176;&#x5B9E;&#x6709;&#x5404;&#x79CD;&#x4E0D;&#x540C;&#x7684;&#x5B9E;&#x8DF5;&#x3002;&#x6709;&#x4E00;&#x7C7B;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x65B9;&#x6CD5;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x901A;&#x5E38;&#x53EB;&#x4F5C; Marker Interface&#xFF0C;&#x987E;&#x540D;&#x601D;&#x4E49;&#xFF0C;&#x5B83;&#x7684;&#x76EE;&#x7684;&#x5C31;&#x662F;&#x4E3A;&#x4E86;&#x58F0;&#x660E;&#x67D0;&#x4E9B;&#x4E1C;&#x897F;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x719F;&#x77E5;&#x7684; Cloneable&#x3001;Serializable &#x7B49;&#x3002;&#x8FD9;&#x79CD;&#x7528;&#x6CD5;&#xFF0C;&#x4E5F;&#x5B58;&#x5728;&#x4E8E;&#x4E1A;&#x754C;&#x5176;&#x4ED6;&#x7684; Java &#x4EA7;&#x54C1;&#x4EE3;&#x7801;&#x4E2D;&#x3002;</p>
+<p>&#x4ECE;&#x8868;&#x9762;&#x770B;&#xFF0C;&#x8FD9;&#x4F3C;&#x4E4E;&#x548C; Annotation &#x5F02;&#x66F2;&#x540C;&#x5DE5;&#xFF0C;&#x4E5F;&#x786E;&#x5B9E;&#x5982;&#x6B64;&#xFF0C;&#x5B83;&#x7684;&#x597D;&#x5904;&#x662F;&#x7B80;&#x5355;&#x76F4;&#x63A5;&#x3002;&#x5BF9;&#x4E8E; Annotation&#xFF0C;&#x56E0;&#x4E3A;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x53C2;&#x6570;&#x548C;&#x503C;&#xFF0C;&#x5728;&#x8868;&#x8FBE;&#x80FD;&#x529B;&#x4E0A;&#x8981;&#x66F4;&#x5F3A;&#x5927;&#x4E00;&#x4E9B;&#xFF0C;&#x6240;&#x4EE5;&#x66F4;&#x591A;&#x4EBA;&#x9009;&#x62E9;&#x4F7F;&#x7528; Annotation&#x3002;</p>
+<p>Java 8 &#x589E;&#x52A0;&#x4E86;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;&#x7684;&#x652F;&#x6301;&#xFF0C;&#x6240;&#x4EE5;&#x53C8;&#x589E;&#x52A0;&#x4E86;&#x4E00;&#x7C7B;&#x5B9A;&#x4E49;&#xFF0C;&#x5373;&#x6240;&#x8C13; functional interface&#xFF0C;&#x7B80;&#x5355;&#x8BF4;&#x5C31;&#x662F;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x901A;&#x5E38;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528; @FunctionalInterface Annotation &#x6765;&#x6807;&#x8BB0;&#x3002;Lambda &#x8868;&#x8FBE;&#x5F0F;&#x672C;&#x8EAB;&#x53EF;&#x4EE5;&#x770B;&#x4F5C;&#x662F;&#x4E00;&#x7C7B; functional interface&#xFF0C;&#x67D0;&#x79CD;&#x7A0B;&#x5EA6;&#x4E0A;&#x8FD9;&#x548C;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x7B97;&#x662F;&#x4E24;&#x7801;&#x4E8B;&#x3002;&#x6211;&#x4EEC;&#x719F;&#x77E5;&#x7684; Runnable&#x3001;Callable &#x4E4B;&#x7C7B;&#xFF0C;&#x90FD;&#x662F; functional interface&#xFF0C;&#x8FD9;&#x91CC;&#x4E0D;&#x518D;&#x591A;&#x4ECB;&#x7ECD;&#x4E86;&#xFF0C;&#x6709;&#x5174;&#x8DA3;&#x4F60;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#xFF1A;<a href="https://www.oreilly.com/learning/java-8-functional-interfaces" target="_blank">https://www.oreilly.com/learning/java-8-functional-interfaces</a> &#x3002;</p>
+<p>&#x8FD8;&#x6709;&#x4E00;&#x70B9;&#x53EF;&#x80FD;&#x8BA9;&#x4EBA;&#x611F;&#x5230;&#x610F;&#x5916;&#xFF0C;&#x4E25;&#x683C;&#x8BF4;&#xFF0C;<strong>Java 8 &#x4EE5;&#x540E;&#xFF0C;&#x63A5;&#x53E3;&#x4E5F;&#x662F;&#x53EF;&#x4EE5;&#x6709;&#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#x7684;&#xFF01;</strong></p>
+<p>&#x4ECE; Java 8 &#x5F00;&#x59CB;&#xFF0C;interface &#x589E;&#x52A0;&#x4E86;&#x5BF9; default method &#x7684;&#x652F;&#x6301;&#x3002;Java 9 &#x4EE5;&#x540E;&#xFF0C;&#x751A;&#x81F3;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49; private default method&#x3002;Default method &#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x79CD;&#x4E8C;&#x8FDB;&#x5236;&#x517C;&#x5BB9;&#x7684;&#x6269;&#x5C55;&#x5DF2;&#x6709;&#x63A5;&#x53E3;&#x7684;&#x529E;&#x6CD5;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x6211;&#x4EEC;&#x719F;&#x77E5;&#x7684; java.util.Collection&#xFF0C;&#x5B83;&#x662F; collection &#x4F53;&#x7CFB;&#x7684; root interface&#xFF0C;&#x5728; Java 8 &#x4E2D;&#x6DFB;&#x52A0;&#x4E86;&#x4E00;&#x7CFB;&#x5217; default method&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x589E;&#x52A0; Lambda&#x3001;Stream &#x76F8;&#x5173;&#x7684;&#x529F;&#x80FD;&#x3002;&#x6211;&#x5728;&#x4E13;&#x680F;&#x524D;&#x9762;&#x63D0;&#x5230;&#x7684;&#x7C7B;&#x4F3C; Collections &#x4E4B;&#x7C7B;&#x7684;&#x5DE5;&#x5177;&#x7C7B;&#xFF0C;&#x5F88;&#x591A;&#x65B9;&#x6CD5;&#x90FD;&#x9002;&#x5408;&#x4F5C;&#x4E3A; default method &#x5B9E;&#x73B0;&#x5728;&#x57FA;&#x7840;&#x63A5;&#x53E3;&#x91CC;&#x9762;&#x3002;</p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x4E0B;&#x9762;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#xFF1A;</p>
+<pre><code>public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {
+     /**
+     * Returns a sequential Stream with this collection as its source 
+     * ...
+     **/
+     default Stream&lt;E&gt; stream() {
+         return StreamSupport.stream(spliterator(), false);
+     }
+  }
+</code></pre><p><strong>&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x8BBE;&#x8BA1;</strong></p>
+<p>&#x8C08;&#x5230;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#xFF0C;&#x5F88;&#x591A;&#x4EBA;&#x5C31;&#x4F1A;&#x60F3;&#x8D77;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF0C;&#x90A3;&#x4E9B;&#x662F;&#x975E;&#x5E38;&#x7ECF;&#x5178;&#x7684;&#x95EE;&#x9898;&#x548C;&#x8BBE;&#x8BA1;&#x65B9;&#x6CD5;&#x7684;&#x603B;&#x7ED3;&#x3002;&#x6211;&#x4ECA;&#x5929;&#x6765;&#x592F;&#x5B9E;&#x4E00;&#x4E0B;&#x57FA;&#x7840;&#xFF0C;&#x5148;&#x6765;&#x804A;&#x804A;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x8BBE;&#x8BA1;&#x7684;&#x57FA;&#x672C;&#x65B9;&#x9762;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x4E00;&#x5B9A;&#x8981;&#x6E05;&#x695A;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x57FA;&#x672C;&#x8981;&#x7D20;&#xFF1A;&#x5C01;&#x88C5;&#x3001;&#x7EE7;&#x627F;&#x3001;&#x591A;&#x6001;&#x3002;</p>
+<p><strong>&#x5C01;&#x88C5;</strong>&#x7684;&#x76EE;&#x7684;&#x662F;&#x9690;&#x85CF;&#x4E8B;&#x52A1;&#x5185;&#x90E8;&#x7684;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#xFF0C;&#x4EE5;&#x4FBF;&#x63D0;&#x9AD8;&#x5B89;&#x5168;&#x6027;&#x548C;&#x7B80;&#x5316;&#x7F16;&#x7A0B;&#x3002;&#x5C01;&#x88C5;&#x63D0;&#x4F9B;&#x4E86;&#x5408;&#x7406;&#x7684;&#x8FB9;&#x754C;&#xFF0C;&#x907F;&#x514D;&#x5916;&#x90E8;&#x8C03;&#x7528;&#x8005;&#x63A5;&#x89E6;&#x5230;&#x5185;&#x90E8;&#x7684;&#x7EC6;&#x8282;&#x3002;&#x6211;&#x4EEC;&#x5728;&#x65E5;&#x5E38;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x56E0;&#x4E3A;&#x65E0;&#x610F;&#x95F4;&#x66B4;&#x9732;&#x4E86;&#x7EC6;&#x8282;&#x5BFC;&#x81F4;&#x7684;&#x96BE;&#x7F20; bug &#x592A;&#x591A;&#x4E86;&#xFF0C;&#x6BD4;&#x5982;&#x5728;&#x591A;&#x7EBF;&#x7A0B;&#x73AF;&#x5883;&#x66B4;&#x9732;&#x5185;&#x90E8;&#x72B6;&#x6001;&#xFF0C;&#x5BFC;&#x81F4;&#x7684;&#x5E76;&#x53D1;&#x4FEE;&#x6539;&#x95EE;&#x9898;&#x3002;&#x4ECE;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x89D2;&#x5EA6;&#x770B;&#xFF0C;&#x5C01;&#x88C5;&#x8FD9;&#x79CD;&#x9690;&#x85CF;&#xFF0C;&#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x7B80;&#x5316;&#x7684;&#x754C;&#x9762;&#xFF0C;&#x907F;&#x514D;&#x592A;&#x591A;&#x65E0;&#x610F;&#x4E49;&#x7684;&#x7EC6;&#x8282;&#x6D6A;&#x8D39;&#x8C03;&#x7528;&#x8005;&#x7684;&#x7CBE;&#x529B;&#x3002;</p>
+<p><strong>&#x7EE7;&#x627F;</strong>&#x662F;&#x4EE3;&#x7801;&#x590D;&#x7528;&#x7684;&#x57FA;&#x7840;&#x673A;&#x5236;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;&#x6211;&#x4EEC;&#x5BF9;&#x4E8E;&#x9A6C;&#x3001;&#x767D;&#x9A6C;&#x3001;&#x9ED1;&#x9A6C;&#x7684;&#x5F52;&#x7EB3;&#x603B;&#x7ED3;&#x3002;&#x4F46;&#x8981;&#x6CE8;&#x610F;&#xFF0C;&#x7EE7;&#x627F;&#x53EF;&#x4EE5;&#x770B;&#x4F5C;&#x662F;&#x975E;&#x5E38;&#x7D27;&#x8026;&#x5408;&#x7684;&#x4E00;&#x79CD;&#x5173;&#x7CFB;&#xFF0C;&#x7236;&#x7C7B;&#x4EE3;&#x7801;&#x4FEE;&#x6539;&#xFF0C;&#x5B50;&#x7C7B;&#x884C;&#x4E3A;&#x4E5F;&#x4F1A;&#x53D8;&#x52A8;&#x3002;&#x5728;&#x5B9E;&#x8DF5;&#x4E2D;&#xFF0C;&#x8FC7;&#x5EA6;&#x6EE5;&#x7528;&#x7EE7;&#x627F;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x8D77;&#x5230;&#x53CD;&#x6548;&#x679C;&#x3002;</p>
+<p><strong>&#x591A;&#x6001;</strong>&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x7ACB;&#x5373;&#x4F1A;&#x60F3;&#x5230;&#x91CD;&#x5199;&#xFF08;override&#xFF09;&#x548C;&#x91CD;&#x8F7D;&#xFF08;overload&#xFF09;&#x3001;&#x5411;&#x4E0A;&#x8F6C;&#x578B;&#x3002;&#x7B80;&#x5355;&#x8BF4;&#xFF0C;&#x91CD;&#x5199;&#x662F;&#x7236;&#x5B50;&#x7C7B;&#x4E2D;&#x76F8;&#x540C;&#x540D;&#x5B57;&#x548C;&#x53C2;&#x6570;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x5B9E;&#x73B0;&#xFF1B;&#x91CD;&#x8F7D;&#x5219;&#x662F;&#x76F8;&#x540C;&#x540D;&#x5B57;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x672C;&#x8D28;&#x4E0A;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x7B7E;&#x540D;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x4E3A;&#x4E86;&#x66F4;&#x597D;&#x8BF4;&#x660E;&#xFF0C;&#x8BF7;&#x53C2;&#x8003;&#x4E0B;&#x9762;&#x7684;&#x6837;&#x4F8B;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code>public int doSomething() {
+    return 0;
+}
+// &#x8F93;&#x5165;&#x53C2;&#x6570;&#x4E0D;&#x540C;&#xFF0C;&#x610F;&#x5473;&#x7740;&#x65B9;&#x6CD5;&#x7B7E;&#x540D;&#x4E0D;&#x540C;&#xFF0C;&#x91CD;&#x8F7D;&#x7684;&#x4F53;&#x73B0;
+public int doSomething(List&lt;String&gt; strs) {
+    return 0;
+}
+// return &#x7C7B;&#x578B;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x7F16;&#x8BD1;&#x4E0D;&#x80FD;&#x901A;&#x8FC7;
+public short doSomething() {
+    return 0;
+}
+</code></pre><p>&#x8FD9;&#x91CC;&#x4F60;&#x53EF;&#x4EE5;&#x601D;&#x8003;&#x4E00;&#x4E2A;&#x5C0F;&#x95EE;&#x9898;&#xFF0C;&#x65B9;&#x6CD5;&#x540D;&#x79F0;&#x548C;&#x53C2;&#x6570;&#x4E00;&#x81F4;&#xFF0C;&#x4F46;&#x662F;&#x8FD4;&#x56DE;&#x503C;&#x4E0D;&#x540C;&#xFF0C;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x5728; Java &#x4EE3;&#x7801;&#x4E2D;&#x7B97;&#x662F;&#x6709;&#x6548;&#x7684;&#x91CD;&#x8F7D;&#x5417;&#xFF1F; &#x7B54;&#x6848;&#x662F;&#x4E0D;&#x662F;&#x7684;&#xFF0C;&#x7F16;&#x8BD1;&#x90FD;&#x4F1A;&#x51FA;&#x9519;&#x7684;&#x3002;</p>
+<p>&#x8FDB;&#x884C;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7F16;&#x7A0B;&#xFF0C;&#x638C;&#x63E1;&#x57FA;&#x672C;&#x7684;&#x8BBE;&#x8BA1;&#x539F;&#x5219;&#x662F;&#x5FC5;&#x987B;&#x7684;&#xFF0C;&#x6211;&#x4ECA;&#x5929;&#x4ECB;&#x7ECD;&#x6700;&#x901A;&#x7528;&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x6240;&#x8C13;&#x7684; S.O.L.I.D &#x539F;&#x5219;&#x3002;</p>
+<ul>
+<li>&#x5355;&#x4E00;&#x804C;&#x8D23;&#xFF08;Single Responsibility&#xFF09;&#xFF0C;&#x7C7B;&#x6216;&#x8005;&#x5BF9;&#x8C61;&#x6700;&#x597D;&#x662F;&#x53EA;&#x6709;&#x5355;&#x4E00;&#x804C;&#x8D23;&#xFF0C;&#x5728;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;&#x4E2D;&#x5982;&#x679C;&#x53D1;&#x73B0;&#x67D0;&#x4E2A;&#x7C7B;&#x627F;&#x62C5;&#x7740;&#x591A;&#x79CD;&#x4E49;&#x52A1;&#xFF0C;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x8FDB;&#x884C;&#x62C6;&#x5206;&#x3002;</li>
+<li>&#x5F00;&#x5173;&#x539F;&#x5219;&#xFF08;Open-Close, Open for extension, close for modification&#xFF09;&#xFF0C;&#x8BBE;&#x8BA1;&#x8981;&#x5BF9;&#x6269;&#x5C55;&#x5F00;&#x653E;&#xFF0C;&#x5BF9;&#x4FEE;&#x6539;&#x5173;&#x95ED;&#x3002;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;&#x5E94;&#x4FDD;&#x8BC1;&#x5E73;&#x6ED1;&#x7684;&#x6269;&#x5C55;&#x6027;&#xFF0C;&#x5C3D;&#x91CF;&#x907F;&#x514D;&#x56E0;&#x4E3A;&#x65B0;&#x589E;&#x540C;&#x7C7B;&#x529F;&#x80FD;&#x800C;&#x4FEE;&#x6539;&#x5DF2;&#x6709;&#x5B9E;&#x73B0;&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x5C11;&#x4EA7;&#x51FA;&#x4E9B;&#x56DE;&#x5F52;&#xFF08;regression&#xFF09;&#x95EE;&#x9898;&#x3002;</li>
+<li>&#x91CC;&#x6C0F;&#x66FF;&#x6362;&#xFF08;Liskov Substitution&#xFF09;&#xFF0C;&#x8FD9;&#x662F;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;&#x57FA;&#x672C;&#x8981;&#x7D20;&#x4E4B;&#x4E00;&#xFF0C;&#x8FDB;&#x884C;&#x7EE7;&#x627F;&#x5173;&#x7CFB;&#x62BD;&#x8C61;&#x65F6;&#xFF0C;&#x51E1;&#x662F;&#x53EF;&#x4EE5;&#x7528;&#x7236;&#x7C7B;&#x6216;&#x8005;&#x57FA;&#x7C7B;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x90FD;&#x53EF;&#x4EE5;&#x7528;&#x5B50;&#x7C7B;&#x66FF;&#x6362;&#x3002;</li>
+<li>&#x63A5;&#x53E3;&#x5206;&#x79BB;&#xFF08;Interface Segregation&#xFF09;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x8FDB;&#x884C;&#x7C7B;&#x548C;&#x63A5;&#x53E3;&#x8BBE;&#x8BA1;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x5728;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#x91CC;&#x5B9A;&#x4E49;&#x4E86;&#x592A;&#x591A;&#x65B9;&#x6CD5;&#xFF0C;&#x5176;&#x5B50;&#x7C7B;&#x5F88;&#x53EF;&#x80FD;&#x9762;&#x4E34;&#x4E24;&#x96BE;&#xFF0C;&#x5C31;&#x662F;&#x53EA;&#x6709;&#x90E8;&#x5206;&#x65B9;&#x6CD5;&#x5BF9;&#x5B83;&#x662F;&#x6709;&#x610F;&#x4E49;&#x7684;&#xFF0C;&#x8FD9;&#x5C31;&#x7834;&#x574F;&#x4E86;&#x7A0B;&#x5E8F;&#x7684;&#x5185;&#x805A;&#x6027;&#x3002;
+&#x5BF9;&#x4E8E;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x62C6;&#x5206;&#x6210;&#x529F;&#x80FD;&#x5355;&#x4E00;&#x7684;&#x591A;&#x4E2A;&#x63A5;&#x53E3;&#xFF0C;&#x5C06;&#x884C;&#x4E3A;&#x8FDB;&#x884C;&#x89E3;&#x8026;&#x3002;&#x5728;&#x672A;&#x6765;&#x7EF4;&#x62A4;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x63A5;&#x53E3;&#x8BBE;&#x8BA1;&#x6709;&#x53D8;&#xFF0C;&#x4E0D;&#x4F1A;&#x5BF9;&#x4F7F;&#x7528;&#x5176;&#x4ED6;&#x63A5;&#x53E3;&#x7684;&#x5B50;&#x7C7B;&#x6784;&#x6210;&#x5F71;&#x54CD;&#x3002;</li>
+<li>&#x4F9D;&#x8D56;&#x53CD;&#x8F6C;&#xFF08;Dependency Inversion&#xFF09;&#xFF0C;&#x5B9E;&#x4F53;&#x5E94;&#x8BE5;&#x4F9D;&#x8D56;&#x4E8E;&#x62BD;&#x8C61;&#x800C;&#x4E0D;&#x662F;&#x5B9E;&#x73B0;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x9AD8;&#x5C42;&#x6B21;&#x6A21;&#x5757;&#xFF0C;&#x4E0D;&#x5E94;&#x8BE5;&#x4F9D;&#x8D56;&#x4E8E;&#x4F4E;&#x5C42;&#x6B21;&#x6A21;&#x5757;&#xFF0C;&#x800C;&#x662F;&#x5E94;&#x8BE5;&#x57FA;&#x4E8E;&#x62BD;&#x8C61;&#x3002;&#x5B9E;&#x8DF5;&#x8FD9;&#x4E00;&#x539F;&#x5219;&#x662F;&#x4FDD;&#x8BC1;&#x4EA7;&#x54C1;&#x4EE3;&#x7801;&#x4E4B;&#x95F4;&#x9002;&#x5F53;&#x8026;&#x5408;&#x5EA6;&#x7684;&#x6CD5;&#x5B9D;&#x3002;</li>
+</ul>
+<p><strong>OOP &#x539F;&#x5219;&#x5B9E;&#x8DF5;&#x4E2D;&#x7684;&#x53D6;&#x820D;</strong></p>
+<p>&#x503C;&#x5F97;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x73B0;&#x4EE3;&#x8BED;&#x8A00;&#x7684;&#x53D1;&#x5C55;&#xFF0C;&#x5F88;&#x591A;&#x65F6;&#x5019;&#x5E76;&#x4E0D;&#x662F;&#x5B8C;&#x5168;&#x9075;&#x5B88;&#x524D;&#x9762;&#x7684;&#x539F;&#x5219;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#xFF0C;Java 10 &#x4E2D;&#x5F15;&#x5165;&#x4E86;&#x672C;&#x5730;&#x65B9;&#x6CD5;&#x7C7B;&#x578B;&#x63A8;&#x65AD;&#x548C; var &#x7C7B;&#x578B;&#x3002;&#x6309;&#x7167;&#xFF0C;&#x91CC;&#x6C0F;&#x66FF;&#x6362;&#x539F;&#x5219;&#xFF0C;&#x6211;&#x4EEC;&#x901A;&#x5E38;&#x8FD9;&#x6837;&#x5B9A;&#x4E49;&#x53D8;&#x91CF;&#xFF1A;</p>
+<pre><code>List&lt;String&gt; list = new ArrayList&lt;&gt;();
+</code></pre><p>&#x5982;&#x679C;&#x4F7F;&#x7528; var &#x7C7B;&#x578B;&#xFF0C;&#x53EF;&#x4EE5;&#x7B80;&#x5316;&#x4E3A;</p>
+<pre><code>var list = new ArrayList&lt;String&gt;();
+</code></pre><p>&#x4F46;&#x662F;&#xFF0C;list &#x5B9E;&#x9645;&#x4F1A;&#x88AB;&#x63A8;&#x65AD;&#x4E3A;&#x201C;ArrayList &lt; String &gt;&#x201D;</p>
+<pre><code>ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+</code></pre><p>&#x7406;&#x8BBA;&#x4E0A;&#xFF0C;&#x8FD9;&#x79CD;&#x8BED;&#x6CD5;&#x4E0A;&#x7684;&#x4FBF;&#x5229;&#xFF0C;&#x5176;&#x5B9E;&#x662F;&#x589E;&#x5F3A;&#x4E86;&#x7A0B;&#x5E8F;&#x5BF9;&#x5B9E;&#x73B0;&#x7684;&#x4F9D;&#x8D56;&#xFF0C;&#x4F46;&#x662F;&#x5FAE;&#x5C0F;&#x7684;&#x7C7B;&#x578B;&#x6CC4;&#x6F0F;&#x5374;&#x5E26;&#x6765;&#x4E86;&#x4E66;&#x5199;&#x7684;&#x4FBF;&#x5229;&#x548C;&#x4EE3;&#x7801;&#x53EF;&#x8BFB;&#x6027;&#x7684;&#x63D0;&#x9AD8;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x5B9E;&#x8DF5;&#x4E2D;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x8981;&#x6309;&#x7167;&#x5F97;&#x5931;&#x5229;&#x5F0A;&#x8FDB;&#x884C;&#x9009;&#x62E9;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4E00;&#x5473;&#x5F97;&#x9075;&#x5FAA;&#x539F;&#x5219;&#x3002;</p>
+<p><strong>OOP &#x539F;&#x5219;&#x5728;&#x9762;&#x8BD5;&#x9898;&#x76EE;&#x4E2D;&#x7684;&#x5206;&#x6790;</strong></p>
+<p>&#x6211;&#x5728;&#x4EE5;&#x5F80;&#x9762;&#x8BD5;&#x4E2D;&#x53D1;&#x73B0;&#xFF0C;&#x5373;&#x4F7F;&#x662F;&#x6709;&#x591A;&#x5E74;&#x7F16;&#x7A0B;&#x7ECF;&#x9A8C;&#x7684;&#x5DE5;&#x7A0B;&#x5E08;&#xFF0C;&#x4E5F;&#x8FD8;&#x6CA1;&#x6709;&#x771F;&#x6B63;&#x638C;&#x63E1;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x8BBE;&#x8BA1;&#x7684;&#x57FA;&#x672C;&#x7684;&#x539F;&#x5219;&#xFF0C;&#x5982;&#x5F00;&#x5173;&#x539F;&#x5219;&#xFF08;Open-Close&#xFF09;&#x3002;&#x770B;&#x770B;&#x4E0B;&#x9762;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#xFF0C;&#x6539;&#x7F16;&#x81EA;&#x670B;&#x53CB;&#x5708;&#x76DB;&#x4F20;&#x7684;&#x67D0;&#x4F1F;&#x5927;&#x516C;&#x53F8;&#x4EA7;&#x54C1;&#x4EE3;&#x7801;&#xFF0C;&#x4F60;&#x89C9;&#x5F97;&#x53EF;&#x4EE5;&#x5229;&#x7528;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x8BBE;&#x8BA1;&#x539F;&#x5219;&#x5982;&#x4F55;&#x6539;&#x8FDB;&#xFF1F;</p>
+<pre><code>public class VIPCenter {
+  void serviceVIP(T extend User user&gt;) {
+     if (user instanceof SlumDogVIP) {
+        // &#x7A77; X VIP&#xFF0C;&#x6D3B;&#x52A8;&#x62A2;&#x7684;&#x90A3;&#x79CD;
+        // do somthing
+      } else if(user instanceof RealVIP) {
+        // do somthing
+      }
+      // ...
+  }
+</code></pre><p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x7684;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#x662F;&#xFF0C;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x96C6;&#x4E2D;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x5F53;&#x51FA;&#x73B0;&#x65B0;&#x7684;&#x7528;&#x6237;&#x7C7B;&#x578B;&#x65F6;&#xFF0C;&#x6BD4;&#x5982;&#xFF0C;&#x5927;&#x6570;&#x636E;&#x53D1;&#x73B0;&#x4E86;&#x6211;&#x4EEC;&#x662F;&#x80A5;&#x7F8A;&#xFF0C;&#x9700;&#x8981;&#x53BB;&#x6536;&#x83B7;&#x4E00;&#x4E0B;&#xFF0C; &#x8FD9;&#x5C31;&#x9700;&#x8981;&#x76F4;&#x63A5;&#x53BB;&#x4FEE;&#x6539;&#x670D;&#x52A1;&#x65B9;&#x6CD5;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#xFF0C;&#x8FD9;&#x53EF;&#x80FD;&#x4F1A;&#x610F;&#x5916;&#x5F71;&#x54CD;&#x4E0D;&#x76F8;&#x5173;&#x7684;&#x67D0;&#x4E2A;&#x7528;&#x6237;&#x7C7B;&#x578B;&#x903B;&#x8F91;&#x3002;</p>
+<p>&#x5229;&#x7528;&#x5F00;&#x5173;&#x539F;&#x5219;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C1D;&#x8BD5;&#x6539;&#x9020;&#x4E3A;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code>public class VIPCenter {
+   private Map&lt;User.TYPE, ServiceProvider&gt; providers;
+   void serviceVIP(T extend User user&#xFF09; {
+      providers.get(user.getType()).service(user);
+   }
+ }
+ interface ServiceProvider{
+   void service(T extend User user) ;
+ }
+ class SlumDogVIPServiceProvider implements ServiceProvider{
+   void service(T extend User user){
+     // do somthing
+   }
+ }
+ class RealVIPServiceProvider implements ServiceProvider{
+   void service(T extend User user) {
+     // do something
+   }
+ }
+</code></pre><p>&#x4E0A;&#x9762;&#x7684;&#x793A;&#x4F8B;&#xFF0C;&#x5C06;&#x4E0D;&#x540C;&#x5BF9;&#x8C61;&#x5206;&#x7C7B;&#x7684;&#x670D;&#x52A1;&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x62BD;&#x8C61;&#xFF0C;&#x628A;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x7684;&#x7D27;&#x8026;&#x5408;&#x5173;&#x7CFB;&#x62C6;&#x5F00;&#xFF0C;&#x5B9E;&#x73B0;&#x4EE3;&#x7801;&#x7684;&#x9694;&#x79BB;&#x4FDD;&#x8BC1;&#x4E86;&#x65B9;&#x4FBF;&#x7684;&#x6269;&#x5C55;&#x3002;</p>
+<p>&#x4ECA;&#x5929;&#x6211;&#x5BF9; Java &#x9762;&#x5411;&#x5BF9;&#x8C61;&#x6280;&#x672F;&#x8FDB;&#x884C;&#x4E86;&#x68B3;&#x7406;&#xFF0C;&#x5BF9;&#x6BD4;&#x4E86;&#x62BD;&#x8C61;&#x7C7B;&#x548C;&#x63A5;&#x53E3;&#xFF0C;&#x5206;&#x6790;&#x4E86; Java &#x8BED;&#x8A00;&#x5728;&#x63A5;&#x53E3;&#x5C42;&#x9762;&#x7684;&#x6F14;&#x8FDB;&#x548C;&#x76F8;&#x5E94;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;&#x5B9E;&#x73B0;&#xFF0C;&#x6700;&#x540E;&#x56DE;&#x987E;&#x5E76;&#x5B9E;&#x8DF5;&#x4E86;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x8BBE;&#x8BA1;&#x7684;&#x57FA;&#x672C;&#x539F;&#x5219;&#xFF0C;&#x5E0C;&#x671B;&#x5BF9;&#x4F60;&#x6709;&#x6240;&#x5E2E;&#x52A9;&#x3002;</p>
+<h2 id="&#x4E00;&#x8BFE;&#x4E00;&#x7EC3;">&#x4E00;&#x8BFE;&#x4E00;&#x7EC3;</h2>
+<p>&#x5173;&#x4E8E;&#x63A5;&#x53E3;&#x548C;&#x62BD;&#x8C61;&#x7C7B;&#x7684;&#x533A;&#x522B;&#xFF0C;&#x4F60;&#x505A;&#x5230;&#x5FC3;&#x4E2D;&#x6709;&#x6570;&#x4E86;&#x5417;&#xFF1F;&#x7ED9;&#x4F60;&#x5E03;&#x7F6E;&#x4E00;&#x4E2A;&#x601D;&#x8003;&#x9898;&#xFF0C;&#x601D;&#x8003;&#x4E00;&#x4E0B;&#x81EA;&#x5DF1;&#x7684;&#x4EA7;&#x54C1;&#x4EE3;&#x7801;&#xFF0C;&#x6709;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x5730;&#x65B9;&#x8FDD;&#x53CD;&#x4E86;&#x57FA;&#x672C;&#x8BBE;&#x8BA1;&#x539F;&#x5219;&#xFF1F;&#x90A3;&#x4E9B;&#x4E00;&#x6539;&#x5C31;&#x5D29;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x662F;&#x5426;&#x9075;&#x5FAA;&#x4E86;&#x5F00;&#x5173;&#x539F;&#x5219;&#xFF1F;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="12.html" class="navigation navigation-prev " aria-label="Previous page: 第12讲 | Java有几种文件拷贝方式？哪一种最高效？">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="14.html" class="navigation navigation-next " aria-label="Next page: 第14讲 | 谈谈你知道的设计模式？">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"第13讲 | 谈谈接口和抽象类有什么区别？","level":"1.1.14","depth":2,"next":{"title":"第14讲 | 谈谈你知道的设计模式？","level":"1.1.15","depth":2,"path":"document/14.md","ref":"document/14.md","articles":[]},"previous":{"title":"第12讲 | Java有几种文件拷贝方式？哪一种最高效？","level":"1.1.13","depth":2,"path":"document/12.md","ref":"document/12.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"document/13.md","mtime":"2019-03-14T08:24:33.247Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-15T08:24:05.595Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,911 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>第24讲 | 有哪些方法可以在运行时动态生成一个Java类？ · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="25.html" />
+    
+    
+    <link rel="prev" href="23.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1" data-path="0.html">
+            
+                <a href="0.html">
+            
+                    
+                    开篇词 | 以面试题为切入点，有效提升你的Java内功
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2" data-path="1.html">
+            
+                <a href="1.html">
+            
+                    
+                    第1讲 | 谈谈你对Java平台的理解？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3" data-path="2.html">
+            
+                <a href="2.html">
+            
+                    
+                    第2讲 | Exception和Error有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4" data-path="3.html">
+            
+                <a href="3.html">
+            
+                    
+                    第3讲 | 谈谈final、finally、 finalize有什么不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5" data-path="4.html">
+            
+                <a href="4.html">
+            
+                    
+                    第4讲 | 强引用、软引用、弱引用、幻象引用有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.6" data-path="5.html">
+            
+                <a href="5.html">
+            
+                    
+                    第5讲 | String、StringBuffer、StringBuilder有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.7" data-path="6.html">
+            
+                <a href="6.html">
+            
+                    
+                    第6讲 | 动态代理是基于什么原理？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.8" data-path="7.html">
+            
+                <a href="7.html">
+            
+                    
+                    第7讲 | int和Integer有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.9" data-path="8.html">
+            
+                <a href="8.html">
+            
+                    
+                    第8讲 | 对比Vector、ArrayList、LinkedList有何区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.10" data-path="9.html">
+            
+                <a href="9.html">
+            
+                    
+                    第9讲 | 对比Hashtable、HashMap、TreeMap有什么不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.11" data-path="10.html">
+            
+                <a href="10.html">
+            
+                    
+                    第10讲 | 如何保证集合是线程安全的? ConcurrentHashMap如何实现高效地线程安全？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.12" data-path="11.html">
+            
+                <a href="11.html">
+            
+                    
+                    第11讲 | Java提供了哪些IO方式？ NIO如何实现多路复用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.13" data-path="12.html">
+            
+                <a href="12.html">
+            
+                    
+                    第12讲 | Java有几种文件拷贝方式？哪一种最高效？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.14" data-path="13.html">
+            
+                <a href="13.html">
+            
+                    
+                    第13讲 | 谈谈接口和抽象类有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.15" data-path="14.html">
+            
+                <a href="14.html">
+            
+                    
+                    第14讲 | 谈谈你知道的设计模式？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.16" data-path="15.html">
+            
+                <a href="15.html">
+            
+                    
+                    第15讲 | synchronized和ReentrantLock有什么区别呢？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.17" data-path="15-1.html">
+            
+                <a href="15-1.html">
+            
+                    
+                    周末福利 | 谈谈我对Java学习和面试的看法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.18" data-path="16.html">
+            
+                <a href="16.html">
+            
+                    
+                    第16讲 | synchronized底层如何实现？什么是锁的升级、降级？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.19" data-path="17.html">
+            
+                <a href="17.html">
+            
+                    
+                    第17讲 | 一个线程两次调用start()方法会出现什么情况？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.20" data-path="18.html">
+            
+                <a href="18.html">
+            
+                    
+                    第18讲 | 什么情况下Java程序会产生死锁？如何定位、修复？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.21" data-path="19.html">
+            
+                <a href="19.html">
+            
+                    
+                    第19讲 | Java并发包提供了哪些并发工具类？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.22" data-path="20.html">
+            
+                <a href="20.html">
+            
+                    
+                    第20讲 | 并发包中的ConcurrentLinkedQueue和LinkedBlockingQueue有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.23" data-path="21.html">
+            
+                <a href="21.html">
+            
+                    
+                    第21讲 | Java并发类库提供的线程池有哪几种？ 分别有什么特点？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.24" data-path="22.html">
+            
+                <a href="22.html">
+            
+                    
+                    第22讲 | AtomicInteger底层实现原理是什么？如何在自己的产品代码中应用CAS操作？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.25" data-path="23.html">
+            
+                <a href="23.html">
+            
+                    
+                    第23讲 | 请介绍类加载过程，什么是双亲委派模型？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.1.26" data-path="24.html">
+            
+                <a href="24.html">
+            
+                    
+                    第24讲 | 有哪些方法可以在运行时动态生成一个Java类？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.27" data-path="25.html">
+            
+                <a href="25.html">
+            
+                    
+                    第25讲 | 谈谈JVM内存区域的划分，哪些区域可能发生OutOfMemoryError？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.28" data-path="26.html">
+            
+                <a href="26.html">
+            
+                    
+                    第26讲 | 如何监控和诊断JVM堆内和堆外内存使用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.29" data-path="27.html">
+            
+                <a href="27.html">
+            
+                    
+                    第27讲 | Java常见的垃圾收集器有哪些？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.30" data-path="28.html">
+            
+                <a href="28.html">
+            
+                    
+                    第28讲 | 谈谈你的GC调优思路?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.31" data-path="29.html">
+            
+                <a href="29.html">
+            
+                    
+                    第29讲 | Java内存模型中的happen-before是什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.32" data-path="30.html">
+            
+                <a href="30.html">
+            
+                    
+                    第30讲 | Java程序运行在Docker等容器环境有哪些新问题？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.33" data-path="31.html">
+            
+                <a href="31.html">
+            
+                    
+                    第31讲 | 你了解Java应用开发中的注入攻击吗？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.34" data-path="32.html">
+            
+                <a href="32.html">
+            
+                    
+                    第32讲 | 如何写出安全的Java代码？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.35" data-path="33.html">
+            
+                <a href="33.html">
+            
+                    
+                    第33讲 | 后台服务出现明显“变慢”，谈谈你的诊断思路？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.36" data-path="34.html">
+            
+                <a href="34.html">
+            
+                    
+                    第34讲 | 有人说“Lambda能让Java程序慢30倍”，你怎么看？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.37" data-path="35.html">
+            
+                <a href="35.html">
+            
+                    
+                    第35讲 | JVM优化Java代码时都做了什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.38" data-path="35-1.html">
+            
+                <a href="35-1.html">
+            
+                    
+                    周末福利 | 一份Java工程师必读书单
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.39" data-path="36.html">
+            
+                <a href="36.html">
+            
+                    
+                    第36讲 | 谈谈MySQL支持的事务隔离级别，以及悲观锁和乐观锁的原理和应用场景？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.40" data-path="37.html">
+            
+                <a href="37.html">
+            
+                    
+                    第37讲 | 谈谈Spring Bean的生命周期和作用域？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.41" data-path="38.html">
+            
+                <a href="38.html">
+            
+                    
+                    第38讲 | 对比Java标准NIO类库，你知道Netty是如何实现更高性能的吗？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.42" data-path="39.html">
+            
+                <a href="39.html">
+            
+                    
+                    第39讲 | 谈谈常用的分布式ID的设计方案？Snowflake是否受冬令时切换影响？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.43" data-path="end.html">
+            
+                <a href="end.html">
+            
+                    
+                    结束语 | 技术没有终点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >第24讲 | 有哪些方法可以在运行时动态生成一个Java类？</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x7B2C;24&#x8BB2;--&#x6709;&#x54EA;&#x4E9B;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x52A8;&#x6001;&#x751F;&#x6210;&#x4E00;&#x4E2A;java&#x7C7B;&#xFF1F;">&#x7B2C;24&#x8BB2; | &#x6709;&#x54EA;&#x4E9B;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x52A8;&#x6001;&#x751F;&#x6210;&#x4E00;&#x4E2A;Java&#x7C7B;&#xFF1F;</h1>
+<p>&#x5728;&#x5F00;&#x59CB;&#x4ECA;&#x5929;&#x7684;&#x5B66;&#x4E60;&#x524D;&#xFF0C;&#x6211;&#x5EFA;&#x8BAE;&#x4F60;&#x5148;&#x590D;&#x4E60;&#x4E00;&#x4E0B;<a href="6.html">&#x4E13;&#x680F;&#x7B2C; 6 &#x8BB2;</a>&#x6709;&#x5173;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x7684;&#x5185;&#x5BB9;&#x3002;&#x4F5C;&#x4E3A; Java &#x57FA;&#x7840;&#x6A21;&#x5757;&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x8003;&#x8651;&#x5230;&#x4E0D;&#x540C;&#x57FA;&#x7840;&#x7684;&#x540C;&#x5B66;&#x4EE5;&#x53CA;&#x4E00;&#x4E2A;&#x5FAA;&#x5E8F;&#x6E10;&#x8FDB;&#x7684;&#x5B66;&#x4E60;&#x8FC7;&#x7A0B;&#xFF0C;&#x6211;&#x5F53;&#x65F6;&#x5E76;&#x6CA1;&#x6709;&#x5728;&#x6E90;&#x7801;&#x5C42;&#x9762;&#x4ECB;&#x7ECD;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x7684;&#x5B9E;&#x73B0;&#x6280;&#x672F;&#xFF0C;&#x4EC5;&#x8FDB;&#x884C;&#x4E86;&#x76F8;&#x5E94;&#x7684;&#x6280;&#x672F;&#x6BD4;&#x8F83;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x6709;&#x4E86;<a href="23.html">&#x4E0A;&#x4E00;&#x8BB2;</a>&#x7684;&#x7C7B;&#x52A0;&#x8F7D;&#x7684;&#x5B66;&#x4E60;&#x57FA;&#x7840;&#x540E;&#xFF0C;&#x6211;&#x60F3;&#x662F;&#x65F6;&#x5019;&#x8BE5;&#x8FDB;&#x884C;&#x6DF1;&#x5165;&#x5206;&#x6790;&#x4E86;&#x3002;</p>
+<p>&#x4ECA;&#x5929;&#x6211;&#x8981;&#x95EE;&#x4F60;&#x7684;&#x95EE;&#x9898;&#x662F;&#xFF0C;&#x6709;&#x54EA;&#x4E9B;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x52A8;&#x6001;&#x751F;&#x6210;&#x4E00;&#x4E2A; Java &#x7C7B;&#xFF1F;</p>
+<h2 id="&#x5178;&#x578B;&#x56DE;&#x7B54;">&#x5178;&#x578B;&#x56DE;&#x7B54;</h2>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4ECE;&#x5E38;&#x89C1;&#x7684; Java &#x7C7B;&#x6765;&#x6E90;&#x5206;&#x6790;&#xFF0C;&#x901A;&#x5E38;&#x7684;&#x5F00;&#x53D1;&#x8FC7;&#x7A0B;&#x662F;&#xFF0C;&#x5F00;&#x53D1;&#x8005;&#x7F16;&#x5199; Java &#x4EE3;&#x7801;&#xFF0C;&#x8C03;&#x7528; javac &#x7F16;&#x8BD1;&#x6210; class &#x6587;&#x4EF6;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;&#x7C7B;&#x52A0;&#x8F7D;&#x673A;&#x5236;&#x8F7D;&#x5165; JVM&#xFF0C;&#x5C31;&#x6210;&#x4E3A;&#x5E94;&#x7528;&#x8FD0;&#x884C;&#x65F6;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7684; Java &#x7C7B;&#x4E86;&#x3002;</p>
+<p>&#x4ECE;&#x4E0A;&#x9762;&#x8FC7;&#x7A0B;&#x5F97;&#x5230;&#x542F;&#x53D1;&#xFF0C;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x76F4;&#x63A5;&#x7684;&#x65B9;&#x5F0F;&#x662F;&#x4ECE;&#x6E90;&#x7801;&#x5165;&#x624B;&#xFF0C;&#x53EF;&#x4EE5;&#x5229;&#x7528; Java &#x7A0B;&#x5E8F;&#x751F;&#x6210;&#x4E00;&#x6BB5;&#x6E90;&#x7801;&#xFF0C;&#x7136;&#x540E;&#x4FDD;&#x5B58;&#x5230;&#x6587;&#x4EF6;&#x7B49;&#xFF0C;&#x4E0B;&#x9762;&#x5C31;&#x53EA;&#x9700;&#x8981;&#x89E3;&#x51B3;&#x7F16;&#x8BD1;&#x95EE;&#x9898;&#x4E86;&#x3002;</p>
+<p>&#x6709;&#x4E00;&#x79CD;&#x7B28;&#x529E;&#x6CD5;&#xFF0C;&#x76F4;&#x63A5;&#x7528; ProcessBuilder &#x4E4B;&#x7C7B;&#x542F;&#x52A8; javac &#x8FDB;&#x7A0B;&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x4E0A;&#x9762;&#x751F;&#x6210;&#x7684;&#x6587;&#x4EF6;&#x4F5C;&#x4E3A;&#x8F93;&#x5165;&#xFF0C;&#x8FDB;&#x884C;&#x7F16;&#x8BD1;&#x3002;&#x6700;&#x540E;&#xFF0C;&#x518D;&#x5229;&#x7528;&#x7C7B;&#x52A0;&#x8F7D;&#x5668;&#xFF0C;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x52A0;&#x8F7D;&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x524D;&#x9762;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x672C;&#x8D28;&#x4E0A;&#x8FD8;&#x662F;&#x5728;&#x5F53;&#x524D;&#x7A0B;&#x5E8F;&#x8FDB;&#x7A0B;&#x4E4B;&#x5916;&#x7F16;&#x8BD1;&#x7684;&#xFF0C;&#x90A3;&#x4E48;&#x8FD8;&#x6709;&#x6CA1;&#x6709;&#x4E0D;&#x8FD9;&#x4E48; low &#x7684;&#x529E;&#x6CD5;&#x5462;&#xFF1F;</p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x4F7F;&#x7528; Java Compiler API&#xFF0C;&#x8FD9;&#x662F; JDK &#x63D0;&#x4F9B;&#x7684;&#x6807;&#x51C6; API&#xFF0C;&#x91CC;&#x9762;&#x63D0;&#x4F9B;&#x4E86;&#x4E0E; javac &#x5BF9;&#x7B49;&#x7684;&#x7F16;&#x8BD1;&#x5668;&#x529F;&#x80FD;&#xFF0C;&#x5177;&#x4F53;&#x8BF7;&#x53C2;&#x8003;<a href="https://docs.oracle.com/javase/9/docs/api/javax/tools/package-summary.html" target="_blank">java.compiler</a>&#x76F8;&#x5173;&#x6587;&#x6863;&#x3002;</p>
+<p>&#x8FDB;&#x4E00;&#x6B65;&#x601D;&#x8003;&#xFF0C;&#x6211;&#x4EEC;&#x4E00;&#x76F4;&#x56F4;&#x7ED5; Java &#x6E90;&#x7801;&#x7F16;&#x8BD1;&#x6210;&#x4E3A; JVM &#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x7684;&#x5B57;&#x8282;&#x7801;&#xFF0C;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;&#x53EA;&#x8981;&#x662F;&#x7B26;&#x5408; JVM &#x89C4;&#x8303;&#x7684;&#x5B57;&#x8282;&#x7801;&#xFF0C;&#x4E0D;&#x7BA1;&#x5B83;&#x662F;&#x5982;&#x4F55;&#x751F;&#x6210;&#x7684;&#xFF0C;&#x662F;&#x4E0D;&#x662F;&#x90FD;&#x53EF;&#x4EE5;&#x88AB; JVM &#x52A0;&#x8F7D;&#x5462;&#xFF1F;&#x6211;&#x4EEC;&#x80FD;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x751F;&#x6210;&#x76F8;&#x5E94;&#x7684;&#x5B57;&#x8282;&#x7801;&#xFF0C;&#x7136;&#x540E;&#x4EA4;&#x7ED9;&#x7C7B;&#x52A0;&#x8F7D;&#x5668;&#x53BB;&#x52A0;&#x8F7D;&#x5462;&#xFF1F;</p>
+<p>&#x5F53;&#x7136;&#x4E5F;&#x53EF;&#x4EE5;&#xFF0C;&#x4E0D;&#x8FC7;&#x76F4;&#x63A5;&#x53BB;&#x5199;&#x5B57;&#x8282;&#x7801;&#x96BE;&#x5EA6;&#x592A;&#x5927;&#xFF0C;&#x901A;&#x5E38;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5229;&#x7528; Java &#x5B57;&#x8282;&#x7801;&#x64CD;&#x7EB5;&#x5DE5;&#x5177;&#x548C;&#x7C7B;&#x5E93;&#x6765;&#x5B9E;&#x73B0;&#xFF0C;&#x6BD4;&#x5982;&#x5728;<a href="6.html">&#x4E13;&#x680F;&#x7B2C; 6 &#x8BB2;</a>&#x4E2D;&#x63D0;&#x5230;&#x7684;<a href="https://asm.ow2.io/" target="_blank">ASM</a>&#x3001;<a href="http://www.javassist.org/" target="_blank">Javassist</a>&#x3001;cglib &#x7B49;&#x3002;</p>
+<h2 id="&#x8003;&#x70B9;&#x5206;&#x6790;">&#x8003;&#x70B9;&#x5206;&#x6790;</h2>
+<p>&#x867D;&#x7136;&#x66FE;&#x7ECF;&#x88AB;&#x89C6;&#x4E3A;&#x9ED1;&#x9B54;&#x6CD5;&#xFF0C;&#x4F46;&#x5728;&#x5F53;&#x524D;&#x590D;&#x6742;&#x591A;&#x53D8;&#x7684;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x4E2D;&#xFF0C;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x52A8;&#x6001;&#x751F;&#x6210;&#x903B;&#x8F91;&#x5E76;&#x4E0D;&#x662F;&#x4EC0;&#x4E48;&#x7F55;&#x89C1;&#x7684;&#x573A;&#x666F;&#x3002;&#x91CD;&#x65B0;&#x5BA1;&#x89C6;&#x6211;&#x4EEC;&#x8C08;&#x5230;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#xFF0C;&#x672C;&#x8D28;&#x4E0A;&#x4E0D;&#x5C31;&#x662F;&#x5728;&#x7279;&#x5B9A;&#x7684;&#x65F6;&#x673A;&#xFF0C;&#x53BB;&#x4FEE;&#x6539;&#x5DF2;&#x6709;&#x7C7B;&#x578B;&#x5B9E;&#x73B0;&#xFF0C;&#x6216;&#x8005;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x7C7B;&#x578B;&#x3002;</p>
+<p>&#x660E;&#x767D;&#x4E86;&#x57FA;&#x672C;&#x601D;&#x8DEF;&#x540E;&#xFF0C;&#x6211;&#x8FD8;&#x662F;&#x56F4;&#x7ED5;&#x7C7B;&#x52A0;&#x8F7D;&#x673A;&#x5236;&#x8FDB;&#x884C;&#x5C55;&#x5F00;&#xFF0C;&#x9762;&#x8BD5;&#x8FC7;&#x7A0B;&#x4E2D;&#x9762;&#x8BD5;&#x5B98;&#x5F88;&#x53EF;&#x80FD;&#x4ECE;&#x6280;&#x672F;&#x539F;&#x7406;&#x6216;&#x5B9E;&#x8DF5;&#x7684;&#x89D2;&#x5EA6;&#x8003;&#x5BDF;&#xFF1A;</p>
+<ul>
+<li>&#x5B57;&#x8282;&#x7801;&#x548C;&#x7C7B;&#x52A0;&#x8F7D;&#x5230;&#x5E95;&#x662F;&#x600E;&#x4E48;&#x65E0;&#x7F1D;&#x8FDB;&#x884C;&#x8F6C;&#x6362;&#x7684;&#xFF1F;&#x53D1;&#x751F;&#x5728;&#x6574;&#x4E2A;&#x7C7B;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x7684;&#x54EA;&#x4E00;&#x6B65;&#xFF1F;</li>
+<li>&#x5982;&#x4F55;&#x5229;&#x7528;&#x5B57;&#x8282;&#x7801;&#x64CD;&#x7EB5;&#x6280;&#x672F;&#xFF0C;&#x5B9E;&#x73B0;&#x57FA;&#x672C;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x903B;&#x8F91;&#xFF1F;</li>
+<li>&#x9664;&#x4E86;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#xFF0C;&#x5B57;&#x8282;&#x7801;&#x64CD;&#x7EB5;&#x6280;&#x672F;&#x8FD8;&#x6709;&#x90A3;&#x4E9B;&#x5E94;&#x7528;&#x573A;&#x666F;&#xFF1F;</li>
+</ul>
+<h2 id="&#x77E5;&#x8BC6;&#x6269;&#x5C55;">&#x77E5;&#x8BC6;&#x6269;&#x5C55;</h2>
+<p>&#x9996;&#x5148;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x7406;&#x89E3;&#x4E00;&#x4E0B;&#xFF0C;&#x7C7B;&#x4ECE;&#x5B57;&#x8282;&#x7801;&#x5230; Class &#x5BF9;&#x8C61;&#x7684;&#x8F6C;&#x6362;&#xFF0C;&#x5728;&#x7C7B;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x8FD9;&#x4E00;&#x6B65;&#x662F;&#x901A;&#x8FC7;&#x4E0B;&#x9762;&#x7684;&#x65B9;&#x6CD5;&#x63D0;&#x4F9B;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x6216;&#x8005; defineClass &#x7684;&#x5176;&#x4ED6;&#x672C;&#x5730;&#x5BF9;&#x7B49;&#x5B9E;&#x73B0;&#x3002;</p>
+<pre><code>protected final Class&lt;?&gt; defineClass(String name, byte[] b, int off, int len,
+                                     ProtectionDomain protectionDomain)
+protected final Class&lt;?&gt; defineClass(String name, java.nio.ByteBuffer b,
+                                     ProtectionDomain protectionDomain)
+</code></pre><p>&#x6211;&#x8FD9;&#x91CC;&#x53EA;&#x9009;&#x53D6;&#x4E86;&#x6700;&#x57FA;&#x7840;&#x7684;&#x4E24;&#x4E2A;&#x5178;&#x578B;&#x7684; defineClass &#x5B9E;&#x73B0;&#xFF0C;Java &#x91CD;&#x8F7D;&#x4E86;&#x51E0;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x53EA;&#x8981;&#x80FD;&#x591F;&#x751F;&#x6210;&#x51FA;&#x89C4;&#x8303;&#x7684;&#x5B57;&#x8282;&#x7801;&#xFF0C;&#x4E0D;&#x7BA1;&#x662F;&#x4F5C;&#x4E3A; byte &#x6570;&#x7EC4;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x8FD8;&#x662F;&#x653E;&#x5230; ByteBuffer &#x91CC;&#xFF0C;&#x90FD;&#x53EF;&#x4EE5;&#x5E73;&#x6ED1;&#x5730;&#x5B8C;&#x6210;&#x5B57;&#x8282;&#x7801;&#x5230; Java &#x5BF9;&#x8C61;&#x7684;&#x8F6C;&#x6362;&#x8FC7;&#x7A0B;&#x3002;</p>
+<p>JDK &#x63D0;&#x4F9B;&#x7684; defineClass &#x65B9;&#x6CD5;&#xFF0C;&#x6700;&#x7EC8;&#x90FD;&#x662F;&#x672C;&#x5730;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#x7684;&#x3002;</p>
+<pre><code>static native Class&lt;?&gt; defineClass1(ClassLoader loader, String name, byte[] b, int off, int len,
+                                    ProtectionDomain pd, String source);
+
+static native Class&lt;?&gt; defineClass2(ClassLoader loader, String name, java.nio.ByteBuffer b,
+                                    int off, int len, ProtectionDomain pd,
+                                    String source);
+</code></pre><p>&#x66F4;&#x8FDB;&#x4E00;&#x6B65;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x770B; JDK dynamic proxy &#x7684;<a href="http://hg.openjdk.java.net/jdk/jdk/file/29169633327c/src/java.base/share/classes/java/lang/reflect/Proxy.java" target="_blank">&#x5B9E;&#x73B0;&#x4EE3;&#x7801;</a>&#x3002;&#x4F60;&#x4F1A;&#x53D1;&#x73B0;&#xFF0C;&#x5BF9;&#x5E94;&#x903B;&#x8F91;&#x662F;&#x5B9E;&#x73B0;&#x5728; ProxyBuilder &#x8FD9;&#x4E2A;&#x9759;&#x6001;&#x5185;&#x90E8;&#x7C7B;&#x4E2D;&#xFF0C;ProxyGenerator &#x751F;&#x6210;&#x5B57;&#x8282;&#x7801;&#xFF0C;&#x5E76;&#x4EE5; byte &#x6570;&#x7EC4;&#x7684;&#x5F62;&#x5F0F;&#x4FDD;&#x5B58;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;&#x8C03;&#x7528; Unsafe &#x63D0;&#x4F9B;&#x7684; defineClass &#x5165;&#x53E3;&#x3002;</p>
+<pre><code>byte[] proxyClassFile = ProxyGenerator.generateProxyClass(
+        proxyName, interfaces.toArray(EMPTY_CLASS_ARRAY), accessFlags);
+try {
+    Class&lt;?&gt; pc = UNSAFE.defineClass(proxyName, proxyClassFile,
+                                     0, proxyClassFile.length,
+                                     loader, null);
+    reverseProxyCache.sub(pc).putIfAbsent(loader, Boolean.TRUE);
+    return pc;
+} catch (ClassFormatError e) {
+// &#x5982;&#x679C;&#x51FA;&#x73B0; ClassFormatError&#xFF0C;&#x5F88;&#x53EF;&#x80FD;&#x662F;&#x8F93;&#x5165;&#x53C2;&#x6570;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x6BD4;&#x5982;&#xFF0C;ProxyGenerator &#x6709; bug
+}
+</code></pre><p>&#x524D;&#x9762;&#x7406;&#x987A;&#x4E86;&#x4E8C;&#x8FDB;&#x5236;&#x7684;&#x5B57;&#x8282;&#x7801;&#x4FE1;&#x606F;&#x5230; Class &#x5BF9;&#x8C61;&#x7684;&#x8F6C;&#x6362;&#x8FC7;&#x7A0B;&#xFF0C;&#x4F3C;&#x4E4E;&#x6211;&#x4EEC;&#x8FD8;&#x6CA1;&#x6709;&#x5206;&#x6790;&#x5982;&#x4F55;&#x751F;&#x6210;&#x81EA;&#x5DF1;&#x9700;&#x8981;&#x7684;&#x5B57;&#x8282;&#x7801;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x4E00;&#x8D77;&#x6765;&#x770B;&#x770B;&#x76F8;&#x5173;&#x7684;&#x5B57;&#x8282;&#x7801;&#x64CD;&#x7EB5;&#x903B;&#x8F91;&#x3002;</p>
+<p>JDK &#x5185;&#x90E8;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;<a href="http://hg.openjdk.java.net/jdk/jdk/file/29169633327c/src/java.base/share/classes/java/lang/reflect/ProxyGenerator.java" target="_blank">java.lang.reflect.ProxyGenerator</a>&#x7684;&#x5185;&#x90E8;&#x5B9E;&#x73B0;&#x3002;&#x6211;&#x89C9;&#x5F97;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x8FD9;&#x662F;&#x79CD;&#x53E6;&#x7C7B;&#x7684;&#x5B57;&#x8282;&#x7801;&#x64CD;&#x7EB5;&#x6280;&#x672F;&#xFF0C;&#x5176;&#x5229;&#x7528;&#x4E86;<a href="https://docs.oracle.com/javase/9/docs/api/java/io/DataOutputStream.html" target="_blank">DataOutputStrem</a>&#x63D0;&#x4F9B;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x914D;&#x5408; hard-coded &#x7684;&#x5404;&#x79CD; JVM &#x6307;&#x4EE4;&#x5B9E;&#x73B0;&#x65B9;&#x6CD5;&#xFF0C;&#x751F;&#x6210;&#x6240;&#x9700;&#x7684;&#x5B57;&#x8282;&#x7801;&#x6570;&#x7EC4;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x4E0B;&#x9762;&#x7684;&#x793A;&#x4F8B;&#x4EE3;&#x7801;&#x3002;</p>
+<pre><code>private void codeLocalLoadStore(int lvar, int opcode, int opcode_0,
+                                DataOutputStream out)
+    throws IOException
+{
+    assert lvar &gt;= 0 &amp;&amp; lvar &lt;= 0xFFFF;
+    // &#x6839;&#x636E;&#x53D8;&#x91CF;&#x6570;&#x503C;&#xFF0C;&#x4EE5;&#x4E0D;&#x540C;&#x683C;&#x5F0F;&#xFF0C;dump &#x64CD;&#x4F5C;&#x7801;
+    if (lvar &lt;= 3) {
+        out.writeByte(opcode_0 + lvar);
+    } else if (lvar &lt;= 0xFF) {
+        out.writeByte(opcode);
+        out.writeByte(lvar &amp; 0xFF);
+    } else {
+        // &#x4F7F;&#x7528;&#x5BBD;&#x6307;&#x4EE4;&#x4FEE;&#x9970;&#x7B26;&#xFF0C;&#x5982;&#x679C;&#x53D8;&#x91CF;&#x7D22;&#x5F15;&#x4E0D;&#x80FD;&#x7528;&#x65E0;&#x7B26;&#x53F7; byte
+        out.writeByte(opc_wide);
+        out.writeByte(opcode);
+        out.writeShort(lvar &amp; 0xFFFF);
+    }
+}
+</code></pre><p>&#x8FD9;&#x79CD;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#x7684;&#x597D;&#x5904;&#x662F;&#x6CA1;&#x6709;&#x592A;&#x591A;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x7B80;&#x5355;&#x5B9E;&#x7528;&#xFF0C;&#x4F46;&#x662F;&#x524D;&#x63D0;&#x662F;&#x4F60;&#x9700;&#x8981;&#x61C2;&#x5404;&#x79CD;<a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html#jvms-6.5" target="_blank">JVM &#x6307;&#x4EE4;</a>&#xFF0C;&#x77E5;&#x9053;&#x600E;&#x4E48;&#x5904;&#x7406;&#x90A3;&#x4E9B;&#x504F;&#x79FB;&#x5730;&#x5740;&#x7B49;&#xFF0C;&#x5B9E;&#x9645;&#x95E8;&#x69DB;&#x975E;&#x5E38;&#x9AD8;&#xFF0C;&#x6240;&#x4EE5;&#x5E76;&#x4E0D;&#x9002;&#x5408;&#x5927;&#x591A;&#x6570;&#x7684;&#x666E;&#x901A;&#x5F00;&#x53D1;&#x573A;&#x666F;&#x3002;</p>
+<p>&#x5E78;&#x597D;&#xFF0C;Java &#x793E;&#x533A;&#x4E13;&#x5BB6;&#x63D0;&#x4F9B;&#x4E86;&#x5404;&#x79CD;&#x4ECE;&#x5E95;&#x5C42;&#x5230;&#x66F4;&#x9AD8;&#x62BD;&#x8C61;&#x6C34;&#x5E73;&#x7684;&#x5B57;&#x8282;&#x7801;&#x64CD;&#x4F5C;&#x7C7B;&#x5E93;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x9700;&#x8981;&#x4EC0;&#x4E48;&#x90FD;&#x81EA;&#x5DF1;&#x4ECE;&#x5934;&#x505A;&#x3002;JDK &#x5185;&#x90E8;&#x5C31;&#x96C6;&#x6210;&#x4E86; ASM &#x7C7B;&#x5E93;&#xFF0C;&#x867D;&#x7136;&#x5E76;&#x672A;&#x4F5C;&#x4E3A;&#x516C;&#x5171; API &#x66B4;&#x9732;&#x51FA;&#x6765;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x5E7F;&#x6CDB;&#x5E94;&#x7528;&#x5728;&#xFF0C;&#x5982;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/instrument/package-summary.html" target="_blank">java.lang.instrumentation</a> API &#x5E95;&#x5C42;&#x5B9E;&#x73B0;&#xFF0C;&#x6216;&#x8005;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/invoke/CallSite.html" target="_blank">Lambda Call Site</a>&#x751F;&#x6210;&#x7684;&#x5185;&#x90E8;&#x903B;&#x8F91;&#x4E2D;&#xFF0C;&#x8FD9;&#x4E9B;&#x4EE3;&#x7801;&#x7684;&#x5B9E;&#x73B0;&#x6211;&#x5C31;&#x4E0D;&#x5728;&#x8FD9;&#x91CC;&#x5C55;&#x5F00;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x786E;&#x5B9E;&#x6709;&#x5174;&#x8DA3;&#x6216;&#x6709;&#x9700;&#x8981;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x7C7B;&#x4F3C; LamdaForm &#x7684;&#x5B57;&#x8282;&#x7801;&#x751F;&#x6210;&#x903B;&#x8F91;&#xFF1A;<a href="http://hg.openjdk.java.net/jdk/jdk/file/29169633327c/src/java.base/share/classes/java/lang/invoke/InvokerBytecodeGenerator.java" target="_blank">java.lang.invoke.InvokerBytecodeGenerator</a><a href="http://hg.openjdk.java.net/jdk/jdk/file/29169633327c/src/java.base/share/classes/java/lang/invoke/InvokerBytecodeGenerator.java" target="_blank">&#x3002;</a></p>
+<p>&#x4ECE;&#x76F8;&#x5BF9;&#x5B9E;&#x7528;&#x7684;&#x89D2;&#x5EA6;&#x601D;&#x8003;&#x4E00;&#x4E0B;&#xFF0C;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#xFF0C;&#x90FD;&#x8981;&#x505A;&#x4EC0;&#x4E48;&#xFF1F;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5B57;&#x8282;&#x7801;&#x64CD;&#x7EB5;&#x6280;&#x672F;&#xFF0C;&#x8D70;&#x901A;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x5462;&#xFF1F;</p>
+<p>&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x7684; Java &#x52A8;&#x6001;&#x4EE3;&#x7406;&#xFF0C;&#x5176;&#x5B9E;&#x73B0;&#x8FC7;&#x7A0B;&#x53EF;&#x4EE5;&#x7B80;&#x5316;&#x6210;&#x4E3A;&#xFF1A;</p>
+<ul>
+<li>&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x57FA;&#x7840;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x4F5C;&#x4E3A;&#x88AB;&#x8C03;&#x7528;&#x7C7B;&#x578B;&#xFF08;com.mycorp.HelloImpl&#xFF09;&#x548C;&#x4EE3;&#x7406;&#x7C7B;&#x4E4B;&#x95F4;&#x7684;&#x7EDF;&#x4E00;&#x5165;&#x53E3;&#xFF0C;&#x5982; com.mycorp.Hello&#x3002;</li>
+<li>&#x5B9E;&#x73B0;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/reflect/InvocationHandler.html" target="_blank">InvocationHandler</a>&#xFF0C;&#x5BF9;&#x4EE3;&#x7406;&#x5BF9;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x4F1A;&#x88AB;&#x5206;&#x6D3E;&#x5230;&#x5176; invoke &#x65B9;&#x6CD5;&#x6765;&#x771F;&#x6B63;&#x5B9E;&#x73B0;&#x52A8;&#x4F5C;&#x3002;</li>
+<li>&#x901A;&#x8FC7; Proxy &#x7C7B;&#xFF0C;&#x8C03;&#x7528;&#x5176; newProxyInstance &#x65B9;&#x6CD5;&#xFF0C;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x4E86;&#x76F8;&#x5E94;&#x57FA;&#x7840;&#x63A5;&#x53E3;&#x7684;&#x4EE3;&#x7406;&#x7C7B;&#x5B9E;&#x4F8B;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x4E0B;&#x9762;&#x7684;&#x65B9;&#x6CD5;&#x7B7E;&#x540D;&#x3002;</li>
+</ul>
+<pre><code>public static Object newProxyInstance(ClassLoader loader,
+                                      Class&lt;?&gt;[] interfaces,
+                                      InvocationHandler h)
+</code></pre><p>&#x6211;&#x4EEC;&#x5206;&#x6790;&#x4E00;&#x4E0B;&#xFF0C;&#x52A8;&#x6001;&#x4EE3;&#x7801;&#x751F;&#x6210;&#x662F;&#x5177;&#x4F53;&#x53D1;&#x751F;&#x5728;&#x4EC0;&#x4E48;&#x9636;&#x6BB5;&#x5462;&#xFF1F;</p>
+<p>&#x4E0D;&#x9519;&#xFF0C;&#x5C31;&#x662F;&#x5728; newProxyInstance &#x751F;&#x6210;&#x4EE3;&#x7406;&#x7C7B;&#x5B9E;&#x4F8B;&#x7684;&#x65F6;&#x5019;&#x3002;&#x6211;&#x9009;&#x53D6;&#x4E86; JDK &#x81EA;&#x5DF1;&#x91C7;&#x7528;&#x7684; ASM &#x4F5C;&#x4E3A;&#x793A;&#x4F8B;&#xFF0C;&#x4E00;&#x8D77;&#x6765;&#x770B;&#x770B;&#x7528; ASM &#x5B9E;&#x73B0;&#x7684;&#x7B80;&#x8981;&#x8FC7;&#x7A0B;&#xFF0C;&#x8BF7;&#x53C2;&#x8003;&#x4E0B;&#x9762;&#x7684;&#x793A;&#x4F8B;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x3002;</p>
+<p>&#x7B2C;&#x4E00;&#x6B65;&#xFF0C;&#x751F;&#x6210;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#xFF0C;&#x5176;&#x5B9E;&#x548C;&#x6211;&#x4EEC;&#x53BB;&#x5199; Java &#x4EE3;&#x7801;&#x5F88;&#x7C7B;&#x4F3C;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x6539;&#x4E3A;&#x7528; ASM &#x65B9;&#x6CD5;&#x548C;&#x6307;&#x5B9A;&#x53C2;&#x6570;&#xFF0C;&#x4EE3;&#x66FF;&#x4E86;&#x6211;&#x4EEC;&#x4E66;&#x5199;&#x7684;&#x6E90;&#x7801;&#x3002;</p>
+<pre><code>ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+
+cw.visit(V1_8,                      // &#x6307;&#x5B9A; Java &#x7248;&#x672C;
+        ACC_PUBLIC,                 // &#x8BF4;&#x660E;&#x662F; public &#x7C7B;&#x578B;
+        &quot;com/mycorp/HelloProxy&quot;,    // &#x6307;&#x5B9A;&#x5305;&#x548C;&#x7C7B;&#x7684;&#x540D;&#x79F0;
+        null,                       // &#x7B7E;&#x540D;&#xFF0C;null &#x8868;&#x793A;&#x4E0D;&#x662F;&#x6CDB;&#x578B;
+        &quot;java/lang/Object&quot;,                 // &#x6307;&#x5B9A;&#x7236;&#x7C7B;
+        new String[]{ &quot;com/mycorp/Hello&quot; }); // &#x6307;&#x5B9A;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x7684;&#x63A5;&#x53E3;
+</code></pre><p>&#x66F4;&#x8FDB;&#x4E00;&#x6B65;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6309;&#x7167;&#x9700;&#x8981;&#x4E3A;&#x4EE3;&#x7406;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#xFF0C;&#x751F;&#x6210;&#x9700;&#x8981;&#x7684;&#x65B9;&#x6CD5;&#x548C;&#x903B;&#x8F91;&#x3002;</p>
+<pre><code>MethodVisitor mv = cw.visitMethod(
+        ACC_PUBLIC,                 // &#x58F0;&#x660E;&#x516C;&#x5171;&#x65B9;&#x6CD5;
+        &quot;sayHello&quot;,                 // &#x65B9;&#x6CD5;&#x540D;&#x79F0;
+        &quot;()Ljava/lang/Object;&quot;,     // &#x63CF;&#x8FF0;&#x7B26;
+        null,                       // &#x7B7E;&#x540D;&#xFF0C;null &#x8868;&#x793A;&#x4E0D;&#x662F;&#x6CDB;&#x578B;
+        null);                      // &#x53EF;&#x80FD;&#x629B;&#x51FA;&#x7684;&#x5F02;&#x5E38;&#xFF0C;&#x5982;&#x679C;&#x6709;&#xFF0C;&#x5219;&#x6307;&#x5B9A;&#x5B57;&#x7B26;&#x4E32;&#x6570;&#x7EC4;
+
+mv.visitCode();
+// &#x7701;&#x7565;&#x4EE3;&#x7801;&#x903B;&#x8F91;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;
+cw.visitEnd();                      // &#x7ED3;&#x675F;&#x7C7B;&#x5B57;&#x8282;&#x7801;&#x751F;&#x6210;
+</code></pre><p>&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x867D;&#x7136;&#x6709;&#x4E9B;&#x6666;&#x6DA9;&#xFF0C;&#x4F46;&#x603B;&#x4F53;&#x8FD8;&#x662F;&#x80FD;&#x591A;&#x5C11;&#x7406;&#x89E3;&#x5176;&#x7528;&#x610F;&#xFF0C;&#x4E0D;&#x540C;&#x7684; visitX &#x65B9;&#x6CD5;&#x63D0;&#x4F9B;&#x4E86;&#x521B;&#x5EFA;&#x7C7B;&#x578B;&#xFF0C;&#x521B;&#x5EFA;&#x5404;&#x79CD;&#x65B9;&#x6CD5;&#x7B49;&#x903B;&#x8F91;&#x3002;ASM API&#xFF0C;&#x5E7F;&#x6CDB;&#x7684;&#x4F7F;&#x7528;&#x4E86;<a href="https://en.wikipedia.org/wiki/Visitor_pattern" target="_blank">Visitor</a>&#x6A21;&#x5F0F;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x719F;&#x6089;&#x8FD9;&#x4E2A;&#x6A21;&#x5F0F;&#xFF0C;&#x5C31;&#x4F1A;&#x77E5;&#x9053;&#x5B83;&#x6240;&#x9488;&#x5BF9;&#x7684;&#x573A;&#x666F;&#x662F;&#x5C06;&#x7B97;&#x6CD5;&#x548C;&#x5BF9;&#x8C61;&#x7ED3;&#x6784;&#x89E3;&#x8026;&#xFF0C;&#x975E;&#x5E38;&#x9002;&#x5408;&#x5B57;&#x8282;&#x7801;&#x64CD;&#x7EB5;&#x7684;&#x573A;&#x5408;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5927;&#x90E8;&#x5206;&#x60C5;&#x51B5;&#x90FD;&#x662F;&#x4F9D;&#x8D56;&#x4E8E;&#x7279;&#x5B9A;&#x7ED3;&#x6784;&#x4FEE;&#x6539;&#x6216;&#x8005;&#x6DFB;&#x52A0;&#x65B0;&#x7684;&#x65B9;&#x6CD5;&#x3001;&#x53D8;&#x91CF;&#x6216;&#x8005;&#x7C7B;&#x578B;&#x7B49;&#x3002;</p>
+<p>&#x6309;&#x7167;&#x524D;&#x9762;&#x7684;&#x5206;&#x6790;&#xFF0C;&#x5B57;&#x8282;&#x7801;&#x64CD;&#x4F5C;&#x6700;&#x540E;&#x5927;&#x90FD;&#x5E94;&#x8BE5;&#x662F;&#x751F;&#x6210; byte &#x6570;&#x7EC4;&#xFF0C;ClassWriter &#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x7B80;&#x4FBF;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<pre><code>cw.toByteArray();
+</code></pre><p>&#x7136;&#x540E;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x8FDB;&#x5165;&#x6211;&#x4EEC;&#x719F;&#x77E5;&#x7684;&#x7C7B;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x4E86;&#xFF0C;&#x6211;&#x5C31;&#x4E0D;&#x518D;&#x8D58;&#x8FF0;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5BF9; ASM &#x7684;&#x5177;&#x4F53;&#x7528;&#x6CD5;&#x611F;&#x5174;&#x8DA3;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x8FD9;&#x4E2A;<a href="http://www.baeldung.com/java-asm" target="_blank">&#x6559;&#x7A0B;</a>&#x3002;</p>
+<p>&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x5B57;&#x8282;&#x7801;&#x64CD;&#x7EB5;&#x6280;&#x672F;&#xFF0C;&#x9664;&#x4E86;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x5E94;&#x7528;&#x5728;&#x4EC0;&#x4E48;&#x5730;&#x65B9;&#xFF1F;</p>
+<p>&#x8FD9;&#x4E2A;&#x6280;&#x672F;&#x4F3C;&#x4E4E;&#x79BB;&#x6211;&#x4EEC;&#x65E5;&#x5E38;&#x5F00;&#x53D1;&#x9065;&#x8FDC;&#xFF0C;&#x4F46;&#x5176;&#x5B9E;&#x5DF2;&#x7ECF;&#x6DF1;&#x5165;&#x5230;&#x5404;&#x4E2A;&#x65B9;&#x9762;&#xFF0C;&#x4E5F;&#x8BB8;&#x5F88;&#x591A;&#x4F60;&#x73B0;&#x5728;&#x6B63;&#x5728;&#x4F7F;&#x7528;&#x7684;&#x6846;&#x67B6;&#x3001;&#x5DE5;&#x5177;&#x5C31;&#x5E94;&#x7528;&#x8BE5;&#x6280;&#x672F;&#xFF0C;&#x4E0B;&#x9762;&#x662F;&#x6211;&#x80FD;&#x60F3;&#x5230;&#x7684;&#x51E0;&#x4E2A;&#x5E38;&#x89C1;&#x9886;&#x57DF;&#x3002;</p>
+<ul>
+<li>&#x5404;&#x79CD; Mock &#x6846;&#x67B6;</li>
+<li>ORM &#x6846;&#x67B6;</li>
+<li>IOC &#x5BB9;&#x5668;</li>
+<li>&#x90E8;&#x5206; Profiler &#x5DE5;&#x5177;&#xFF0C;&#x6216;&#x8005;&#x8FD0;&#x884C;&#x65F6;&#x8BCA;&#x65AD;&#x5DE5;&#x5177;&#x7B49;</li>
+<li>&#x751F;&#x6210;&#x5F62;&#x5F0F;&#x5316;&#x4EE3;&#x7801;&#x7684;&#x5DE5;&#x5177;</li>
+</ul>
+<p>&#x751A;&#x81F3;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#xFF0C;&#x5B57;&#x8282;&#x7801;&#x64CD;&#x7EB5;&#x6280;&#x672F;&#x662F;&#x5DE5;&#x5177;&#x548C;&#x57FA;&#x7840;&#x6846;&#x67B6;&#x5FC5;&#x4E0D;&#x53EF;&#x5C11;&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x5927;&#x5927;&#x51CF;&#x5C11;&#x4E86;&#x5F00;&#x53D1;&#x8005;&#x7684;&#x8D1F;&#x62C5;&#x3002;</p>
+<p>&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x63A2;&#x8BA8;&#x4E86;&#x66F4;&#x52A0;&#x6DF1;&#x5165;&#x7684;&#x7C7B;&#x52A0;&#x8F7D;&#x548C;&#x5B57;&#x8282;&#x7801;&#x64CD;&#x4F5C;&#x65B9;&#x9762;&#x6280;&#x672F;&#x3002;&#x4E3A;&#x4E86;&#x7406;&#x89E3;&#x5E95;&#x5C42;&#x7684;&#x539F;&#x7406;&#xFF0C;&#x6211;&#x9009;&#x53D6;&#x7684;&#x4F8B;&#x5B50;&#x662F;&#x6BD4;&#x8F83;&#x504F;&#x5E95;&#x5C42;&#x7684;&#x3001;&#x80FD;&#x529B;&#x5168;&#x9762;&#x7684;&#x7C7B;&#x5E93;&#xFF0C;&#x5982;&#x679C;&#x5B9E;&#x9645;&#x9879;&#x76EE;&#x4E2D;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x57FA;&#x7840;&#x7684;&#x5B57;&#x8282;&#x7801;&#x64CD;&#x4F5C;&#xFF0C;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x4F7F;&#x7528;&#x66F4;&#x52A0;&#x9AD8;&#x5C42;&#x6B21;&#x89C6;&#x89D2;&#x7684;&#x7C7B;&#x5E93;&#xFF0C;&#x4F8B;&#x5982;<a href="http://bytebuddy.net/#/" target="_blank">Byte Buddy</a>&#x7B49;&#x3002;</p>
+<h2 id="&#x4E00;&#x8BFE;&#x4E00;&#x7EC3;">&#x4E00;&#x8BFE;&#x4E00;&#x7EC3;</h2>
+<p>&#x5173;&#x4E8E;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x8BA8;&#x8BBA;&#x7684;&#x9898;&#x76EE;&#x4F60;&#x505A;&#x5230;&#x5FC3;&#x4E2D;&#x6709;&#x6570;&#x4E86;&#x5417;&#xFF1F;&#x8BD5;&#x60F3;&#xFF0C;&#x5047;&#x5982;&#x6211;&#x4EEC;&#x6709;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x9700;&#x6C42;&#xFF0C;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x67D0;&#x4E2A;&#x529F;&#x80FD;&#xFF0C;&#x4F8B;&#x5982;&#x5BF9;&#x67D0;&#x7C7B;&#x578B;&#x8D44;&#x6E90;&#x5982;&#x7F51;&#x7EDC;&#x901A;&#x4FE1;&#x7684;&#x6D88;&#x8017;&#x8FDB;&#x884C;&#x7EDF;&#x8BA1;&#xFF0C;&#x91CD;&#x70B9;&#x8981;&#x6C42;&#x662F;&#xFF0C;&#x4E0D;&#x5F00;&#x542F;&#x65F6;&#x5FC5;&#x987B;&#x662F;<strong>&#x96F6;&#x5F00;&#x9500;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4F4E;&#x5F00;&#x9500;&#xFF0C;</strong>&#x53EF;&#x4EE5;&#x5229;&#x7528;&#x6211;&#x4EEC;&#x4ECA;&#x5929;&#x8C08;&#x5230;&#x7684;&#x6216;&#x8005;&#x76F8;&#x5173;&#x7684;&#x6280;&#x672F;&#x5B9E;&#x73B0;&#x5417;&#xFF1F;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="23.html" class="navigation navigation-prev " aria-label="Previous page: 第23讲 | 请介绍类加载过程，什么是双亲委派模型？">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="25.html" class="navigation navigation-next " aria-label="Next page: 第25讲 | 谈谈JVM内存区域的划分，哪些区域可能发生OutOfMemoryError？">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"第24讲 | 有哪些方法可以在运行时动态生成一个Java类？","level":"1.1.26","depth":2,"next":{"title":"第25讲 | 谈谈JVM内存区域的划分，哪些区域可能发生OutOfMemoryError？","level":"1.1.27","depth":2,"path":"document/25.md","ref":"document/25.md","articles":[]},"previous":{"title":"第23讲 | 请介绍类加载过程，什么是双亲委派模型？","level":"1.1.25","depth":2,"path":"document/23.md","ref":"document/23.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"document/24.md","mtime":"2019-03-14T08:53:45.680Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-15T08:24:05.595Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

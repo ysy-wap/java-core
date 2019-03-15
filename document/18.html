@@ -1,0 +1,937 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>第18讲 | 什么情况下Java程序会产生死锁？如何定位、修复？ · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="19.html" />
+    
+    
+    <link rel="prev" href="17.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1" data-path="0.html">
+            
+                <a href="0.html">
+            
+                    
+                    开篇词 | 以面试题为切入点，有效提升你的Java内功
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2" data-path="1.html">
+            
+                <a href="1.html">
+            
+                    
+                    第1讲 | 谈谈你对Java平台的理解？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3" data-path="2.html">
+            
+                <a href="2.html">
+            
+                    
+                    第2讲 | Exception和Error有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.4" data-path="3.html">
+            
+                <a href="3.html">
+            
+                    
+                    第3讲 | 谈谈final、finally、 finalize有什么不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.5" data-path="4.html">
+            
+                <a href="4.html">
+            
+                    
+                    第4讲 | 强引用、软引用、弱引用、幻象引用有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.6" data-path="5.html">
+            
+                <a href="5.html">
+            
+                    
+                    第5讲 | String、StringBuffer、StringBuilder有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.7" data-path="6.html">
+            
+                <a href="6.html">
+            
+                    
+                    第6讲 | 动态代理是基于什么原理？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.8" data-path="7.html">
+            
+                <a href="7.html">
+            
+                    
+                    第7讲 | int和Integer有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.9" data-path="8.html">
+            
+                <a href="8.html">
+            
+                    
+                    第8讲 | 对比Vector、ArrayList、LinkedList有何区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.10" data-path="9.html">
+            
+                <a href="9.html">
+            
+                    
+                    第9讲 | 对比Hashtable、HashMap、TreeMap有什么不同？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.11" data-path="10.html">
+            
+                <a href="10.html">
+            
+                    
+                    第10讲 | 如何保证集合是线程安全的? ConcurrentHashMap如何实现高效地线程安全？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.12" data-path="11.html">
+            
+                <a href="11.html">
+            
+                    
+                    第11讲 | Java提供了哪些IO方式？ NIO如何实现多路复用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.13" data-path="12.html">
+            
+                <a href="12.html">
+            
+                    
+                    第12讲 | Java有几种文件拷贝方式？哪一种最高效？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.14" data-path="13.html">
+            
+                <a href="13.html">
+            
+                    
+                    第13讲 | 谈谈接口和抽象类有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.15" data-path="14.html">
+            
+                <a href="14.html">
+            
+                    
+                    第14讲 | 谈谈你知道的设计模式？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.16" data-path="15.html">
+            
+                <a href="15.html">
+            
+                    
+                    第15讲 | synchronized和ReentrantLock有什么区别呢？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.17" data-path="15-1.html">
+            
+                <a href="15-1.html">
+            
+                    
+                    周末福利 | 谈谈我对Java学习和面试的看法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.18" data-path="16.html">
+            
+                <a href="16.html">
+            
+                    
+                    第16讲 | synchronized底层如何实现？什么是锁的升级、降级？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.19" data-path="17.html">
+            
+                <a href="17.html">
+            
+                    
+                    第17讲 | 一个线程两次调用start()方法会出现什么情况？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.1.20" data-path="18.html">
+            
+                <a href="18.html">
+            
+                    
+                    第18讲 | 什么情况下Java程序会产生死锁？如何定位、修复？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.21" data-path="19.html">
+            
+                <a href="19.html">
+            
+                    
+                    第19讲 | Java并发包提供了哪些并发工具类？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.22" data-path="20.html">
+            
+                <a href="20.html">
+            
+                    
+                    第20讲 | 并发包中的ConcurrentLinkedQueue和LinkedBlockingQueue有什么区别？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.23" data-path="21.html">
+            
+                <a href="21.html">
+            
+                    
+                    第21讲 | Java并发类库提供的线程池有哪几种？ 分别有什么特点？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.24" data-path="22.html">
+            
+                <a href="22.html">
+            
+                    
+                    第22讲 | AtomicInteger底层实现原理是什么？如何在自己的产品代码中应用CAS操作？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.25" data-path="23.html">
+            
+                <a href="23.html">
+            
+                    
+                    第23讲 | 请介绍类加载过程，什么是双亲委派模型？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.26" data-path="24.html">
+            
+                <a href="24.html">
+            
+                    
+                    第24讲 | 有哪些方法可以在运行时动态生成一个Java类？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.27" data-path="25.html">
+            
+                <a href="25.html">
+            
+                    
+                    第25讲 | 谈谈JVM内存区域的划分，哪些区域可能发生OutOfMemoryError？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.28" data-path="26.html">
+            
+                <a href="26.html">
+            
+                    
+                    第26讲 | 如何监控和诊断JVM堆内和堆外内存使用？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.29" data-path="27.html">
+            
+                <a href="27.html">
+            
+                    
+                    第27讲 | Java常见的垃圾收集器有哪些？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.30" data-path="28.html">
+            
+                <a href="28.html">
+            
+                    
+                    第28讲 | 谈谈你的GC调优思路?
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.31" data-path="29.html">
+            
+                <a href="29.html">
+            
+                    
+                    第29讲 | Java内存模型中的happen-before是什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.32" data-path="30.html">
+            
+                <a href="30.html">
+            
+                    
+                    第30讲 | Java程序运行在Docker等容器环境有哪些新问题？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.33" data-path="31.html">
+            
+                <a href="31.html">
+            
+                    
+                    第31讲 | 你了解Java应用开发中的注入攻击吗？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.34" data-path="32.html">
+            
+                <a href="32.html">
+            
+                    
+                    第32讲 | 如何写出安全的Java代码？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.35" data-path="33.html">
+            
+                <a href="33.html">
+            
+                    
+                    第33讲 | 后台服务出现明显“变慢”，谈谈你的诊断思路？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.36" data-path="34.html">
+            
+                <a href="34.html">
+            
+                    
+                    第34讲 | 有人说“Lambda能让Java程序慢30倍”，你怎么看？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.37" data-path="35.html">
+            
+                <a href="35.html">
+            
+                    
+                    第35讲 | JVM优化Java代码时都做了什么？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.38" data-path="35-1.html">
+            
+                <a href="35-1.html">
+            
+                    
+                    周末福利 | 一份Java工程师必读书单
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.39" data-path="36.html">
+            
+                <a href="36.html">
+            
+                    
+                    第36讲 | 谈谈MySQL支持的事务隔离级别，以及悲观锁和乐观锁的原理和应用场景？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.40" data-path="37.html">
+            
+                <a href="37.html">
+            
+                    
+                    第37讲 | 谈谈Spring Bean的生命周期和作用域？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.41" data-path="38.html">
+            
+                <a href="38.html">
+            
+                    
+                    第38讲 | 对比Java标准NIO类库，你知道Netty是如何实现更高性能的吗？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.42" data-path="39.html">
+            
+                <a href="39.html">
+            
+                    
+                    第39讲 | 谈谈常用的分布式ID的设计方案？Snowflake是否受冬令时切换影响？
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.43" data-path="end.html">
+            
+                <a href="end.html">
+            
+                    
+                    结束语 | 技术没有终点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >第18讲 | 什么情况下Java程序会产生死锁？如何定位、修复？</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x7B2C;18&#x8BB2;--&#x4EC0;&#x4E48;&#x60C5;&#x51B5;&#x4E0B;java&#x7A0B;&#x5E8F;&#x4F1A;&#x4EA7;&#x751F;&#x6B7B;&#x9501;&#xFF1F;&#x5982;&#x4F55;&#x5B9A;&#x4F4D;&#x3001;&#x4FEE;&#x590D;&#xFF1F;">&#x7B2C;18&#x8BB2; | &#x4EC0;&#x4E48;&#x60C5;&#x51B5;&#x4E0B;Java&#x7A0B;&#x5E8F;&#x4F1A;&#x4EA7;&#x751F;&#x6B7B;&#x9501;&#xFF1F;&#x5982;&#x4F55;&#x5B9A;&#x4F4D;&#x3001;&#x4FEE;&#x590D;&#xFF1F;</h1>
+<p>&#x4ECA;&#x5929;&#xFF0C;&#x6211;&#x4F1A;&#x4ECB;&#x7ECD;&#x4E00;&#x4E9B;&#x65E5;&#x5E38;&#x5F00;&#x53D1;&#x4E2D;&#x7C7B;&#x4F3C;&#x7EBF;&#x7A0B;&#x6B7B;&#x9501;&#x7B49;&#x95EE;&#x9898;&#x7684;&#x6392;&#x67E5;&#x7ECF;&#x9A8C;&#xFF0C;&#x5E76;&#x9009;&#x62E9;&#x4E00;&#x4E24;&#x4E2A;&#x6211;&#x81EA;&#x5DF1;&#x4FEE;&#x590D;&#x8FC7;&#x6216;&#x8005;&#x8BCA;&#x65AD;&#x8FC7;&#x7684;&#x6838;&#x5FC3;&#x7C7B;&#x5E93;&#x6B7B;&#x9501;&#x95EE;&#x9898;&#x4F5C;&#x4E3A;&#x4F8B;&#x5B50;&#xFF0C;&#x5E0C;&#x671B;&#x4E0D;&#x4EC5;&#x80FD;&#x5728;&#x9762;&#x8BD5;&#x65F6;&#xFF0C;&#x5305;&#x62EC;&#x5728;&#x65E5;&#x5E38;&#x5DE5;&#x4F5C;&#x4E2D;&#x4E5F;&#x80FD;&#x5BF9;&#x4F60;&#x6709;&#x6240;&#x5E2E;&#x52A9;&#x3002;</p>
+<p>&#x4ECA;&#x5929;&#x6211;&#x8981;&#x95EE;&#x4F60;&#x7684;&#x95EE;&#x9898;&#x662F;&#xFF0C;&#x4EC0;&#x4E48;&#x60C5;&#x51B5;&#x4E0B; Java &#x7A0B;&#x5E8F;&#x4F1A;&#x4EA7;&#x751F;&#x6B7B;&#x9501;&#xFF1F;&#x5982;&#x4F55;&#x5B9A;&#x4F4D;&#x3001;&#x4FEE;&#x590D;&#xFF1F;</p>
+<h2 id="&#x5178;&#x578B;&#x56DE;&#x7B54;">&#x5178;&#x578B;&#x56DE;&#x7B54;</h2>
+<p>&#x6B7B;&#x9501;&#x662F;&#x4E00;&#x79CD;&#x7279;&#x5B9A;&#x7684;&#x7A0B;&#x5E8F;&#x72B6;&#x6001;&#xFF0C;&#x5728;&#x5B9E;&#x4F53;&#x4E4B;&#x95F4;&#xFF0C;&#x7531;&#x4E8E;&#x5FAA;&#x73AF;&#x4F9D;&#x8D56;&#x5BFC;&#x81F4;&#x5F7C;&#x6B64;&#x4E00;&#x76F4;&#x5904;&#x4E8E;&#x7B49;&#x5F85;&#x4E4B;&#x4E2D;&#xFF0C;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x4E2A;&#x4F53;&#x53EF;&#x4EE5;&#x7EE7;&#x7EED;&#x524D;&#x8FDB;&#x3002;&#x6B7B;&#x9501;&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;&#x5728;&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x4F1A;&#x53D1;&#x751F;&#xFF0C;&#x5B58;&#x5728;&#x8D44;&#x6E90;&#x72EC;&#x5360;&#x7684;&#x8FDB;&#x7A0B;&#x4E4B;&#x95F4;&#x540C;&#x6837;&#x4E5F;&#x53EF;&#x80FD;&#x51FA;&#x73B0;&#x6B7B;&#x9501;&#x3002;&#x901A;&#x5E38;&#x6765;&#x8BF4;&#xFF0C;&#x6211;&#x4EEC;&#x5927;&#x591A;&#x662F;&#x805A;&#x7126;&#x5728;&#x591A;&#x7EBF;&#x7A0B;&#x573A;&#x666F;&#x4E2D;&#x7684;&#x6B7B;&#x9501;&#xFF0C;&#x6307;&#x4E24;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#xFF0C;&#x7531;&#x4E8E;&#x4E92;&#x76F8;&#x6301;&#x6709;&#x5BF9;&#x65B9;&#x9700;&#x8981;&#x7684;&#x9501;&#xFF0C;&#x800C;&#x6C38;&#x4E45;&#x5904;&#x4E8E;&#x963B;&#x585E;&#x7684;&#x72B6;&#x6001;&#x3002;</p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x5229;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x793A;&#x4F8B;&#x56FE;&#x7406;&#x89E3;&#x57FA;&#x672C;&#x7684;&#x6B7B;&#x9501;&#x95EE;&#x9898;&#xFF1A;</p>
+<p><img src="../image/ea88719ec112dead21334034c9ef8a6c.png" alt="img"></p>
+<p>&#x5B9A;&#x4F4D;&#x6B7B;&#x9501;&#x6700;&#x5E38;&#x89C1;&#x7684;&#x65B9;&#x5F0F;&#x5C31;&#x662F;&#x5229;&#x7528; jstack &#x7B49;&#x5DE5;&#x5177;&#x83B7;&#x53D6;&#x7EBF;&#x7A0B;&#x6808;&#xFF0C;&#x7136;&#x540E;&#x5B9A;&#x4F4D;&#x4E92;&#x76F8;&#x4E4B;&#x95F4;&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x8FDB;&#x800C;&#x627E;&#x5230;&#x6B7B;&#x9501;&#x3002;&#x5982;&#x679C;&#x662F;&#x6BD4;&#x8F83;&#x660E;&#x663E;&#x7684;&#x6B7B;&#x9501;&#xFF0C;&#x5F80;&#x5F80; jstack &#x7B49;&#x5C31;&#x80FD;&#x76F4;&#x63A5;&#x5B9A;&#x4F4D;&#xFF0C;&#x7C7B;&#x4F3C; JConsole &#x751A;&#x81F3;&#x53EF;&#x4EE5;&#x5728;&#x56FE;&#x5F62;&#x754C;&#x9762;&#x8FDB;&#x884C;&#x6709;&#x9650;&#x7684;&#x6B7B;&#x9501;&#x68C0;&#x6D4B;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x65F6;&#x53D1;&#x751F;&#x4E86;&#x6B7B;&#x9501;&#xFF0C;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x90FD;&#x662F;&#x65E0;&#x6CD5;&#x5728;&#x7EBF;&#x89E3;&#x51B3;&#x7684;&#xFF0C;&#x53EA;&#x80FD;&#x91CD;&#x542F;&#x3001;&#x4FEE;&#x6B63;&#x7A0B;&#x5E8F;&#x672C;&#x8EAB;&#x95EE;&#x9898;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x4EE3;&#x7801;&#x5F00;&#x53D1;&#x9636;&#x6BB5;&#x4E92;&#x76F8;&#x5BA1;&#x67E5;&#xFF0C;&#x6216;&#x8005;&#x5229;&#x7528;&#x5DE5;&#x5177;&#x8FDB;&#x884C;&#x9884;&#x9632;&#x6027;&#x6392;&#x67E5;&#xFF0C;&#x5F80;&#x5F80;&#x4E5F;&#x662F;&#x5F88;&#x91CD;&#x8981;&#x7684;&#x3002;</p>
+<h2 id="&#x8003;&#x70B9;&#x5206;&#x6790;">&#x8003;&#x70B9;&#x5206;&#x6790;</h2>
+<p>&#x4ECA;&#x5929;&#x7684;&#x95EE;&#x9898;&#x504F;&#x5411;&#x4E8E;&#x5B9E;&#x7528;&#x573A;&#x666F;&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x6B7B;&#x9501;&#x672C;&#x8EAB;&#x5E76;&#x4E0D;&#x96BE;&#x5B9A;&#x4F4D;&#xFF0C;&#x638C;&#x63E1;&#x57FA;&#x672C;&#x601D;&#x8DEF;&#x548C;&#x5DE5;&#x5177;&#x4F7F;&#x7528;&#xFF0C;&#x7406;&#x89E3;&#x7EBF;&#x7A0B;&#x76F8;&#x5173;&#x7684;&#x57FA;&#x672C;&#x6982;&#x5FF5;&#xFF0C;&#x6BD4;&#x5982;&#x5404;&#x79CD;&#x7EBF;&#x7A0B;&#x72B6;&#x6001;&#x548C;&#x540C;&#x6B65;&#x3001;&#x9501;&#x3001;Latch &#x7B49;&#x5E76;&#x53D1;&#x5DE5;&#x5177;&#xFF0C;&#x5C31;&#x5DF2;&#x7ECF;&#x8DB3;&#x591F;&#x89E3;&#x51B3;&#x5927;&#x591A;&#x6570;&#x95EE;&#x9898;&#x4E86;&#x3002;</p>
+<p>&#x9488;&#x5BF9;&#x6B7B;&#x9501;&#xFF0C;&#x9762;&#x8BD5;&#x5B98;&#x53EF;&#x4EE5;&#x6DF1;&#x5165;&#x8003;&#x5BDF;&#xFF1A;</p>
+<ul>
+<li>&#x629B;&#x5F00;&#x5B57;&#x9762;&#x4E0A;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x8BA9;&#x9762;&#x8BD5;&#x8005;&#x5199;&#x4E00;&#x4E2A;&#x53EF;&#x80FD;&#x6B7B;&#x9501;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x987A;&#x4FBF;&#x4E5F;&#x8003;&#x5BDF;&#x4E0B;&#x57FA;&#x672C;&#x7684;&#x7EBF;&#x7A0B;&#x7F16;&#x7A0B;&#x3002;</li>
+<li>&#x8BCA;&#x65AD;&#x6B7B;&#x9501;&#x6709;&#x54EA;&#x4E9B;&#x5DE5;&#x5177;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x5206;&#x5E03;&#x5F0F;&#x73AF;&#x5883;&#xFF0C;&#x53EF;&#x80FD;&#x66F4;&#x5173;&#x5FC3;&#x80FD;&#x5426;&#x7528; API &#x5B9E;&#x73B0;&#x5417;&#xFF1F;</li>
+<li>&#x540E;&#x671F;&#x8BCA;&#x65AD;&#x6B7B;&#x9501;&#x8FD8;&#x662F;&#x633A;&#x75DB;&#x82E6;&#x7684;&#xFF0C;&#x7ECF;&#x5E38;&#x52A0;&#x73ED;&#xFF0C;&#x5982;&#x4F55;&#x5728;&#x7F16;&#x7A0B;&#x4E2D;&#x5C3D;&#x91CF;&#x907F;&#x514D;&#x4E00;&#x4E9B;&#x5178;&#x578B;&#x573A;&#x666F;&#x7684;&#x6B7B;&#x9501;&#xFF0C;&#x6709;&#x5176;&#x4ED6;&#x5DE5;&#x5177;&#x8F85;&#x52A9;&#x5417;&#xFF1F;</li>
+</ul>
+<h2 id="&#x77E5;&#x8BC6;&#x6269;&#x5C55;">&#x77E5;&#x8BC6;&#x6269;&#x5C55;</h2>
+<p>&#x5728;&#x5206;&#x6790;&#x5F00;&#x59CB;&#x4E4B;&#x524D;&#xFF0C;&#x5148;&#x4EE5;&#x4E00;&#x4E2A;&#x57FA;&#x672C;&#x7684;&#x6B7B;&#x9501;&#x7A0B;&#x5E8F;&#x4E3A;&#x4F8B;&#xFF0C;&#x6211;&#x5728;&#x8FD9;&#x91CC;&#x53EA;&#x7528;&#x4E86;&#x4E24;&#x4E2A;&#x5D4C;&#x5957;&#x7684; synchronized &#x53BB;&#x83B7;&#x53D6;&#x9501;&#xFF0C;&#x5177;&#x4F53;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>public class DeadLockSample extends Thread {
+    private String first;
+    private String second;
+    public DeadLockSample(String name, String first, String second) {
+        super(name);
+        this.first = first;
+        this.second = second;
+    }
+
+    public  void run() {
+        synchronized (first) {
+            System.out.println(this.getName() + &quot; obtained: &quot; + first);
+            try {
+                Thread.sleep(1000L);
+                synchronized (second) {
+                    System.out.println(this.getName() + &quot; obtained: &quot; + second);
+                }
+            } catch (InterruptedException e) {
+                // Do nothing
+            }
+        }
+    }
+    public static void main(String[] args) throws InterruptedException {
+        String lockA = &quot;lockA&quot;;
+        String lockB = &quot;lockB&quot;;
+        DeadLockSample t1 = new DeadLockSample(&quot;Thread1&quot;, lockA, lockB);
+        DeadLockSample t2 = new DeadLockSample(&quot;Thread2&quot;, lockB, lockA);
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+    }
+}
+</code></pre><p>&#x8FD9;&#x4E2A;&#x7A0B;&#x5E8F;&#x7F16;&#x8BD1;&#x6267;&#x884C;&#x540E;&#xFF0C;&#x51E0;&#x4E4E;&#x6BCF;&#x6B21;&#x90FD;&#x53EF;&#x4EE5;&#x91CD;&#x73B0;&#x6B7B;&#x9501;&#xFF0C;&#x8BF7;&#x770B;&#x4E0B;&#x9762;&#x622A;&#x53D6;&#x7684;&#x8F93;&#x51FA;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x8FD9;&#x91CC;&#x6709;&#x4E2A;&#x6BD4;&#x8F83;&#x6709;&#x610F;&#x601D;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x6211;&#x5148;&#x8C03;&#x7528; Thread1 &#x7684; start&#xFF0C;&#x4F46;&#x662F; Thread2 &#x5374;&#x5148;&#x6253;&#x5370;&#x51FA;&#x6765;&#x4E86;&#x5462;&#xFF1F;&#x8FD9;&#x5C31;&#x662F;&#x56E0;&#x4E3A;&#x7EBF;&#x7A0B;&#x8C03;&#x5EA6;&#x4F9D;&#x8D56;&#x4E8E;&#xFF08;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF09;&#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x867D;&#x7136;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4F18;&#x5148;&#x7EA7;&#x4E4B;&#x7C7B;&#x8FDB;&#x884C;&#x5F71;&#x54CD;&#xFF0C;&#x4F46;&#x662F;&#x5177;&#x4F53;&#x60C5;&#x51B5;&#x662F;&#x4E0D;&#x786E;&#x5B9A;&#x7684;&#x3002;</p>
+<p><img src="../image/869f3a3d7b759fbfb794f8c81047f30e.png" alt="img"></p>
+<p>&#x4E0B;&#x9762;&#x6765;&#x6A21;&#x62DF;&#x95EE;&#x9898;&#x5B9A;&#x4F4D;&#xFF0C;&#x6211;&#x5C31;&#x9009;&#x53D6;&#x6700;&#x5E38;&#x89C1;&#x7684; jstack&#xFF0C;&#x5176;&#x4ED6;&#x4E00;&#x4E9B;&#x7C7B;&#x4F3C; JConsole &#x7B49;&#x56FE;&#x5F62;&#x5316;&#x7684;&#x5DE5;&#x5177;&#xFF0C;&#x8BF7;&#x81EA;&#x884C;&#x67E5;&#x627E;&#x3002;</p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; jps &#x6216;&#x8005;&#x7CFB;&#x7EDF;&#x7684; ps &#x547D;&#x4EE4;&#x3001;&#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x5668;&#x7B49;&#x5DE5;&#x5177;&#xFF0C;&#x786E;&#x5B9A;&#x8FDB;&#x7A0B; ID&#x3002;</p>
+<p>&#x5176;&#x6B21;&#xFF0C;&#x8C03;&#x7528; jstack &#x83B7;&#x53D6;&#x7EBF;&#x7A0B;&#x6808;&#xFF1A;</p>
+<pre><code>${JAVA_HOME}\bin\jstack your_pid
+</code></pre><p>&#x7136;&#x540E;&#xFF0C;&#x5206;&#x6790;&#x5F97;&#x5230;&#x7684;&#x8F93;&#x51FA;&#xFF0C;&#x5177;&#x4F53;&#x7247;&#x6BB5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="../image/1fcc1a521b801a5f7428d5229525a38b.png" alt="img"></p>
+<p>&#x6700;&#x540E;&#xFF0C;&#x7ED3;&#x5408;&#x4EE3;&#x7801;&#x5206;&#x6790;&#x7EBF;&#x7A0B;&#x6808;&#x4FE1;&#x606F;&#x3002;&#x4E0A;&#x9762;&#x8FD9;&#x4E2A;&#x8F93;&#x51FA;&#x975E;&#x5E38;&#x660E;&#x663E;&#xFF0C;&#x627E;&#x5230;&#x5904;&#x4E8E; BLOCKED &#x72B6;&#x6001;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x6309;&#x7167;&#x8BD5;&#x56FE;&#x83B7;&#x53D6;&#xFF08;waiting&#xFF09;&#x7684;&#x9501; ID&#xFF08;&#x8BF7;&#x770B;&#x6211;&#x6807;&#x8BB0;&#x4E3A;&#x76F8;&#x540C;&#x989C;&#x8272;&#x7684;&#x6570;&#x5B57;&#xFF09;&#x67E5;&#x627E;&#xFF0C;&#x5F88;&#x5FEB;&#x5C31;&#x5B9A;&#x4F4D;&#x95EE;&#x9898;&#x3002; jstack &#x672C;&#x8EAB;&#x4E5F;&#x4F1A;&#x628A;&#x7C7B;&#x4F3C;&#x7684;&#x7B80;&#x5355;&#x6B7B;&#x9501;&#x62BD;&#x53D6;&#x51FA;&#x6765;&#xFF0C;&#x76F4;&#x63A5;&#x6253;&#x5370;&#x51FA;&#x6765;&#x3002;</p>
+<p>&#x5728;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E2D;&#xFF0C;&#x7C7B;&#x6B7B;&#x9501;&#x60C5;&#x51B5;&#x672A;&#x5FC5;&#x6709;&#x5982;&#x6B64;&#x6E05;&#x6670;&#x7684;&#x8F93;&#x51FA;&#xFF0C;&#x4F46;&#x662F;&#x603B;&#x4F53;&#x4E0A;&#x53EF;&#x4EE5;&#x7406;&#x89E3;&#x4E3A;&#xFF1A;</p>
+<p><strong>&#x533A;&#x5206;&#x7EBF;&#x7A0B;&#x72B6;&#x6001; -&gt; &#x67E5;&#x770B;&#x7B49;&#x5F85;&#x76EE;&#x6807; -&gt; &#x5BF9;&#x6BD4; Monitor &#x7B49;&#x6301;&#x6709;&#x72B6;&#x6001;</strong></p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x7406;&#x89E3;&#x7EBF;&#x7A0B;&#x57FA;&#x672C;&#x72B6;&#x6001;&#x548C;&#x5E76;&#x53D1;&#x76F8;&#x5173;&#x5143;&#x7D20;&#x662F;&#x5B9A;&#x4F4D;&#x95EE;&#x9898;&#x7684;&#x5173;&#x952E;&#xFF0C;&#x7136;&#x540E;&#x914D;&#x5408;&#x7A0B;&#x5E8F;&#x8C03;&#x7528;&#x6808;&#x7ED3;&#x6784;&#xFF0C;&#x57FA;&#x672C;&#x5C31;&#x53EF;&#x4EE5;&#x5B9A;&#x4F4D;&#x5230;&#x5177;&#x4F53;&#x7684;&#x95EE;&#x9898;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x662F;&#x5F00;&#x53D1;&#x81EA;&#x5DF1;&#x7684;&#x7BA1;&#x7406;&#x5DE5;&#x5177;&#xFF0C;&#x9700;&#x8981;&#x7528;&#x66F4;&#x52A0;&#x7A0B;&#x5E8F;&#x5316;&#x7684;&#x65B9;&#x5F0F;&#x626B;&#x63CF;&#x670D;&#x52A1;&#x8FDB;&#x7A0B;&#x3001;&#x5B9A;&#x4F4D;&#x6B7B;&#x9501;&#xFF0C;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x4F7F;&#x7528; Java &#x63D0;&#x4F9B;&#x7684;&#x6807;&#x51C6;&#x7BA1;&#x7406; API&#xFF0C;<a href="https://docs.oracle.com/javase/9/docs/api/java/lang/management/ThreadMXBean.html#findDeadlockedThreads--" target="_blank">ThreadMXBean</a>&#xFF0C;&#x5176;&#x76F4;&#x63A5;&#x5C31;&#x63D0;&#x4F9B;&#x4E86; findDeadlockedThreads() &#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x5B9A;&#x4F4D;&#x3002;&#x4E3A;&#x65B9;&#x4FBF;&#x8BF4;&#x660E;&#xFF0C;&#x6211;&#x4FEE;&#x6539;&#x4E86; DeadLockSample&#xFF0C;&#x8BF7;&#x770B;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x3002;</p>
+<pre><code>public static void main(String[] args) throws InterruptedException {
+
+    ThreadMXBean mbean = ManagementFactory.getThreadMXBean();
+    Runnable dlCheck = new Runnable() {
+
+        @Override
+        public void run() {
+            long[] threadIds = mbean.findDeadlockedThreads();
+            if (threadIds != null) {
+                     ThreadInfo[] threadInfos = mbean.getThreadInfo(threadIds);
+                     System.out.println(&quot;Detected deadlock threads:&quot;);
+                for (ThreadInfo threadInfo : threadInfos) {
+                    System.out.println(threadInfo.getThreadName());
+                }
+          }
+       }
+    };
+
+       ScheduledExecutorService scheduler =Executors.newScheduledThreadPool(1);
+       // &#x7A0D;&#x7B49; 5 &#x79D2;&#xFF0C;&#x7136;&#x540E;&#x6BCF; 10 &#x79D2;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x6B7B;&#x9501;&#x626B;&#x63CF;
+        scheduler.scheduleAtFixedRate(dlCheck, 5L, 10L, TimeUnit.SECONDS);
+// &#x6B7B;&#x9501;&#x6837;&#x4F8B;&#x4EE3;&#x7801;&#x2026;
+}
+</code></pre><p>&#x91CD;&#x65B0;&#x7F16;&#x8BD1;&#x6267;&#x884C;&#xFF0C;&#x4F60;&#x5C31;&#x80FD;&#x770B;&#x5230;&#x6B7B;&#x9501;&#x88AB;&#x5B9A;&#x4F4D;&#x5230;&#x7684;&#x8F93;&#x51FA;&#x3002;&#x5728;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E2D;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x636E;&#x6B64;&#x6536;&#x96C6;&#x8FDB;&#x4E00;&#x6B65;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x7136;&#x540E;&#x8FDB;&#x884C;&#x9884;&#x8B66;&#x7B49;&#x540E;&#x7EED;&#x5904;&#x7406;&#x3002;&#x4F46;&#x662F;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x5BF9;&#x7EBF;&#x7A0B;&#x8FDB;&#x884C;&#x5FEB;&#x7167;&#x672C;&#x8EAB;&#x662F;&#x4E00;&#x4E2A;&#x76F8;&#x5BF9;&#x91CD;&#x91CF;&#x7EA7;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x8FD8;&#x662F;&#x8981;&#x614E;&#x91CD;&#x9009;&#x62E9;&#x9891;&#x5EA6;&#x548C;&#x65F6;&#x673A;&#x3002;</p>
+<p><strong>&#x5982;&#x4F55;&#x5728;&#x7F16;&#x7A0B;&#x4E2D;&#x5C3D;&#x91CF;&#x9884;&#x9632;&#x6B7B;&#x9501;&#x5462;&#xFF1F;</strong></p>
+<p>&#x9996;&#x5148;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x603B;&#x7ED3;&#x4E00;&#x4E0B;&#x524D;&#x9762;&#x4F8B;&#x5B50;&#x4E2D;&#x6B7B;&#x9501;&#x7684;&#x4EA7;&#x751F;&#x5305;&#x542B;&#x54EA;&#x4E9B;&#x57FA;&#x672C;&#x5143;&#x7D20;&#x3002;&#x57FA;&#x672C;&#x4E0A;&#x6B7B;&#x9501;&#x7684;&#x53D1;&#x751F;&#x662F;&#x56E0;&#x4E3A;&#xFF1A;</p>
+<ul>
+<li>&#x4E92;&#x65A5;&#x6761;&#x4EF6;&#xFF0C;&#x7C7B;&#x4F3C; Java &#x4E2D; Monitor &#x90FD;&#x662F;&#x72EC;&#x5360;&#x7684;&#xFF0C;&#x8981;&#x4E48;&#x662F;&#x6211;&#x7528;&#xFF0C;&#x8981;&#x4E48;&#x662F;&#x4F60;&#x7528;&#x3002;</li>
+<li>&#x4E92;&#x65A5;&#x6761;&#x4EF6;&#x662F;&#x957F;&#x671F;&#x6301;&#x6709;&#x7684;&#xFF0C;&#x5728;&#x4F7F;&#x7528;&#x7ED3;&#x675F;&#x4E4B;&#x524D;&#xFF0C;&#x81EA;&#x5DF1;&#x4E0D;&#x4F1A;&#x91CA;&#x653E;&#xFF0C;&#x4E5F;&#x4E0D;&#x80FD;&#x88AB;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x62A2;&#x5360;&#x3002;</li>
+<li>&#x5FAA;&#x73AF;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x4E24;&#x4E2A;&#x6216;&#x8005;&#x591A;&#x4E2A;&#x4E2A;&#x4F53;&#x4E4B;&#x95F4;&#x51FA;&#x73B0;&#x4E86;&#x9501;&#x7684;&#x94FE;&#x6761;&#x73AF;&#x3002;</li>
+</ul>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x636E;&#x6B64;&#x5206;&#x6790;&#x53EF;&#x80FD;&#x7684;&#x907F;&#x514D;&#x6B7B;&#x9501;&#x7684;&#x601D;&#x8DEF;&#x548C;&#x65B9;&#x6CD5;&#x3002;</p>
+<p><strong>&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x6CD5;</strong></p>
+<p>&#x5982;&#x679C;&#x53EF;&#x80FD;&#x7684;&#x8BDD;&#xFF0C;&#x5C3D;&#x91CF;&#x907F;&#x514D;&#x4F7F;&#x7528;&#x591A;&#x4E2A;&#x9501;&#xFF0C;&#x5E76;&#x4E14;&#x53EA;&#x6709;&#x9700;&#x8981;&#x65F6;&#x624D;&#x6301;&#x6709;&#x9501;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x5373;&#x4F7F;&#x662F;&#x975E;&#x5E38;&#x7CBE;&#x901A;&#x5E76;&#x53D1;&#x7F16;&#x7A0B;&#x7684;&#x5DE5;&#x7A0B;&#x5E08;&#xFF0C;&#x4E5F;&#x96BE;&#x514D;&#x4F1A;&#x6389;&#x8FDB;&#x5751;&#x91CC;&#xFF0C;&#x5D4C;&#x5957;&#x7684; synchronized &#x6216;&#x8005; lock &#x975E;&#x5E38;&#x5BB9;&#x6613;&#x51FA;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x6211;&#x4E3E;&#x4E2A;<a href="https://bugs.openjdk.java.net/browse/JDK-8198928" target="_blank">&#x4F8B;&#x5B50;</a>&#xFF0C; Java NIO &#x7684;&#x5B9E;&#x73B0;&#x4EE3;&#x7801;&#x5411;&#x6765;&#x4EE5;&#x9501;&#x591A;&#x8457;&#x79F0;&#xFF0C;&#x4E00;&#x4E2A;&#x539F;&#x56E0;&#x662F;&#xFF0C;&#x5176;&#x672C;&#x8EAB;&#x6A21;&#x578B;&#x5C31;&#x975E;&#x5E38;&#x590D;&#x6742;&#xFF0C;&#x67D0;&#x79CD;&#x7A0B;&#x5EA6;&#x4E0A;&#x662F;&#x4E0D;&#x5F97;&#x4E0D;&#x5982;&#x6B64;&#xFF1B;&#x53E6;&#x5916;&#x662F;&#x5728;&#x8BBE;&#x8BA1;&#x65F6;&#xFF0C;&#x8003;&#x8651;&#x5230;&#x65E2;&#x8981;&#x652F;&#x6301;&#x963B;&#x585E;&#x6A21;&#x5F0F;&#xFF0C;&#x53C8;&#x8981;&#x652F;&#x6301;&#x975E;&#x963B;&#x585E;&#x6A21;&#x5F0F;&#x3002;&#x76F4;&#x63A5;&#x7ED3;&#x679C;&#x5C31;&#x662F;&#xFF0C;&#x4E00;&#x4E9B;&#x57FA;&#x672C;&#x64CD;&#x4F5C;&#x5982; connect&#xFF0C;&#x9700;&#x8981;&#x64CD;&#x4F5C;&#x4E09;&#x4E2A;&#x9501;&#x4EE5;&#x4E0A;&#xFF0C;&#x5728;&#x6700;&#x8FD1;&#x7684;&#x4E00;&#x4E2A; JDK &#x6539;&#x8FDB;&#x4E2D;&#xFF0C;&#x5C31;&#x53D1;&#x751F;&#x4E86;&#x6B7B;&#x9501;&#x73B0;&#x8C61;&#x3002;</p>
+<p>&#x6211;&#x5C06;&#x5176;&#x7B80;&#x5316;&#x4E3A;&#x4E0B;&#x9762;&#x7684;&#x4F2A;&#x4EE3;&#x7801;&#xFF0C;&#x95EE;&#x9898;&#x662F;&#x66B4;&#x9732;&#x5728; HTTP/2 &#x5BA2;&#x6237;&#x7AEF;&#x4E2D;&#xFF0C;&#x8FD9;&#x662F;&#x4E2A;&#x975E;&#x5E38;&#x73B0;&#x4EE3;&#x7684;&#x53CD;&#x5E94;&#x5F0F;&#x98CE;&#x683C;&#x7684; API&#xFF0C;&#x975E;&#x5E38;&#x63A8;&#x8350;&#x5B66;&#x4E60;&#x4F7F;&#x7528;&#x3002;</p>
+<pre><code>/// Thread HttpClient-6-SelectorManager:
+readLock.lock();
+writeLock.lock();
+// &#x6301;&#x6709; readLock/writeLock&#xFF0C;&#x8C03;&#x7528; close&#xFF08;&#xFF09;&#x9700;&#x8981;&#x83B7;&#x5F97; closeLock
+close();
+// Thread HttpClient-6-Worker-2 &#x6301;&#x6709; closeLock
+implCloseSelectableChannel (); // &#x60F3;&#x83B7;&#x5F97; readLock
+</code></pre><p>&#x5728; close &#x53D1;&#x751F;&#x65F6;&#xFF0C; HttpClient-6-SelectorManager &#x7EBF;&#x7A0B;&#x6301;&#x6709; readLock/writeLock&#xFF0C;&#x8BD5;&#x56FE;&#x83B7;&#x5F97; closeLock&#xFF1B;&#x4E0E;&#x6B64;&#x540C;&#x65F6;&#xFF0C;&#x53E6;&#x4E00;&#x4E2A; HttpClient-6-Worker-2 &#x7EBF;&#x7A0B;&#xFF0C;&#x6301;&#x6709; closeLock&#xFF0C;&#x8BD5;&#x56FE;&#x83B7;&#x5F97; readLock&#xFF0C;&#x8FD9;&#x5C31;&#x4E0D;&#x53EF;&#x907F;&#x514D;&#x5730;&#x8FDB;&#x5165;&#x4E86;&#x6B7B;&#x9501;&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x6BD4;&#x8F83;&#x96BE;&#x61C2;&#x7684;&#x5730;&#x65B9;&#x5728;&#x4E8E;&#xFF0C;closeLock &#x7684;&#x6301;&#x6709;&#x72B6;&#x6001;&#xFF08;&#x5C31;&#x662F;&#x6211;&#x6807;&#x8BB0;&#x4E3A;&#x7EFF;&#x8272;&#x7684;&#x90E8;&#x5206;&#xFF09;<strong>&#x5E76;&#x6CA1;&#x6709;&#x5728;&#x7EBF;&#x7A0B;&#x6808;&#x4E2D;&#x663E;&#x793A;&#x51FA;&#x6765;</strong>&#xFF0C;&#x8BF7;&#x53C2;&#x8003;&#x6211;&#x5728;&#x4E0B;&#x56FE;&#x4E2D;&#x6807;&#x8BB0;&#x7684;&#x90E8;&#x5206;&#x3002;</p>
+<p><img src="../image/b7961a84838b5429a8f59826b91ed724.png" alt="img">
+&#xFEFF;
+&#x66F4;&#x52A0;&#x5177;&#x4F53;&#x6765;&#x8BF4;&#xFF0C;&#x8BF7;&#x67E5;&#x770B;<a href="http://hg.openjdk.java.net/jdk/jdk/file/ce06058197a4/src/java.base/share/classes/sun/nio/ch/SocketChannelImpl.java" target="_blank">SocketChannelImpl</a>&#x7684; 663 &#x884C;&#xFF0C;&#x5BF9;&#x6BD4; implCloseSelectableChannel() &#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#x548C;<a href="http://hg.openjdk.java.net/jdk/jdk/file/ce06058197a4/src/java.base/share/classes/java/nio/channels/spi/AbstractInterruptibleChannel.java" target="_blank">AbstractInterruptibleChannel.close()</a>&#x5728; 109 &#x884C;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x5C55;&#x793A;&#x4EE3;&#x7801;&#x4E86;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#xFF0C;&#x4ECE;&#x7A0B;&#x5E8F;&#x8BBE;&#x8BA1;&#x7684;&#x89D2;&#x5EA6;&#x53CD;&#x601D;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x8D4B;&#x4E88;&#x4E00;&#x6BB5;&#x7A0B;&#x5E8F;&#x592A;&#x591A;&#x7684;&#x804C;&#x8D23;&#xFF0C;&#x51FA;&#x73B0;&#x201C;&#x65E2;&#x8981;&#x2026;&#x53C8;&#x8981;&#x2026;&#x201D;&#x7684;&#x60C5;&#x51B5;&#x65F6;&#xFF0C;&#x53EF;&#x80FD;&#x5C31;&#x9700;&#x8981;&#x6211;&#x4EEC;&#x5BA1;&#x89C6;&#x4E0B;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;&#x6216;&#x76EE;&#x7684;&#x662F;&#x5426;&#x5408;&#x7406;&#x4E86;&#x3002;&#x5BF9;&#x4E8E;&#x7C7B;&#x5E93;&#xFF0C;&#x56E0;&#x4E3A;&#x5176;&#x57FA;&#x7840;&#x3001;&#x5171;&#x4EAB;&#x7684;&#x5B9A;&#x4F4D;&#xFF0C;&#x6BD4;&#x5E94;&#x7528;&#x5F00;&#x53D1;&#x5F80;&#x5F80;&#x66F4;&#x52A0;&#x4EE4;&#x4EBA;&#x82E6;&#x607C;&#xFF0C;&#x9700;&#x8981;&#x4ED4;&#x7EC6;&#x659F;&#x914C;&#x4E4B;&#x95F4;&#x7684;&#x5E73;&#x8861;&#x3002;</p>
+<p><strong>&#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x6CD5;</strong></p>
+<p>&#x5982;&#x679C;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x591A;&#x4E2A;&#x9501;&#xFF0C;&#x5C3D;&#x91CF;&#x8BBE;&#x8BA1;&#x597D;&#x9501;&#x7684;&#x83B7;&#x53D6;&#x987A;&#x5E8F;&#xFF0C;&#x8FD9;&#x4E2A;&#x8BF4;&#x8D77;&#x6765;&#x7B80;&#x5355;&#xFF0C;&#x505A;&#x8D77;&#x6765;&#x53EF;&#x4E0D;&#x5BB9;&#x6613;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x53C2;&#x770B;&#x8457;&#x540D;&#x7684;<a href="https://en.wikipedia.org/wiki/Banker%27s_algorithm" target="_blank">&#x94F6;&#x884C;&#x5BB6;&#x7B97;&#x6CD5;</a>&#x3002;</p>
+<p>&#x4E00;&#x822C;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x6211;&#x5EFA;&#x8BAE;&#x53EF;&#x4EE5;&#x91C7;&#x53D6;&#x4E9B;&#x7B80;&#x5355;&#x7684;&#x8F85;&#x52A9;&#x624B;&#x6BB5;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<ul>
+<li>&#x5C06;&#x5BF9;&#x8C61;&#xFF08;&#x65B9;&#x6CD5;&#xFF09;&#x548C;&#x9501;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x7528;&#x56FE;&#x5F62;&#x5316;&#x7684;&#x65B9;&#x5F0F;&#x8868;&#x793A;&#x5206;&#x522B;&#x62BD;&#x53D6;&#x51FA;&#x6765;&#xFF0C;&#x4EE5;&#x4ECA;&#x5929;&#x6700;&#x521D;&#x8BB2;&#x7684;&#x6B7B;&#x9501;&#x4E3A;&#x4F8B;&#xFF0C;&#x56E0;&#x4E3A;&#x662F;&#x8C03;&#x7528;&#x4E86;&#x540C;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#x6240;&#x4EE5;&#x66F4;&#x52A0;&#x7B80;&#x5355;&#x3002;</li>
+</ul>
+<p><img src="../image/1e23562b6ff34206b11c5ec07608fb59.png" alt="img"></p>
+<ul>
+<li>&#x7136;&#x540E;&#x6839;&#x636E;&#x5BF9;&#x8C61;&#x4E4B;&#x95F4;&#x7EC4;&#x5408;&#x3001;&#x8C03;&#x7528;&#x7684;&#x5173;&#x7CFB;&#x5BF9;&#x6BD4;&#x548C;&#x7EC4;&#x5408;&#xFF0C;&#x8003;&#x8651;&#x53EF;&#x80FD;&#x8C03;&#x7528;&#x65F6;&#x5E8F;&#x3002;</li>
+</ul>
+<p><img src="../image/ee413b86e8775c63e7947955646db975.png" alt="img"></p>
+<ul>
+<li>&#x6309;&#x7167;&#x53EF;&#x80FD;&#x65F6;&#x5E8F;&#x5408;&#x5E76;&#xFF0C;&#x53D1;&#x73B0;&#x53EF;&#x80FD;&#x6B7B;&#x9501;&#x7684;&#x573A;&#x666F;&#x3002;</li>
+</ul>
+<p><img src="../image/9bbad67e205e54e8f7ec8ad37872a9e7.png" alt="img">
+&#xFEFF;
+<strong>&#x7B2C;&#x4E09;&#x79CD;&#x65B9;&#x6CD5;</strong></p>
+<p>&#x4F7F;&#x7528;&#x5E26;&#x8D85;&#x65F6;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4E3A;&#x7A0B;&#x5E8F;&#x5E26;&#x6765;&#x66F4;&#x591A;&#x53EF;&#x63A7;&#x6027;&#x3002;</p>
+<p>&#x7C7B;&#x4F3C; Object.wait(&#x2026;) &#x6216;&#x8005; CountDownLatch.await(&#x2026;)&#xFF0C;&#x90FD;&#x652F;&#x6301;&#x6240;&#x8C13;&#x7684; timed_wait&#xFF0C;&#x6211;&#x4EEC;&#x5B8C;&#x5168;&#x53EF;&#x4EE5;&#x5C31;&#x4E0D;&#x5047;&#x5B9A;&#x8BE5;&#x9501;&#x4E00;&#x5B9A;&#x4F1A;&#x83B7;&#x5F97;&#xFF0C;&#x6307;&#x5B9A;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#xFF0C;&#x5E76;&#x4E3A;&#x65E0;&#x6CD5;&#x5F97;&#x5230;&#x9501;&#x65F6;&#x51C6;&#x5907;&#x9000;&#x51FA;&#x903B;&#x8F91;&#x3002;</p>
+<p>&#x5E76;&#x53D1; Lock &#x5B9E;&#x73B0;&#xFF0C;&#x5982; ReentrantLock &#x8FD8;&#x652F;&#x6301;&#x975E;&#x963B;&#x585E;&#x5F0F;&#x7684;&#x83B7;&#x53D6;&#x9501;&#x64CD;&#x4F5C; tryLock()&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x63D2;&#x961F;&#x884C;&#x4E3A;&#xFF08;barging&#xFF09;&#xFF0C;&#x5E76;&#x4E0D;&#x5728;&#x4E4E;&#x7B49;&#x5F85;&#x7684;&#x516C;&#x5E73;&#x6027;&#xFF0C;&#x5982;&#x679C;&#x6267;&#x884C;&#x65F6;&#x5BF9;&#x8C61;&#x6070;&#x597D;&#x6CA1;&#x6709;&#x88AB;&#x72EC;&#x5360;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x83B7;&#x53D6;&#x9501;&#x3002;&#x6709;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x6761;&#x4EF6;&#x5141;&#x8BB8;&#x5C31;&#x5C1D;&#x8BD5;&#x63D2;&#x961F;&#xFF0C;&#x4E0D;&#x7136;&#x5C31;&#x6309;&#x7167;&#x73B0;&#x6709;&#x516C;&#x5E73;&#x6027;&#x89C4;&#x5219;&#x7B49;&#x5F85;&#xFF0C;&#x4E00;&#x822C;&#x91C7;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code>if (lock.tryLock() || lock.tryLock(timeout, unit)) {
+      // ...
+   }
+</code></pre><p><strong>&#x7B2C;&#x56DB;&#x79CD;&#x65B9;&#x6CD5;</strong></p>
+<p>&#x4E1A;&#x754C;&#x4E5F;&#x6709;&#x4E00;&#x4E9B;&#x5176;&#x4ED6;&#x65B9;&#x9762;&#x7684;&#x5C1D;&#x8BD5;&#xFF0C;&#x6BD4;&#x5982;&#x901A;&#x8FC7;&#x9759;&#x6001;&#x4EE3;&#x7801;&#x5206;&#x6790;&#xFF08;&#x5982; FindBugs&#xFF09;&#x53BB;&#x67E5;&#x627E;&#x56FA;&#x5B9A;&#x7684;&#x6A21;&#x5F0F;&#xFF0C;&#x8FDB;&#x800C;&#x5B9A;&#x4F4D;&#x53EF;&#x80FD;&#x7684;&#x6B7B;&#x9501;&#x6216;&#x8005;&#x7ADE;&#x4E89;&#x60C5;&#x51B5;&#x3002;&#x5B9E;&#x8DF5;&#x8BC1;&#x660E;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x4E5F;&#x6709;&#x4E00;&#x5B9A;&#x4F5C;&#x7528;&#xFF0C;&#x8BF7;&#x53C2;&#x8003;<a href="https://plugins.jetbrains.com/plugin/3847-findbugs-idea" target="_blank">&#x76F8;&#x5173;&#x6587;&#x6863;</a>&#x3002;</p>
+<p>&#x9664;&#x4E86;&#x5178;&#x578B;&#x5E94;&#x7528;&#x4E2D;&#x7684;&#x6B7B;&#x9501;&#x573A;&#x666F;&#xFF0C;&#x5176;&#x5B9E;&#x8FD8;&#x6709;&#x4E00;&#x4E9B;&#x66F4;&#x4EE4;&#x4EBA;&#x5934;&#x75BC;&#x7684;&#x6B7B;&#x9501;&#xFF0C;&#x6BD4;&#x5982;&#x7C7B;&#x52A0;&#x8F7D;&#x8FC7;&#x7A0B;&#x53D1;&#x751F;&#x7684;&#x6B7B;&#x9501;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x5728;&#x6846;&#x67B6;&#x5927;&#x91CF;&#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x52A0;&#x8F7D;&#x65F6;&#xFF0C;&#x56E0;&#x4E3A;&#x5F80;&#x5F80;&#x4E0D;&#x662F;&#x5728;&#x5E94;&#x7528;&#x672C;&#x8EAB;&#x7684;&#x4EE3;&#x7801;&#x5E93;&#x4E2D;&#xFF0C;jstack &#x7B49;&#x5DE5;&#x5177;&#x4E5F;&#x4E0D;&#x89C1;&#x5F97;&#x80FD;&#x591F;&#x663E;&#x793A;&#x5168;&#x90E8;&#x9501;&#x4FE1;&#x606F;&#xFF0C;&#x6240;&#x4EE5;&#x5904;&#x7406;&#x8D77;&#x6765;&#x6BD4;&#x8F83;&#x68D8;&#x624B;&#x3002;&#x5BF9;&#x6B64;&#xFF0C;Java &#x6709;<a href="https://docs.oracle.com/javase/7/docs/technotes/guides/lang/cl-mt.html" target="_blank">&#x5B98;&#x65B9;&#x6587;&#x6863;</a>&#x8FDB;&#x884C;&#x4E86;&#x8BE6;&#x7EC6;&#x89E3;&#x91CA;&#xFF0C;&#x5E76;&#x9488;&#x5BF9;&#x7279;&#x5B9A;&#x60C5;&#x51B5;&#x63D0;&#x4F9B;&#x4E86;&#x76F8;&#x5E94; JVM &#x53C2;&#x6570;&#x548C;&#x57FA;&#x672C;&#x539F;&#x5219;&#x3002;</p>
+<p>&#x4ECA;&#x5929;&#xFF0C;&#x6211;&#x4ECE;&#x6837;&#x4F8B;&#x7A0B;&#x5E8F;&#x51FA;&#x53D1;&#xFF0C;&#x4ECB;&#x7ECD;&#x4E86;&#x6B7B;&#x9501;&#x4EA7;&#x751F;&#x539F;&#x56E0;&#xFF0C;&#x5E76;&#x5E2E;&#x4F60;&#x719F;&#x6089;&#x4E86;&#x6392;&#x67E5;&#x6B7B;&#x9501;&#x57FA;&#x672C;&#x5DE5;&#x5177;&#x7684;&#x4F7F;&#x7528;&#x548C;&#x5178;&#x578B;&#x601D;&#x8DEF;&#xFF0C;&#x6700;&#x540E;&#x7ED3;&#x5408;&#x5B9E;&#x4F8B;&#x4ECB;&#x7ECD;&#x4E86;&#x5B9E;&#x9645;&#x573A;&#x666F;&#x4E2D;&#x7684;&#x6B7B;&#x9501;&#x5206;&#x6790;&#x65B9;&#x6CD5;&#x4E0E;&#x9884;&#x9632;&#x63AA;&#x65BD;&#xFF0C;&#x5E0C;&#x671B;&#x5BF9;&#x4F60;&#x6709;&#x6240;&#x5E2E;&#x52A9;&#x3002;</p>
+<h2 id="&#x4E00;&#x8BFE;&#x4E00;&#x7EC3;">&#x4E00;&#x8BFE;&#x4E00;&#x7EC3;</h2>
+<p>&#x5173;&#x4E8E;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x8BA8;&#x8BBA;&#x7684;&#x9898;&#x76EE;&#x4F60;&#x505A;&#x5230;&#x5FC3;&#x4E2D;&#x6709;&#x6570;&#x4E86;&#x5417;&#xFF1F;&#x4ECA;&#x5929;&#x7684;&#x601D;&#x8003;&#x9898;&#x662F;&#xFF0C;&#x6709;&#x65F6;&#x5019;&#x5E76;&#x4E0D;&#x662F;&#x963B;&#x585E;&#x5BFC;&#x81F4;&#x7684;&#x6B7B;&#x9501;&#xFF0C;&#x53EA;&#x662F;&#x67D0;&#x4E2A;&#x7EBF;&#x7A0B;&#x8FDB;&#x5165;&#x4E86;&#x6B7B;&#x5FAA;&#x73AF;&#xFF0C;&#x5BFC;&#x81F4;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x4E00;&#x76F4;&#x7B49;&#x5F85;&#xFF0C;&#x8FD9;&#x79CD;&#x95EE;&#x9898;&#x5982;&#x4F55;&#x8BCA;&#x65AD;&#x5462;&#xFF1F;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="17.html" class="navigation navigation-prev " aria-label="Previous page: 第17讲 | 一个线程两次调用start()方法会出现什么情况？">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="19.html" class="navigation navigation-next " aria-label="Next page: 第19讲 | Java并发包提供了哪些并发工具类？">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"第18讲 | 什么情况下Java程序会产生死锁？如何定位、修复？","level":"1.1.20","depth":2,"next":{"title":"第19讲 | Java并发包提供了哪些并发工具类？","level":"1.1.21","depth":2,"path":"document/19.md","ref":"document/19.md","articles":[]},"previous":{"title":"第17讲 | 一个线程两次调用start()方法会出现什么情况？","level":"1.1.19","depth":2,"path":"document/17.md","ref":"document/17.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"document/18.md","mtime":"2019-03-14T08:40:49.799Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-15T08:24:05.595Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
